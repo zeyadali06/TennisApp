@@ -27,8 +27,15 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed ?? () {},
       height: height,
       color: backgroundColor,
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-      child: Text(title, style: TextStyle(color: textColor, fontSize: fontSize, fontWeight: fontWeight)),
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(
+          title,
+          style: TextStyle(color: textColor, fontSize: fontSize, fontWeight: fontWeight),
+        ),
+      ),
     );
   }
 }
