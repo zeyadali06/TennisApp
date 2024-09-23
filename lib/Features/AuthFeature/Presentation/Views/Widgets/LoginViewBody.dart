@@ -52,7 +52,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: CustomButton(
                         onPressed: () {
                           if (formKey.currentState!.validate()) {

@@ -13,7 +13,7 @@ class AuthViewHeader extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: Text(
             title,
-            style: const TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
+            style: const TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold, height: 1),
           ),
         ),
         FittedBox(

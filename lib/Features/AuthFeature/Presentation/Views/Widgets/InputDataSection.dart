@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:weather_app/Core/Widgets/CustomTextFormField.dart';
 import 'package:weather_app/Core/Widgets/ScaleDown.dart';
 
 class InputDataSection extends StatelessWidget {
-  const InputDataSection({super.key, required this.title});
+  const InputDataSection({super.key, required this.title, this.controller, this.inputFormatters, this.onSaved, this.onChanged});
   final String title;
+  final TextEditingController? controller;
+  final List<TextInputFormatter>? inputFormatters;
+  final void Function(String?)? onSaved;
+  final void Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
