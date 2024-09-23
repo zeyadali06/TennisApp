@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:weather_app/Core/Failure/FirebaseFailure.dart';
 
-class FirebaseFailureHandler {
+class FirebaseFailureHandler extends FirebaseFailure {
   late String message;
-  FirebaseFailureHandler(Object e) {
+  FirebaseFailureHandler(Object e) : super(null) {
     if (e is FirebaseAuthException) {
       if (e.code == 'weak-password') {
         message = 'Password should be at least 6 characters';
