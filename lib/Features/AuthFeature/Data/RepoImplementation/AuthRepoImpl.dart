@@ -10,7 +10,7 @@ import 'package:weather_app/Features/AuthFeature/Data/DataSource/FirebaseFiresto
 
 class AuthRepoImpl implements AuthRepo {
   @override
-  Future<FirebaseResult> login(LoginEntity loginData, String password) async {
+  Future<FirebaseResult<UserModel, FirebaseFailureHandler>> login(LoginEntity loginData, String password) async {
     try {
       UserCredential user = await SignIn.signIn(loginData.email!, password);
       String fullName = await Firestore.getField(collectionPath: ConstantNames.usersDataCollection, docName: user.user!.uid, key: ConstantNames.fullName);
@@ -22,7 +22,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<FirebaseResult> register(RegisterEntity registerData, String password) async {
+  Future<FirebaseResult<UserModel, FirebaseFailureHandler>> register(RegisterEntity registerData, String password) async {
     try {
       UserCredential user = await Register.register(registerData.toMap(), password);
       UserModel userModel = UserModel(email: registerData.email, uid: user.user!.uid, fullName: registerData.fullName);
