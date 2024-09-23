@@ -3,7 +3,7 @@ import 'package:weather_app/Core/Utils/AppRouter.dart';
 import 'package:weather_app/Core/Widgets/CustomButton.dart';
 import 'package:weather_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:weather_app/Core/Widgets/ScaleDown.dart';
-import 'package:weather_app/Features/AuthFeature/Data/Models/RegisterModel.dart';
+import 'package:weather_app/Features/AuthFeature/Domain/Entities/RegisterEntity.dart';
 import 'package:weather_app/Features/AuthFeature/Presentation/Views/Widgets/AuthViewHeader.dart';
 import 'package:weather_app/Features/AuthFeature/Presentation/Views/Widgets/InputDataSection.dart';
 
@@ -17,7 +17,7 @@ class RegisterViewBody extends StatefulWidget {
 class _RegisterViewBodyState extends State<RegisterViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   GlobalKey<FormState> formKey = GlobalKey();
-  final RegisterModel registerModel = RegisterModel();
+  final RegisterEntity registerModel = RegisterEntity();
   late String password;
 
   @override

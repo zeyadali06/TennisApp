@@ -3,7 +3,7 @@ import 'package:weather_app/Core/Utils/AppRouter.dart';
 import 'package:weather_app/Core/Widgets/CustomButton.dart';
 import 'package:weather_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:weather_app/Core/Widgets/ScaleDown.dart';
-import 'package:weather_app/Features/AuthFeature/Data/Models/LoginModel.dart';
+import 'package:weather_app/Features/AuthFeature/Domain/Entities/LoginEntity.dart';
 import 'package:weather_app/Features/AuthFeature/Presentation/Views/Widgets/InputDataSection.dart';
 import 'package:weather_app/Features/AuthFeature/Presentation/Views/Widgets/AuthViewHeader.dart';
 
@@ -17,7 +17,7 @@ class LoginViewBody extends StatefulWidget {
 class _LoginViewBodyState extends State<LoginViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   GlobalKey<FormState> formKey = GlobalKey();
-  final LoginModel loginModel = LoginModel();
+  final LoginEntity loginModel = LoginEntity();
   late String password;
 
   @override

@@ -1,8 +1,8 @@
-class RegisterModel {
+class RegisterEntity {
   String? fullName;
   String? email;
 
-  RegisterModel({this.fullName, this.email});
+  RegisterEntity({this.fullName, this.email});
 
   Map<String, dynamic> toMap() {
     return {

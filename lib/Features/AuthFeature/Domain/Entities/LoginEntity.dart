@@ -1,7 +1,7 @@
-class LoginModel {
+class LoginEntity {
   String? email;
 
-  LoginModel({this.email});
+  LoginEntity({this.email});
 
   Map<String, dynamic> toMap() {
     return {
