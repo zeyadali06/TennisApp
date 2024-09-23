@@ -26,7 +26,12 @@ class InputDataSection extends StatelessWidget {
             ),
           ],
         ),
-        const CustomTextFormField(),
+        CustomTextFormField(
+          controller: controller,
+          inputFormatters: inputFormatters,
+          onSaved: onSaved,
+          onChanged: onChanged,
+        ),
       ],
     );
   }

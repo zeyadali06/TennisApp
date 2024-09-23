@@ -12,7 +12,7 @@ class SplashViewBody extends StatefulWidget {
 class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2)).then(
+    Future.delayed(const Duration(seconds: 0)).then(
       (value) {
         Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.authOptions));
       },

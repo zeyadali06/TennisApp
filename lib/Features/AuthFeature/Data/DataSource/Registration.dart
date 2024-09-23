@@ -2,14 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-class ConstantNames {
-  static const String usersDataCollection = 'usersDataCollection';
-  static const String fullName = 'Full Name';
-  static const String email = 'Email';
-  static const String password = 'password';
-  static const String uid = 'UID';
-}
+import 'package:weather_app/Core/Utils/ConstantsNames.dart';
 
 class SignIn {
   static Future<UserCredential> signIn(String email, String password) async {

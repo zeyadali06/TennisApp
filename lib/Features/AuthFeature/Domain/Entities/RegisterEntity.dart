@@ -1,3 +1,5 @@
+import 'package:weather_app/Core/Utils/ConstantsNames.dart';
+
 class RegisterEntity {
   String? fullName;
   String? email;
@@ -6,8 +8,8 @@ class RegisterEntity {
 
   Map<String, dynamic> toMap() {
     return {
-      "fullName": fullName,
-      "email": email,
+      ConstantNames.fullName: fullName,
+      ConstantNames.email: email,
     };
   }
 }

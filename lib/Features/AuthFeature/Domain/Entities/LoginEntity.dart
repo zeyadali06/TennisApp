@@ -1,3 +1,5 @@
+import 'package:weather_app/Core/Utils/ConstantsNames.dart';
+
 class LoginEntity {
   String? email;
 
@@ -5,7 +7,7 @@ class LoginEntity {
 
   Map<String, dynamic> toMap() {
     return {
-      "email": email,
+      ConstantNames.email: email,
     };
   }
 }

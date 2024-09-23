@@ -1,3 +1,5 @@
+import 'package:weather_app/Core/Utils/ConstantsNames.dart';
+
 class UserModel {
   String? fullName;
   String? email;
@@ -7,9 +9,9 @@ class UserModel {
 
   Map<String, dynamic> toMap() {
     return {
-      "fullName": fullName,
-      "email": email,
-      "uid": uid,
+      ConstantNames.fullName: fullName,
+      ConstantNames.email: email,
+      ConstantNames.uid: uid,
     };
   }
 }
