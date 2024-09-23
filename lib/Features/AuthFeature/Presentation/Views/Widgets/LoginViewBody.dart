@@ -3,6 +3,7 @@ import 'package:weather_app/Core/Utils/AppRouter.dart';
 import 'package:weather_app/Core/Widgets/CustomButton.dart';
 import 'package:weather_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:weather_app/Core/Widgets/ScaleDown.dart';
+import 'package:weather_app/Features/AuthFeature/Data/Models/LoginModel.dart';
 import 'package:weather_app/Features/AuthFeature/Presentation/Views/Widgets/InputDataSection.dart';
 import 'package:weather_app/Features/AuthFeature/Presentation/Views/Widgets/AuthViewHeader.dart';
 
@@ -16,6 +17,8 @@ class LoginViewBody extends StatefulWidget {
 class _LoginViewBodyState extends State<LoginViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   GlobalKey<FormState> formKey = GlobalKey();
+  final LoginModel loginModel = LoginModel();
+  late String password;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +33,15 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               const Expanded(flex: 3, child: SizedBox()),
               const AuthViewHeader(title: 'LOGIN', subTitle: 'CREATE AN ACCOUNT TO MAKE SDFSDF'),
               const Expanded(flex: 3, child: SizedBox()),
-              const InputDataSection(title: 'Email'),
+              InputDataSection(
+                title: 'Email',
+                onChanged: (value) => loginModel.email = value,
+              ),
               const SizedBox(height: 10),
-              const InputDataSection(title: 'Password'),
+              InputDataSection(
+                title: 'Password',
+                onChanged: (value) => password = value!,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

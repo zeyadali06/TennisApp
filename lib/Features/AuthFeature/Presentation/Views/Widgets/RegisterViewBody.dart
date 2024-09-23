@@ -3,6 +3,7 @@ import 'package:weather_app/Core/Utils/AppRouter.dart';
 import 'package:weather_app/Core/Widgets/CustomButton.dart';
 import 'package:weather_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:weather_app/Core/Widgets/ScaleDown.dart';
+import 'package:weather_app/Features/AuthFeature/Data/Models/RegisterModel.dart';
 import 'package:weather_app/Features/AuthFeature/Presentation/Views/Widgets/AuthViewHeader.dart';
 import 'package:weather_app/Features/AuthFeature/Presentation/Views/Widgets/InputDataSection.dart';
 
@@ -16,6 +17,8 @@ class RegisterViewBody extends StatefulWidget {
 class _RegisterViewBodyState extends State<RegisterViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   GlobalKey<FormState> formKey = GlobalKey();
+  final RegisterModel registerModel = RegisterModel();
+  late String password;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +33,20 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               const Expanded(flex: 3, child: SizedBox()),
               const AuthViewHeader(title: 'SIGN UP', subTitle: 'CREATE AN ACCOUNT TO MAKE SDFSDF'),
               const Expanded(flex: 3, child: SizedBox()),
-              const InputDataSection(title: 'FULL NAME'),
+              InputDataSection(
+                title: 'FULL NAME',
+                onChanged: (value) => registerModel.fullName = value,
+              ),
               const SizedBox(height: 10),
-              const InputDataSection(title: 'Email'),
+              InputDataSection(
+                title: 'Email',
+                onChanged: (value) => registerModel.email = value,
+              ),
               const SizedBox(height: 10),
-              const InputDataSection(title: 'Password'),
+              InputDataSection(
+                title: 'Password',
+                onChanged: (value) => password = value!,
+              ),
               const Expanded(flex: 1, child: SizedBox()),
               Row(
                 children: [
