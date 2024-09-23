@@ -43,6 +43,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           return;
         } else if (state is LoginFailed) {
           showSnackBar(context, state.error.message);
+        } else if (state is LoginSuccess) {
+          Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.homeView));
         }
         isLoading = false;
       },

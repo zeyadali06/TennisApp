@@ -33,6 +33,8 @@ class FirebaseFailureHandler extends FirebaseFailure {
         message = 'Code is incorrect';
       } else if (e.code == 'too-many-requests') {
         message = 'Many attempts, try again later';
+      } else if (e.code == 'unknown-error') {
+        message = 'Error try again';
       } else {
         message = 'Error try again later';
       }

@@ -43,6 +43,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
           return;
         } else if (state is RegisterFailed) {
           showSnackBar(context, state.error.message);
+        } else if (state is RegisterSuccess) {
+          Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.homeView));
         }
         isLoading = false;
       },
