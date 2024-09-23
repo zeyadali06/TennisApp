@@ -18,12 +18,12 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       FirebaseResult<dynamic, dynamic> res = await authRepo.login(loginEntity, password);
       if (res is FirebaseSuccess) {
-        emit(LoginSuccess(res.data));
+        return emit(LoginSuccess(res.data));
       } else if (res is FirebaseFailure) {
-        emit(LoginFailed(FirebaseFailureHandler(res.data)));
+        return emit(LoginFailed(res.data));
       }
     } catch (e) {
-      emit(LoginFailed(FirebaseFailureHandler(e)));
+      return emit(LoginFailed(FirebaseFailureHandler(e)));
     }
   }
 }
