@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:weather_app/Core/Formatters/Formatters.dart';
 import 'package:weather_app/Core/Utils/AppRouter.dart';
 import 'package:weather_app/Core/Widgets/CustomButton.dart';
 import 'package:weather_app/Core/Widgets/CustomGradiantContainer.dart';
@@ -64,6 +65,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     const Expanded(flex: 3, child: SizedBox()),
                     InputDataSection(
                       title: 'Email',
+                      inputFormatters: [Formatters.preventSpaces, Formatters.emailRegExp],
                       onSaved: (value) => loginEntity.email = value,
                     ),
                     const SizedBox(height: 10),

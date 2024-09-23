@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:weather_app/Core/Formatters/Formatters.dart';
 import 'package:weather_app/Core/Utils/AppRouter.dart';
 import 'package:weather_app/Core/Widgets/CustomButton.dart';
 import 'package:weather_app/Core/Widgets/CustomGradiantContainer.dart';
@@ -65,11 +67,13 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     InputDataSection(
                       title: 'FULL NAME',
                       onSaved: (value) => registerEntity.fullName = value,
+                      inputFormatters: [Formatters.lettersOnly],
                     ),
                     const SizedBox(height: 10),
                     InputDataSection(
                       title: 'Email',
                       onSaved: (value) => registerEntity.email = value,
+                      inputFormatters: [Formatters.preventSpaces, Formatters.emailRegExp],
                     ),
                     const SizedBox(height: 10),
                     InputDataSection(
