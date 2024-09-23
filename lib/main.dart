@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/Features/SplashFeature/Presentation/Views/SplashView.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:weather_app/firebase_options.dart';
+import 'package:weather_app/Core/Utils/AppRouter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -13,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Montserrat'),
-      home: const SplashView(),
+      home: AppRouter.splashView,
     );
   }
 }
