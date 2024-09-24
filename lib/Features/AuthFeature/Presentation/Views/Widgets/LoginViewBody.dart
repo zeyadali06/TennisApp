@@ -83,7 +83,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                               ScaleDown(
                                 child: GestureDetector(
                                   onTap: () {
-                                    Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.forgetPasswordView));
+                                    Navigator.push(context, AppRouter.goTo(context, AppRouter.forgetPasswordView));
                                   },
                                   child: const Text(
                                     'Forget your password?',

@@ -46,56 +46,73 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
         isLoading = false;
       },
       builder: (context, state) {
-        return CustomGradiantContainer(
-          child: ModalProgressHUD(
-            inAsyncCall: isLoading,
-            child: Form(
-              key: formKey,
-              autovalidateMode: autovalidateMode,
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Expanded(flex: 3, child: SizedBox(height: 50)),
-                    const AuthViewHeader(title: "RESTORE ACCOUNT", subTitle: 'CREATE AN ACCOUNT TO MAKE SDFSDF'),
-                    const Expanded(flex: 2, child: SizedBox(height: 50)),
-                    InputDataSection(
-                      title: "Email",
-                      onSaved: (value) => email = value!,
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const SizedBox(width: 20),
-                        Expanded(
-                          child: CustomButton(
-                            title: "Submit",
-                            onPressed: () async {
-                              if (formKey.currentState!.validate()) {
-                                formKey.currentState!.save();
-                                await BlocProvider.of<ForgetPasswordCubit>(context).forgetPassword(email);
-                              } else {
-                                autovalidateMode = AutovalidateMode.always;
-                                setState(() {});
-                              }
-                            },
+        return CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: CustomGradiantContainer(
+                child: ModalProgressHUD(
+                  inAsyncCall: isLoading,
+                  child: Form(
+                    key: formKey,
+                    autovalidateMode: autovalidateMode,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                              )
+                            ],
                           ),
-                        ),
-                        const SizedBox(width: 20),
-                      ],
+                          const Expanded(flex: 2, child: SizedBox(height: 50)),
+                          const AuthViewHeader(title: "RESTORE ACCOUNT", subTitle: 'CREATE AN ACCOUNT TO MAKE SDFSDF'),
+                          const Expanded(flex: 2, child: SizedBox(height: 50)),
+                          InputDataSection(
+                            title: "Email",
+                            onSaved: (value) => email = value!,
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: CustomButton(
+                                  title: "Submit",
+                                  onPressed: () async {
+                                    if (formKey.currentState!.validate()) {
+                                      formKey.currentState!.save();
+                                      await BlocProvider.of<ForgetPasswordCubit>(context).forgetPassword(email);
+                                    } else {
+                                      autovalidateMode = AutovalidateMode.always;
+                                      setState(() {});
+                                    }
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                            ],
+                          ),
+                          const Expanded(flex: 1, child: SizedBox(height: 20)),
+                          const Text(
+                            'After Submit, We will sent you an email to enter your new password.',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          const Expanded(flex: 3, child: SizedBox()),
+                        ],
+                      ),
                     ),
-                    const Expanded(flex: 1, child: SizedBox(height: 20)),
-                    const Text(
-                      'After Submit, We will sent you an email to enter your new password.',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    const Expanded(flex: 3, child: SizedBox()),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         );
       },
     );
