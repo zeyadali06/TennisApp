@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:weather_app/Core/Failure/FirebaseFailure.dart';
+import 'package:tennis_app/Core/Failure/FirebaseFailure.dart';
 
 class FirebaseFailureHandler extends FirebaseFailure {
   late String message;

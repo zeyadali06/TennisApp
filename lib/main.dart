@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:weather_app/Core/Utils/DependencyInjection.dart';
-import 'package:weather_app/firebase_options.dart';
-import 'package:weather_app/Core/Utils/AppRouter.dart';
+import 'package:tennis_app/Core/Utils/DependencyInjection.dart';
+import 'package:tennis_app/firebase_options.dart';
+import 'package:tennis_app/Core/Utils/AppRouter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

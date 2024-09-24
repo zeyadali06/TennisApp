@@ -1,4 +1,4 @@
-import 'package:weather_app/Core/Utils/ConstantsNames.dart';
+import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
 
 class LoginEntity {
   String? email;

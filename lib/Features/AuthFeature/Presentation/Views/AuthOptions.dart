@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/Features/AuthFeature/Presentation/Views/Widgets/AuthOptionsBody.dart';
+import 'package:tennis_app/Features/AuthFeature/Presentation/Views/Widgets/AuthOptionsBody.dart';
 
 class AuthOptions extends StatelessWidget {
   const AuthOptions({super.key});

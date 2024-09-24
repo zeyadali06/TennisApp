@@ -1,6 +1,6 @@
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_app/Core/Utils/AppRouter.dart';
+import 'package:tennis_app/Core/Utils/AppRouter.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -25,7 +25,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Center(
-        child: Lottie.asset("assets/images/Animation - 1727014378992.json", repeat: true),
+        child: Lottie.asset("assets/images/CNKQNaQVuG.json", repeat: true),
       ),
     );
   }

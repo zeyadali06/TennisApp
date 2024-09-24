@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/Core/Utils/AppRouter.dart';
-import 'package:weather_app/Core/Widgets/CustomButton.dart';
-import 'package:weather_app/Core/Widgets/CustomGradiantContainer.dart';
+import 'package:lottie/lottie.dart';
+import 'package:tennis_app/Core/Utils/AppRouter.dart';
+import 'package:tennis_app/Core/Widgets/CustomButton.dart';
+import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 
 class AuthOptionsBody extends StatelessWidget {
   const AuthOptionsBody({super.key});
@@ -14,6 +15,7 @@ class AuthOptionsBody extends StatelessWidget {
           child: Container(
             width: MediaQuery.sizeOf(context).width,
             decoration: const BoxDecoration(color: Colors.white),
+            child: Lottie.asset("assets/images/CNKQNaQVuG.json", repeat: true),
           ),
         ),
         Expanded(

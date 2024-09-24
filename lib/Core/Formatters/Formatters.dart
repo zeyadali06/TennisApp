@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:weather_app/Core/Formatters/UpperCaseTextFormatter.dart';
+import 'package:tennis_app/Core/Formatters/UpperCaseTextFormatter.dart';
 
 abstract class Formatters {
   static final FilteringTextInputFormatter preventSpaces = FilteringTextInputFormatter.deny(RegExp(' '));

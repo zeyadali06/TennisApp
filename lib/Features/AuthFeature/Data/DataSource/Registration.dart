@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:weather_app/Core/Utils/ConstantsNames.dart';
+import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
 
 class SignIn {
   static Future<UserCredential> signIn(String email, String password) async {

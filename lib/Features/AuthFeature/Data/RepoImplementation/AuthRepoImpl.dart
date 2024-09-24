@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:weather_app/Core/Utils/ConstantsNames.dart';
-import 'package:weather_app/Core/Failure/FirebaseFailure.dart';
-import 'package:weather_app/Core/Failure/FirebaseFailureHandler.dart';
-import 'package:weather_app/Features/AuthFeature/Data/Models/UserModel.dart';
-import 'package:weather_app/Features/AuthFeature/Domain/Entities/LoginEntity.dart';
-import 'package:weather_app/Features/AuthFeature/Data/DataSource/Registration.dart';
-import 'package:weather_app/Features/AuthFeature/Domain/RepoInterface/AuthRepo.dart';
-import 'package:weather_app/Features/AuthFeature/Domain/Entities/RegisterEntity.dart';
-import 'package:weather_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
+import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
+import 'package:tennis_app/Core/Failure/FirebaseFailure.dart';
+import 'package:tennis_app/Core/Failure/FirebaseFailureHandler.dart';
+import 'package:tennis_app/Features/AuthFeature/Data/Models/UserModel.dart';
+import 'package:tennis_app/Features/AuthFeature/Domain/Entities/LoginEntity.dart';
+import 'package:tennis_app/Features/AuthFeature/Data/DataSource/Registration.dart';
+import 'package:tennis_app/Features/AuthFeature/Domain/RepoInterface/AuthRepo.dart';
+import 'package:tennis_app/Features/AuthFeature/Domain/Entities/RegisterEntity.dart';
+import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
 
 class AuthRepoImpl implements AuthRepo {
   @override

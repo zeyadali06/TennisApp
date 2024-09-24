@@ -1,6 +1,6 @@
 {
-    "name": "weather_app",
-    "short_name": "weather_app",
+    "name": "tennis_app",
+    "short_name": "tennis_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

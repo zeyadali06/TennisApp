@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/Core/Failure/FirebaseFailure.dart';
-import 'package:weather_app/Core/Failure/FirebaseFailureHandler.dart';
-import 'package:weather_app/Features/AuthFeature/Data/Models/UserModel.dart';
-import 'package:weather_app/Features/AuthFeature/Domain/Entities/RegisterEntity.dart';
-import 'package:weather_app/Features/AuthFeature/Domain/RepoInterface/AuthRepo.dart';
+import 'package:tennis_app/Core/Failure/FirebaseFailure.dart';
+import 'package:tennis_app/Core/Failure/FirebaseFailureHandler.dart';
+import 'package:tennis_app/Features/AuthFeature/Data/Models/UserModel.dart';
+import 'package:tennis_app/Features/AuthFeature/Domain/Entities/RegisterEntity.dart';
+import 'package:tennis_app/Features/AuthFeature/Domain/RepoInterface/AuthRepo.dart';
 
 part 'register_state.dart';
 
