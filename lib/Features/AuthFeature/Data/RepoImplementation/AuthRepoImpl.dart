@@ -32,4 +32,14 @@ class AuthRepoImpl implements AuthRepo {
       return FirebaseResult.failure(FirebaseFailureHandler(e));
     }
   }
+
+  @override
+  Future<FirebaseResult> forgetPassword(String email) async {
+    try {
+      await AccountData.resetPassword(email);
+      return FirebaseResult.success(UserModel());
+    } catch (e) {
+      return FirebaseResult.failure(FirebaseFailureHandler(e));
+    }
+  }
 }

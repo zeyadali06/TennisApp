@@ -5,4 +5,5 @@ import 'package:tennis_app/Features/AuthFeature/Domain/Entities/RegisterEntity.d
 abstract class AuthRepo {
   Future<FirebaseResult> register(RegisterEntity registerData, String password);
   Future<FirebaseResult> login(LoginEntity loginData, String password);
+  Future<FirebaseResult> forgetPassword(String email);
 }

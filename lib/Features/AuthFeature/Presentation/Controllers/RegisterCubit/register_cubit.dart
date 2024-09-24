@@ -11,7 +11,7 @@ part 'register_state.dart';
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit(this.authRepo) : super(RegisterInitial());
 
-  AuthRepo authRepo;
+  final AuthRepo authRepo;
 
   Future<void> register(RegisterEntity registerEntity, String password) async {
     emit(RegisterLoading());
