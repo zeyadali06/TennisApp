@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Utils/DependencyInjection.dart';
+import 'package:tennis_app/Features/AuthFeature/Domain/UseCases/ForgetPasswordUseCase.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/ForgetPasswordCubit/forget_password_cubit.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/ForgetPasswordView.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView.dart';
@@ -19,7 +20,7 @@ abstract class AppRouter {
     child: const LoginView(),
   );
   static Widget forgetPasswordView = BlocProvider(
-    create: (context) => ForgetPasswordCubit(getit.get<AuthRepoImpl>()),
+    create: (context) => ForgetPasswordCubit(getit.get<ForgetPasswordUseCase>()),
     child: const ForgetPasswordView(),
   );
   static Widget registerView = BlocProvider(

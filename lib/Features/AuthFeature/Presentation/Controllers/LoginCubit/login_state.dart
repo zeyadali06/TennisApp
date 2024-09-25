@@ -7,8 +7,6 @@ final class LoginInitial extends LoginState {}
 
 final class LoginLoading extends LoginState {}
 
-final class EmailSentSuccessfully extends LoginState {}
-
 final class LoginSuccess extends LoginState {
   final UserModel userModel;
 
