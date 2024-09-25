@@ -9,10 +9,12 @@ final class RegisterLoading extends RegisterState {}
 
 final class RegisterSuccess extends RegisterState {
   final UserModel userModel;
+
   RegisterSuccess(this.userModel);
 }
 
 final class RegisterFailed extends RegisterState {
   final FirebaseFailureHandler error;
+
   RegisterFailed(this.error);
 }

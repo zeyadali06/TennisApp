@@ -1,4 +1,3 @@
-// ignore_for_file: file_names
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Firestore {
@@ -33,31 +32,3 @@ class Firestore {
     await FirebaseFirestore.instance.collection(collectionPath).doc(docName).delete();
   }
 }
-
-
-//change the minSdkVersion to 19 and add multiDexEnabled in FireStore\android\app\build.gradle
-
-// android {
-//     defaultConfig {
-//         minSdkVersion 19
-//         multiDexEnabled true
-//     }
-// }
-
-// and change dependencies in FireStore\android\app\build.gradle
-// dependencies {
-//     implementation 'androidx.multidex:multidex:2.0.1'
-// }
-
-// create database in --> https://console.firebase.google.com/u/0/project/fir-core-14c6c/firestore
-
-// next, go to Rules and change if false to if true , then publish
-
-// rules_version = '2';
-// service cloud.firestore {
-//   match /databases/{database}/documents {
-//     match /{document=**} {
-//       allow read, write: if true;
-//     }
-//   }
-// }

@@ -1,0 +1,43 @@
+AuthFeature:
+    Data:
+        DataSource:
+            FirebaseFirestoreServices: helper file to add, get, update and delete data from Firestore
+            Registration: helper file to deal with Firebase Authentication
+        
+        Mappers:
+            UserMapper: contain UserMapper with 2 static methods (toLoginEntity and toRegisterEntity)
+                        to map UserModel to LoginEntity and RegisterEntity
+        
+        Models:
+            UserModel: contain fullName, email and uid attributes
+
+        RepoImplementation:
+            AuthRepoImpl: implements login, register and forgetPassword methods of abstract class AuthRepo
+
+
+    Domain:
+        Entities:
+            LoginEntity: contain LoginEntity class with only email attribute
+            RegisterEntity: contain RegisterEntity class with fullName and email attributes
+        
+        RepoInterface: 
+            AuthRepo: abstract class AuthRepo with 3 methods (login, register and forgetPassword)
+        
+        UseCases:
+            ForgetPasswordUseCase: check if the email found then send reset password email
+
+
+    Presentation:
+        Controllers:
+            ForgetPasswordCubit: contain ForgetPasswordCubit with forgetPassword mehtod and 4 states
+                                 (ForgetPasswordInitial, ForgetPasswordLoading, EmailSentSuccessfully and ForgetPasswordFailed)
+            LoginCubit: contain LoginCubit with login method and 4 states 
+                        (LoginInitial, LoginLoading, LoginSuccess and LoginFailed)
+            RegisterCubit: contain RegisterCubit with register method and 4 states 
+                           (RegisterInitial, RegisterLoading, RegisterSuccess and RegisterFailed)
+
+        Views:
+            AuthOptionsView: contain UI that enable the user to choose between log in and sign in
+            ForgetPasswordView: contain UI that enable the user to to enter his email and send reset password reset email
+            LoginView: contain UI that enable the user to enter his email and password to enter his account
+            RegisterView: contain UI that enable the user to enter his fullName, email and password to create an account

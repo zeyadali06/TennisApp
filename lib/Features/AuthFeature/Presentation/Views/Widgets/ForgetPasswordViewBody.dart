@@ -72,7 +72,7 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                             ],
                           ),
                           const Expanded(flex: 2, child: SizedBox(height: 50)),
-                          const AuthViewHeader(title: "RESTORE ACCOUNT", subTitle: 'CREATE AN ACCOUNT TO MAKE SDFSDF'),
+                          const AuthViewHeader(title: "RESET PASSWORD", subTitle: 'CREATE AN ACCOUNT TO MAKE SDFSDF'),
                           const Expanded(flex: 2, child: SizedBox(height: 50)),
                           InputDataSection(
                             title: "Email",

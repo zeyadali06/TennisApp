@@ -4,8 +4,8 @@ import 'package:tennis_app/Core/Utils/AppRouter.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 
-class AuthOptionsBody extends StatelessWidget {
-  const AuthOptionsBody({super.key});
+class AuthOptionsViewBody extends StatelessWidget {
+  const AuthOptionsViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {

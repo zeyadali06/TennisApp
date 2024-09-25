@@ -6,7 +6,7 @@ import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/ForgetP
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/ForgetPasswordView.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/LoginView.dart';
-import 'package:tennis_app/Features/AuthFeature/Presentation/Views/AuthOptions.dart';
+import 'package:tennis_app/Features/AuthFeature/Presentation/Views/AuthOptionsView.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/RegisterView.dart';
 import 'package:tennis_app/Features/SplashFeature/Presentation/Views/SplashView.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/RepoImplementation/AuthRepoImpl.dart';
@@ -27,7 +27,7 @@ abstract class AppRouter {
     create: (context) => RegisterCubit(getit.get<AuthRepoImpl>()),
     child: const RegisterView(),
   );
-  static const Widget authOptions = AuthOptions();
+  static const Widget authOptions = AuthOptionsView();
   static const Widget homeView = HomeView();
 
   static MaterialPageRoute goTo(BuildContext context, Widget toView) {

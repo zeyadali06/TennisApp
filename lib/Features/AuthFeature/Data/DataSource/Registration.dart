@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
@@ -76,10 +74,3 @@ class Verification {
     return FirebaseAuth.instance.currentUser!.emailVerified;
   }
 }
-
-// For Authentication
-// in cmd --> flutter pub add firebase_core
-// in cmd --> flutter pub add firebase_auth
-// in cmd --> flutter pub add cloud_firestore
-// in cmd --> flutter pub add google_sign_in
-
