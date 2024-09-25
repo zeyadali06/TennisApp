@@ -41,3 +41,6 @@ AuthFeature:
             ForgetPasswordView: contain UI that enable the user to to enter his email and send reset password reset email
             LoginView: contain UI that enable the user to enter his email and password to enter his account
             RegisterView: contain UI that enable the user to enter his fullName, email and password to create an account
+
+
+Video Link: https://drive.google.com/file/d/1bGV4vRnbUn5TLfyYOBCtcN72lYvknaeL/view?usp=sharing
