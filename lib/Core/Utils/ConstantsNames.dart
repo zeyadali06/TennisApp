@@ -4,4 +4,5 @@ class ConstantNames {
   static const String email = 'Email';
   static const String password = 'password';
   static const String uid = 'UID';
+  static const String apiKey = "API_KEY";
 }

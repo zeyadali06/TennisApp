@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:tennis_app/Core/Utils/DependencyInjection.dart';
 import 'package:tennis_app/firebase_options.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tennis_app/Core/Utils/AppRouter.dart';
+import 'package:tennis_app/Core/Utils/DependencyInjection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +11,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   setup();
+  await dotenv.load(fileName: "lib/Core/.env");
   runApp(const MyApp());
 }
 
