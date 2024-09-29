@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 
-class HomeViewBody extends StatelessWidget {
-  const HomeViewBody({super.key});
+class LocationsViewBody extends StatelessWidget {
+  const LocationsViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {

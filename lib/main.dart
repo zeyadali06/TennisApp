@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Montserrat'),
-      home: AppRouter.splashView,
+      home: AppRouter.navigationBar,
     );
   }
 }
