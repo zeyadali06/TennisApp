@@ -1,15 +1,15 @@
-class FirebaseResult<S, F> {
-  const FirebaseResult();
-  factory FirebaseResult.success(S data) = FirebaseSuccess<S, F>;
-  factory FirebaseResult.failure(F data) = FirebaseFailure<S, F>;
+class RequestResault<S, F> {
+  const RequestResault();
+  factory RequestResault.success(S data) = RequestSuccess<S, F>;
+  factory RequestResault.failure(F data) = RequestFailed<S, F>;
 }
 
-class FirebaseSuccess<S, F> extends FirebaseResult<S, F> {
+class RequestSuccess<S, F> extends RequestResault<S, F> {
   final S data;
-  const FirebaseSuccess(this.data);
+  const RequestSuccess(this.data);
 }
 
-class FirebaseFailure<S, F> extends FirebaseResult<S, F> {
+class RequestFailed<S, F> extends RequestResault<S, F> {
   final F data;
-  const FirebaseFailure(this.data);
+  const RequestFailed(this.data);
 }

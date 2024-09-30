@@ -11,37 +11,37 @@ import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestor
 
 class AuthRepoImpl implements AuthRepo {
   @override
-  Future<FirebaseResult<UserModel, FirebaseFailureHandler>> login(LoginEntity loginData, String password) async {
+  Future<RequestResault<UserModel, FirebaseFailureHandler>> login(LoginEntity loginData, String password) async {
     try {
       UserCredential user = await SignIn.signIn(loginData.email!, password);
       String fullName = await Firestore.getField(collectionPath: ConstantNames.usersDataCollection, docName: user.user!.uid, key: ConstantNames.fullName);
       UserModel userModel = UserModel(email: loginData.email, uid: user.user!.uid, fullName: fullName);
       ConstantNames.userModel = userModel;
-      return FirebaseResult.success(userModel);
+      return RequestResault.success(userModel);
     } catch (e) {
-      return FirebaseResult.failure(FirebaseFailureHandler(e));
+      return RequestResault.failure(FirebaseFailureHandler(e));
     }
   }
 
   @override
-  Future<FirebaseResult<UserModel, FirebaseFailureHandler>> register(RegisterEntity registerData, String password) async {
+  Future<RequestResault<UserModel, FirebaseFailureHandler>> register(RegisterEntity registerData, String password) async {
     try {
       UserCredential user = await Register.register(registerData.toMap(), password);
       UserModel userModel = UserModel(email: registerData.email, uid: user.user!.uid, fullName: registerData.fullName);
       ConstantNames.userModel = userModel;
-      return FirebaseResult.success(userModel);
+      return RequestResault.success(userModel);
     } catch (e) {
-      return FirebaseResult.failure(FirebaseFailureHandler(e));
+      return RequestResault.failure(FirebaseFailureHandler(e));
     }
   }
 
   @override
-  Future<FirebaseResult> forgetPassword(String email) async {
+  Future<RequestResault> forgetPassword(String email) async {
     try {
       await AccountData.resetPassword(email);
-      return FirebaseResult.success(UserModel());
+      return RequestResault.success(UserModel());
     } catch (e) {
-      return FirebaseResult.failure(FirebaseFailureHandler(e));
+      return RequestResault.failure(FirebaseFailureHandler(e));
     }
   }
 }

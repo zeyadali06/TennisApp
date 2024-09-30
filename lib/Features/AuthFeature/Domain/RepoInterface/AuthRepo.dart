@@ -3,7 +3,7 @@ import 'package:tennis_app/Features/AuthFeature/Domain/Entities/LoginEntity.dart
 import 'package:tennis_app/Features/AuthFeature/Domain/Entities/RegisterEntity.dart';
 
 abstract class AuthRepo {
-  Future<FirebaseResult> register(RegisterEntity registerData, String password);
-  Future<FirebaseResult> login(LoginEntity loginData, String password);
-  Future<FirebaseResult> forgetPassword(String email);
+  Future<RequestResault> register(RegisterEntity registerData, String password);
+  Future<RequestResault> login(LoginEntity loginData, String password);
+  Future<RequestResault> forgetPassword(String email);
 }

@@ -7,14 +7,14 @@ class ForgetPasswordUseCase {
   AuthRepo authRepo;
   ForgetPasswordUseCase({required this.authRepo});
 
-  Future<FirebaseResult> forgetPassword(String email) async {
+  Future<RequestResault> forgetPassword(String email) async {
     try {
       await AccountData.getUIDFromFirestore(email);
       return await authRepo.forgetPassword(email);
     } on RangeError catch (_) {
       throw FirebaseAuthException(code: "user-not-found");
     } catch (e) {
-      return FirebaseResult.failure(e);
+      return RequestResault.failure(e);
     }
   }
 }

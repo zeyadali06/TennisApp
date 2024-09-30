@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/Core/Failure/FirebaseFailure.dart';
 
-class FirebaseFailureHandler extends FirebaseFailure {
+class FirebaseFailureHandler extends RequestFailed {
   late String message;
   FirebaseFailureHandler(Object e) : super(null) {
     if (e is FirebaseAuthException) {
