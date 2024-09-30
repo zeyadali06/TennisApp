@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/DataSource/PlacesServices.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/RepoImplementation/AuthRepoImpl.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/UseCases/ForgetPasswordUseCase.dart';
+import 'package:tennis_app/Features/LocationFeature/Data/RepoImplementation/LoactionRepoImpl.dart';
 
 GetIt getit = GetIt.instance;
 
@@ -18,6 +19,12 @@ void setup() {
   getit.registerSingleton<PlacesServices>(
     PlacesServices(
       dio: getit.get<Dio>(),
+    ),
+  );
+
+  getit.registerSingleton<LoactionRepoImpl>(
+    LoactionRepoImpl(
+      placesServices: getit.get<PlacesServices>(),
     ),
   );
 
