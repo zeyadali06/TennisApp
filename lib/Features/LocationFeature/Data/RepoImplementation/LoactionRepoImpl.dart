@@ -41,6 +41,11 @@ class LoactionRepoImpl implements LocationRepo {
     }
   }
 
+  @override
+  Future<bool> checkLocation() async {
+    return Geolocator.isLocationServiceEnabled();
+  }
+
   Future<bool> _handlePermission() async {
     bool serviceEnabled;
     LocationPermission permission;
