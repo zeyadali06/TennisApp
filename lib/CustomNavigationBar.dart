@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_app/Core/Utils/AppRouter.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
-import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   const CustomNavigationBar({super.key});
@@ -43,7 +42,8 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ScaleDown(
+            FittedBox(
+              fit: BoxFit.scaleDown,
               child: Icon(
                 iconData,
                 shadows: isSelected ? const [Shadow(color: Colors.white, blurRadius: 4)] : null,
@@ -52,7 +52,8 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
               ),
             ),
             if (!isSelected)
-              ScaleDown(
+              FittedBox(
+                fit: BoxFit.scaleDown,
                 child: Text(
                   label,
                   style: const TextStyle(fontSize: 8, color: Colors.white, fontWeight: FontWeight.w300),
@@ -76,22 +77,17 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
             left: 20,
             child: Container(
               clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-              child: NavigationBar(
-                backgroundColor: Colors.grey.withOpacity(.15),
-                height: kBottomNavigationBarHeight,
-                elevation: 0,
-                selectedIndex: selectedIndex,
-                onDestinationSelected: (index) {
-                  selectedIndex = index;
-                  setState(() {});
-                },
-                destinations: <Widget>[
-                  _buildWidget(Icons.star_border, 0, 'Fav'),
-                  _buildWidget(Icons.admin_panel_settings_outlined, 1, 'Profile'),
-                  _buildWidget(Icons.home_filled, 2, 'Home'),
-                  _buildWidget(Icons.check_box_outlined, 3, 'Check'),
-                  _buildWidget(Icons.location_on, 4, 'Loc'),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.grey.withOpacity(.15),
+              ),
+              child: Row(
+                children: [
+                  Expanded(child: _buildWidget(Icons.star_border, 0, 'Fav')),
+                  Expanded(child: _buildWidget(Icons.admin_panel_settings_outlined, 1, 'Profile')),
+                  Expanded(child: _buildWidget(Icons.home_filled, 2, 'Home')),
+                  Expanded(child: _buildWidget(Icons.check_box_outlined, 3, 'Check')),
+                  Expanded(child: _buildWidget(Icons.location_on, 4, 'Loc')),
                 ],
               ),
             ),
