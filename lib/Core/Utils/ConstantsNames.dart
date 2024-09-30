@@ -1,3 +1,5 @@
+import 'package:tennis_app/Features/AuthFeature/Data/Models/UserModel.dart';
+
 class ConstantNames {
   static const String usersDataCollection = 'usersDataCollection';
   static const String fullName = 'Full Name';
@@ -5,4 +7,5 @@ class ConstantNames {
   static const String password = 'password';
   static const String uid = 'UID';
   static const String apiKey = "API_KEY";
+  static UserModel userModel = UserModel();
 }
