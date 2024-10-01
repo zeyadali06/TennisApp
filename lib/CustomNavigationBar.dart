@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Utils/AppRouter.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
-import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/MyLocationCubit/my_location_cubit.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   const CustomNavigationBar({super.key});
@@ -13,15 +11,12 @@ class CustomNavigationBar extends StatefulWidget {
 
 class CustomNavigationBarState extends State<CustomNavigationBar> {
   int selectedIndex = 2;
-  bool wasOnLocationsView = false;
   List<Widget> pages = <Widget>[];
-  static late bool enableClean;
 
   @override
   void initState() {
     super.initState();
 
-    enableClean = false;
     pages = <Widget>[
       CustomGradiantContainer(child: Container()),
       CustomGradiantContainer(child: Container()),
@@ -31,28 +26,12 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
     ];
   }
 
-  void clean() async {
-    if (wasOnLocationsView) {
-      await BlocProvider.of<MyLocationCubit>(context).closeStatusStream(context);
-    }
-  }
-
   Widget _buildWidget(IconData iconData, int index, String label) {
     bool isSelected = selectedIndex == index;
     return Padding(
       padding: const EdgeInsets.all(2),
       child: MaterialButton(
         onPressed: () {
-          if (selectedIndex == 4) {
-            wasOnLocationsView = true;
-          } else {
-            wasOnLocationsView = false;
-          }
-
-          if (enableClean) {
-            clean();
-          }
-
           selectedIndex = index;
           setState(() {});
         },

@@ -7,12 +7,10 @@ final class MyLocationInitial extends MyLocationState {}
 
 final class CheckLocationLoading extends MyLocationState {}
 
-final class LocationEnabled extends MyLocationState {}
-
-final class LocationFailed extends MyLocationState {
+final class GetLocationFailed extends MyLocationState {
   final GeolocatorFailureHandler error;
 
-  LocationFailed({required this.error});
+  GetLocationFailed({required this.error});
 }
 
 final class GetLocationSuccessed extends MyLocationState {

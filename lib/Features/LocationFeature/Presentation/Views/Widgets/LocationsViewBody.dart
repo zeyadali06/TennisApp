@@ -41,7 +41,7 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
           return;
         } else if (state is GetLocationSuccessed) {
           positionEntity = state.positionEntity;
-        } else if (state is LocationFailed) {
+        } else if (state is GetLocationFailed) {
           showSnackBar(context, state.error.message);
         }
         isLoading = false;
@@ -74,12 +74,11 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                             Expanded(
                               child: CustomButton(
                                 onPressed: () async {
-                                  await BlocProvider.of<MyLocationCubit>(context).checkLocationStatusAsStream(context);
                                   showMyLocationSection = true;
                                   showSerchFieldSection = false;
                                   await BlocProvider.of<MyLocationCubit>(context).getMyLocation();
                                 },
-                                title: "My Location",
+                                title: "Get My Location",
                               ),
                             ),
                             const SizedBox(width: 10),
