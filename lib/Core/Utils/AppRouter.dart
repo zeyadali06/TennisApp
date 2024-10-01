@@ -4,6 +4,7 @@ import 'package:tennis_app/CustomNavigationBar.dart';
 import 'package:tennis_app/Core/Utils/DependencyInjection.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/LoginView.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/SearchForLoactionCubit/search_for_loaction_cubit.dart';
 import 'package:tennis_app/Features/SplashFeature/Presentation/Views/SplashView.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/RegisterView.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/AuthOptionsView.dart';
@@ -14,7 +15,7 @@ import 'package:tennis_app/Features/AuthFeature/Presentation/Views/ForgetPasswor
 import 'package:tennis_app/Features/LocationFeature/Data/RepoImplementation/LoactionRepoImpl.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/LoginCubit/login_cubit.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/RegisterCubit/register_cubit.dart';
-import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/MyLocationCubit/my_location_cubit.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/GetMyLocationCubit/get_my_location_cubit.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/ForgetPasswordCubit/forget_password_cubit.dart';
 
 abstract class AppRouter {
@@ -30,8 +31,15 @@ abstract class AppRouter {
     create: (context) => RegisterCubit(getit.get<AuthRepoImpl>()),
     child: const RegisterView(),
   );
-  static final Widget locationsView = BlocProvider(
-    create: (context) => MyLocationCubit(getit.get<LoactionRepoImpl>()),
+  static final Widget locationsView = MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (context) => GetMyLocationCubit(getit.get<LoactionRepoImpl>()),
+      ),
+      BlocProvider(
+        create: (context) => SearchForLoactionCubit(getit.get<LoactionRepoImpl>()),
+      ),
+    ],
     child: const LocationsView(),
   );
   static const Widget navigationBar = CustomNavigationBar();

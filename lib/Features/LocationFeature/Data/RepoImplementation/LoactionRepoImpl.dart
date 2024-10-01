@@ -12,7 +12,6 @@ class LoactionRepoImpl implements LocationRepo {
   LoactionRepoImpl({required this.placesServices});
   PlacesServices placesServices;
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
-  late StreamSubscription<ServiceStatus> statusStream;
 
   @override
   Future<RequestResault<PositionEntity, int>> getMyLocation() async {
@@ -40,9 +39,11 @@ class LoactionRepoImpl implements LocationRepo {
 
       List<String> places = [];
 
-      res.map((locationJson) {
-        places.add(PlaceModel.fromJson(locationJson).name);
-      });
+      if (res is List) {
+        for (var locationJson in res) {
+          places.add(PlaceModel.fromJson(locationJson).name);
+        }
+      }
 
       return RequestResault.success(places);
     } on DioException catch (e) {

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
-import 'package:tennis_app/Features/AuthFeature/Presentation/Views/Widgets/InputDataSection.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Views/Widgets/SearchTextFieldWithSuggesstions.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/SearchForLoactionCubit/search_for_loaction_cubit.dart';
 
 // ignore: must_be_immutable
 class SearchField extends StatelessWidget {
-  SearchField({super.key});
-  String? searchContent;
+  SearchField({super.key, required this.suggestions});
   AutovalidateMode autovalidateMode = AutovalidateMode.always;
   final GlobalKey<FormState> formKey = GlobalKey();
+  final List<String> suggestions;
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +18,16 @@ class SearchField extends StatelessWidget {
       autovalidateMode: autovalidateMode,
       child: Column(
         children: [
-          InputDataSection(
-            onSaved: (value) {
-              searchContent = value;
-            },
-            title: 'Destination',
-          ),
+          SearchTextFieldWithSuggesstions(suggestions: suggestions),
           const SizedBox(height: 15),
           Row(
             children: [
               Expanded(
                 child: CustomButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
+                      await BlocProvider.of<SearchForLoactionCubit>(context).searchForLoaction(SearchTextFieldWithSuggesstions.searchContent!);
                     }
                   },
                   title: 'Search',

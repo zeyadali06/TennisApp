@@ -5,10 +5,10 @@ import 'package:tennis_app/Core/Failure/GeoLocatorFailureHandler.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationRepo.dart';
 
-part 'my_location_state.dart';
+part 'get_my_location_state.dart';
 
-class MyLocationCubit extends Cubit<MyLocationState> {
-  MyLocationCubit(this.locationRepo) : super(MyLocationInitial());
+class GetMyLocationCubit extends Cubit<GetMyLocationState> {
+  GetMyLocationCubit(this.locationRepo) : super(MyLocationInitial());
 
   final LocationRepo locationRepo;
 

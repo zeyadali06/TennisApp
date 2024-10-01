@@ -4,12 +4,22 @@ import 'package:tennis_app/Core/Widgets/CustomTextFormField.dart';
 import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
 
 class InputDataSection extends StatelessWidget {
-  const InputDataSection({super.key, required this.title, this.controller, this.inputFormatters, this.onSaved, this.onChanged});
+  const InputDataSection({
+    super.key,
+    required this.title,
+    this.controller,
+    this.inputFormatters,
+    this.onSaved,
+    this.onChanged,
+    this.focusNode,
+  });
+
   final String title;
   final TextEditingController? controller;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String?)? onSaved;
   final void Function(String?)? onChanged;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +41,7 @@ class InputDataSection extends StatelessWidget {
           inputFormatters: inputFormatters,
           onSaved: onSaved,
           onChanged: onChanged,
+          focusNode: focusNode,
         ),
       ],
     );

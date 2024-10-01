@@ -10,12 +10,14 @@ class CustomTextFormField extends StatefulWidget {
     this.onSaved,
     this.inputFormatters,
     this.onChanged,
+    this.focusNode,
   });
 
   final TextEditingController? controller;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String?)? onSaved;
   final void Function(String?)? onChanged;
+  final FocusNode? focusNode;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -47,6 +49,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           }
           return null;
         },
+        focusNode: widget.focusNode,
         onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
         onSaved: widget.onSaved,
         onChanged: widget.onChanged,
