@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
@@ -25,7 +24,7 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
   late bool showSerchFieldSection;
   late bool isLoading;
   late PositionEntity positionEntity;
-  late List<String> suggestions;
+  late List<PositionEntity> suggestions;
 
   @override
   void initState() {
@@ -33,7 +32,7 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
     showSerchFieldSection = false;
     isLoading = false;
     suggestions = [];
-    positionEntity = const PositionEntity(longitude: 0, latitude: 0, placemark: Placemark());
+    positionEntity = const PositionEntity(longitude: 0, latitude: 0, place: "");
     super.initState();
   }
 
@@ -64,6 +63,8 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
               suggestions = state.suggestions;
             } else if (state is SearchForLoactionFailed) {
               showSnackBar(context, state.error.message);
+            } else if (state is ChooseLocation) {
+              positionEntity = state.positionEntity;
             }
             isLoading = false;
             setState(() {});

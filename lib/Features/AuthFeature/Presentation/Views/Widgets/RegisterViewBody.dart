@@ -19,7 +19,7 @@ class RegisterViewBody extends StatelessWidget {
   final AutovalidateMode autovalidateMode = AutovalidateMode.always;
   final GlobalKey<FormState> formKey = GlobalKey();
   final RegisterEntity registerEntity = RegisterEntity();
-  late final String password;
+  late String password;
   bool isLoading = false;
 
   @override

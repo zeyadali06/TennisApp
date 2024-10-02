@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:tennis_app/Core/Functions/GetPlaceMarkAsString.dart';
 import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Core/Failure/FirebaseFailureHandler.dart';
@@ -31,7 +32,7 @@ class LoactionRepoImpl implements LocationRepo {
     try {
       position = await _geolocatorPlatform.getCurrentPosition();
       Placemark placemark = await getPlace(position.latitude, position.longitude);
-      return RequestResault.success(LocationMapper.toPositionEntity(position, placemark));
+      return RequestResault.success(LocationMapper.toPositionEntity(position, getPlaceMarkAsString(placemark)));
     } on LocationServiceDisabledException {
       return RequestResault.failure(GeolocatorFailureHandler(1));
     } catch (e) {
@@ -42,7 +43,18 @@ class LoactionRepoImpl implements LocationRepo {
   @override
   Future<RequestResault<void, FirebaseFailureHandler>> addLoaction(PositionEntity poistionEntity) async {
     try {
-      await Firestore.setField(collectionPath: ConstantNames.locationsCollection, docName: ConstantNames.userModel.uid!, data: poistionEntity.toMap());
+      var res = await Firestore.getField(collectionPath: ConstantNames.locationsCollection, docName: ConstantNames.userModel.uid!, key: ConstantNames.locationsField);
+      bool alreadyExist = false;
+      for (var ele in (res as List)) {
+        if (PositionEntity.fromJson(ele).compare(poistionEntity)) {
+          alreadyExist = true;
+          break;
+        }
+      }
+      if (!alreadyExist) {
+        res.add(poistionEntity.toMap());
+      }
+      await Firestore.updateField(collectionPath: ConstantNames.locationsCollection, docName: ConstantNames.userModel.uid!, data: {ConstantNames.locationsField: res});
       return RequestResault.success(null);
     } catch (e) {
       return RequestResault.failure(FirebaseFailureHandler(e));
@@ -50,15 +62,16 @@ class LoactionRepoImpl implements LocationRepo {
   }
 
   @override
-  Future<RequestResault<List<String>, WeatherAPIFailureHandler>> searchForPlaces(String place) async {
+  Future<RequestResault<List<PositionEntity>, WeatherAPIFailureHandler>> searchForPlaces(String place) async {
     try {
       var res = await placesServices.searchForPlaces(place);
 
-      List<String> places = [];
+      List<PositionEntity> places = [];
 
       if (res is List) {
         for (var locationJson in res) {
-          places.add(PlaceModel.fromJson(locationJson).name);
+          PlaceModel placeModel = PlaceModel.fromJson(locationJson);
+          places.add(PositionEntity(place: placeModel.name, longitude: placeModel.lon, latitude: placeModel.lat));
         }
       }
 
@@ -68,6 +81,12 @@ class LoactionRepoImpl implements LocationRepo {
     } catch (e) {
       return RequestResault.failure(WeatherAPIFailureHandler(0));
     }
+  }
+
+  @override
+  Future<RequestResault> removeLoaction(PositionEntity poistionEntity) {
+    // TODO: implement removeLoaction
+    throw UnimplementedError();
   }
 
   Future<Placemark> getPlace(double latitude, double longitude) async {

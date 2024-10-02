@@ -1,4 +1,3 @@
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/Models/PlaceModel.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PlaceEntity.dart';
@@ -9,7 +8,7 @@ class LocationMapper {
     return PlaceEntity(longitude: placeModel.lon, latitude: placeModel.lat, name: placeModel.name, country: placeModel.country);
   }
 
-  static PositionEntity toPositionEntity(Position position, Placemark placemark) {
-    return PositionEntity(longitude: position.longitude, latitude: position.latitude, placemark: placemark);
+  static PositionEntity toPositionEntity(Position position, String place) {
+    return PositionEntity(longitude: position.longitude, latitude: position.latitude, place: place);
   }
 }

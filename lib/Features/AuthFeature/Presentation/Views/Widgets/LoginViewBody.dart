@@ -19,7 +19,7 @@ class LoginViewBody extends StatelessWidget {
   final AutovalidateMode autovalidateMode = AutovalidateMode.always;
   final GlobalKey<FormState> formKey = GlobalKey();
   final LoginEntity loginEntity = LoginEntity();
-  late final String password;
+  late String password;
   bool isLoading = false;
 
   @override

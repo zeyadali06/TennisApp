@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
+import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Views/Widgets/SearchTextFieldWithSuggesstions.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/SearchForLoactionCubit/search_for_loaction_cubit.dart';
 
@@ -9,7 +10,7 @@ class SearchField extends StatelessWidget {
   SearchField({super.key, required this.suggestions});
   AutovalidateMode autovalidateMode = AutovalidateMode.always;
   final GlobalKey<FormState> formKey = GlobalKey();
-  final List<String> suggestions;
+  final List<PositionEntity> suggestions;
 
   @override
   Widget build(BuildContext context) {

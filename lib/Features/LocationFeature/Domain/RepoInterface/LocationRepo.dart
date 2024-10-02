@@ -5,4 +5,5 @@ abstract class LocationRepo {
   Future<RequestResault> getMyLocation();
   Future<RequestResault> searchForPlaces(final String place);
   Future<RequestResault> addLoaction(PositionEntity poistionEntity);
+  Future<RequestResault> removeLoaction(PositionEntity poistionEntity);
 }

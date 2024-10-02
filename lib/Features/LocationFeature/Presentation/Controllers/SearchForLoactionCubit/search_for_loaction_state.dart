@@ -7,8 +7,16 @@ final class SearchForLoactionInitial extends SearchForLoactionState {}
 
 final class SearchForLoactionLoading extends SearchForLoactionState {}
 
+final class ChooseLocation extends SearchForLoactionState {
+  final PositionEntity positionEntity;
+
+  ChooseLocation(this.positionEntity);
+}
+
+final class ChooseLocationFinished extends SearchForLoactionState {}
+
 final class SearchForLoactionSuccessed extends SearchForLoactionState {
-  final List<String> suggestions;
+  final List<PositionEntity> suggestions;
 
   SearchForLoactionSuccessed(this.suggestions);
 }
