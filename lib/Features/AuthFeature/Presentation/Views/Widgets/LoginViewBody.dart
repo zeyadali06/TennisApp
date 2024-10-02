@@ -1,39 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:tennis_app/Core/Formatters/Formatters.dart';
 import 'package:tennis_app/Core/Utils/AppRouter.dart';
-import 'package:tennis_app/Core/Widgets/CustomButton.dart';
-import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
-import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
 import 'package:tennis_app/Core/Widgets/SnackBar.dart';
+import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
+import 'package:tennis_app/Core/Widgets/CustomButton.dart';
+import 'package:tennis_app/Core/Formatters/Formatters.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/Entities/LoginEntity.dart';
-import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/LoginCubit/login_cubit.dart';
-import 'package:tennis_app/Features/AuthFeature/Presentation/Views/Widgets/InputDataSection.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/Widgets/AuthViewHeader.dart';
+import 'package:tennis_app/Features/AuthFeature/Presentation/Views/Widgets/InputDataSection.dart';
+import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/LoginCubit/login_cubit.dart';
 
-class LoginViewBody extends StatefulWidget {
-  const LoginViewBody({super.key});
+// ignore: must_be_immutable
+class LoginViewBody extends StatelessWidget {
+  LoginViewBody({super.key});
 
-  @override
-  State<LoginViewBody> createState() => _LoginViewBodyState();
-}
-
-class _LoginViewBodyState extends State<LoginViewBody> {
-  late final AutovalidateMode autovalidateMode;
-  late final GlobalKey<FormState> formKey;
-  late final LoginEntity loginEntity;
-  late String password;
-  late bool isLoading;
-
-  @override
-  void initState() {
-    loginEntity = LoginEntity();
-    autovalidateMode = AutovalidateMode.disabled;
-    formKey = GlobalKey();
-    isLoading = false;
-    super.initState();
-  }
+  final AutovalidateMode autovalidateMode = AutovalidateMode.always;
+  final GlobalKey<FormState> formKey = GlobalKey();
+  final LoginEntity loginEntity = LoginEntity();
+  late final String password;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -105,9 +92,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                       if (formKey.currentState!.validate()) {
                                         formKey.currentState!.save();
                                         await BlocProvider.of<LoginCubit>(context).login(loginEntity, password);
-                                      } else {
-                                        autovalidateMode = AutovalidateMode.always;
-                                        setState(() {});
                                       }
                                     },
                                     title: 'LOGIN',

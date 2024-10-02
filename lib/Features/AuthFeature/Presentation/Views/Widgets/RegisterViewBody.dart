@@ -1,39 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:tennis_app/Core/Formatters/Formatters.dart';
 import 'package:tennis_app/Core/Utils/AppRouter.dart';
-import 'package:tennis_app/Core/Widgets/CustomButton.dart';
-import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
-import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
 import 'package:tennis_app/Core/Widgets/SnackBar.dart';
+import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
+import 'package:tennis_app/Core/Widgets/CustomButton.dart';
+import 'package:tennis_app/Core/Formatters/Formatters.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/Entities/RegisterEntity.dart';
-import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/RegisterCubit/register_cubit.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/Widgets/AuthViewHeader.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/Widgets/InputDataSection.dart';
+import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/RegisterCubit/register_cubit.dart';
 
-class RegisterViewBody extends StatefulWidget {
-  const RegisterViewBody({super.key});
+// ignore: must_be_immutable
+class RegisterViewBody extends StatelessWidget {
+  RegisterViewBody({super.key});
 
-  @override
-  State<RegisterViewBody> createState() => _RegisterViewBodyState();
-}
-
-class _RegisterViewBodyState extends State<RegisterViewBody> {
-  late final AutovalidateMode autovalidateMode;
-  late final GlobalKey<FormState> formKey;
-  late final RegisterEntity registerEntity;
-  late String password;
-  late bool isLoading;
-
-  @override
-  void initState() {
-    registerEntity = RegisterEntity();
-    autovalidateMode = AutovalidateMode.disabled;
-    formKey = GlobalKey();
-    isLoading = false;
-    super.initState();
-  }
+  final AutovalidateMode autovalidateMode = AutovalidateMode.always;
+  final GlobalKey<FormState> formKey = GlobalKey();
+  final RegisterEntity registerEntity = RegisterEntity();
+  late final String password;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -94,9 +81,6 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                                       if (formKey.currentState!.validate()) {
                                         formKey.currentState!.save();
                                         await BlocProvider.of<RegisterCubit>(context).register(registerEntity, password);
-                                      } else {
-                                        autovalidateMode = AutovalidateMode.always;
-                                        setState(() {});
                                       }
                                     },
                                     title: 'NEXT',
