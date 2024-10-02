@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tennis_app/Core/Widgets/SnackBar.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -31,7 +32,7 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
     showSerchFieldSection = false;
     isLoading = false;
     suggestions = [];
-    positionEntity = const PositionEntity(longitude: 0, latitude: 0);
+    positionEntity = const PositionEntity(longitude: 0, latitude: 0, placemark: Placemark());
     super.initState();
   }
 

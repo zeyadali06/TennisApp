@@ -4,6 +4,7 @@ import 'package:tennis_app/CustomNavigationBar.dart';
 import 'package:tennis_app/Core/Utils/DependencyInjection.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/LoginView.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/AddLocationsCubit/add_locations_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/SearchForLoactionCubit/search_for_loaction_cubit.dart';
 import 'package:tennis_app/Features/SplashFeature/Presentation/Views/SplashView.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/RegisterView.dart';
@@ -38,6 +39,9 @@ abstract class AppRouter {
       ),
       BlocProvider(
         create: (context) => SearchForLoactionCubit(getit.get<LoactionRepoImpl>()),
+      ),
+      BlocProvider(
+        create: (context) => AddLocationsCubit(getit.get<LoactionRepoImpl>()),
       ),
     ],
     child: const LocationsView(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Utils/AppRouter.dart';
-import 'package:tennis_app/Core/Widgets/SnackBar.dart';
+import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
 import 'package:tennis_app/Core/Formatters/Formatters.dart';

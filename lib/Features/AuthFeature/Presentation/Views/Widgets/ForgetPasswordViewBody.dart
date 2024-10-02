@@ -4,7 +4,7 @@ import 'package:tennis_app/Core/Utils/AppRouter.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
-import 'package:tennis_app/Core/Widgets/SnackBar.dart';
+import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/Widgets/AuthViewHeader.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/Widgets/InputDataSection.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/ForgetPasswordCubit/forget_password_cubit.dart';

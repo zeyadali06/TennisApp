@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
+import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
+import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/Models/PlaceModel.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/Mappers/LocationMapper.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/DataSource/PlacesServices.dart';
@@ -24,11 +27,22 @@ class LoactionRepoImpl implements LocationRepo {
 
     try {
       position = await _geolocatorPlatform.getCurrentPosition();
-      return RequestResault.success(LocationMapper.toPositionEntity(position));
+      Placemark placemark = await getPlace(position.latitude, position.longitude);
+      return RequestResault.success(LocationMapper.toPositionEntity(position, placemark));
     } on LocationServiceDisabledException {
       return RequestResault.failure(1);
     } catch (e) {
       return RequestResault.failure(0);
+    }
+  }
+
+  @override
+  Future<RequestResault> addLoaction(PositionEntity poistionEntity) async {
+    try {
+      await Firestore.setField(collectionPath: ConstantNames.locationsCollection, docName: ConstantNames.userModel.uid!, data: poistionEntity.toMap());
+      return RequestResault.success(null);
+    } catch (e) {
+      return RequestResault.failure(e);
     }
   }
 
@@ -51,6 +65,11 @@ class LoactionRepoImpl implements LocationRepo {
     } catch (e) {
       return RequestResault.failure(0);
     }
+  }
+
+  Future<Placemark> getPlace(double latitude, double longitude) async {
+    List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+    return placemarks[0];
   }
 
   Future<bool> _handlePermission() async {

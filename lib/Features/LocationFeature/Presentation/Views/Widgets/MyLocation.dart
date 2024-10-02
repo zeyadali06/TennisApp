@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_app/Core/Functions/GetPlaceMarkAsString.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 
 class MyLocation extends StatelessWidget {
@@ -15,10 +16,17 @@ class MyLocation extends StatelessWidget {
           'Your Location:',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
         ),
+        const SizedBox(height: 10),
+        Text(
+          'Place: ${getPlaceMarkAsString(positionEntity.placemark)}.',
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
+        ),
+        const SizedBox(height: 10),
         Text(
           'Latitude: ${positionEntity.latitude}',
           style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
         ),
+        const SizedBox(height: 10),
         Text(
           'Longitude: ${positionEntity.longitude}',
           style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
