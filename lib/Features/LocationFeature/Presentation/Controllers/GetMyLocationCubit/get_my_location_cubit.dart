@@ -14,11 +14,13 @@ class GetMyLocationCubit extends Cubit<GetMyLocationState> {
 
   Future<void> getMyLocation() async {
     emit(CheckLocationLoading());
+
     RequestResault res = await locationRepo.getMyLocation();
+
     if (res is RequestSuccess) {
-      emit(GetLocationSuccessed(positionEntity: res.data));
+      emit(GetLocationSuccessed(res.data));
     } else if (res is RequestFailed) {
-      emit(GetLocationFailed(error: GeolocatorFailureHandler(res.data)));
+      emit(GetLocationFailed(res.data));
     }
   }
 }

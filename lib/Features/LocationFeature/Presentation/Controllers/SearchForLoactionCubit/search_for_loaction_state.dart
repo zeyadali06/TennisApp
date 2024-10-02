@@ -10,11 +10,11 @@ final class SearchForLoactionLoading extends SearchForLoactionState {}
 final class SearchForLoactionSuccessed extends SearchForLoactionState {
   final List<String> suggestions;
 
-  SearchForLoactionSuccessed({required this.suggestions});
+  SearchForLoactionSuccessed(this.suggestions);
 }
 
 final class SearchForLoactionFailed extends SearchForLoactionState {
   final WeatherAPIFailureHandler error;
 
-  SearchForLoactionFailed({required this.error});
+  SearchForLoactionFailed(this.error);
 }

@@ -12,5 +12,5 @@ final class AddLocationsSuccessed extends AddLocationsState {}
 final class AddLocationsFailed extends AddLocationsState {
   final FirebaseFailureHandler error;
 
-  AddLocationsFailed({required this.error});
+  AddLocationsFailed(this.error);
 }

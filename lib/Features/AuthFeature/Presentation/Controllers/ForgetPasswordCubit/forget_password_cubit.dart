@@ -13,15 +13,13 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
 
   Future<void> forgetPassword(String email) async {
     emit(ForgetPasswordLoading());
-    try {
-      RequestResault<dynamic, dynamic> res = await forgetPasswordUseCase.forgetPassword(email);
-      if (res is RequestSuccess) {
-        return emit(EmailSentSuccessfully());
-      } else if (res is RequestFailed) {
-        return emit(ForgetPasswordFailed(res.data));
-      }
-    } catch (e) {
-      return emit(ForgetPasswordFailed(FirebaseFailureHandler(e)));
+
+    RequestResault<dynamic, dynamic> res = await forgetPasswordUseCase.forgetPassword(email);
+
+    if (res is RequestSuccess) {
+      return emit(EmailSentSuccessfully());
+    } else if (res is RequestFailed) {
+      return emit(ForgetPasswordFailed(res.data));
     }
   }
 }

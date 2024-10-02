@@ -14,11 +14,13 @@ class AddLocationsCubit extends Cubit<AddLocationsState> {
 
   Future<void> addLocation(PositionEntity positionEntity) async {
     emit(AddLocationsLoading());
+
     RequestResault res = await locationRepo.addLoaction(positionEntity);
+    
     if (res is RequestSuccess) {
       emit(AddLocationsSuccessed());
     } else if (res is RequestFailed) {
-      emit(AddLocationsFailed(error: FirebaseFailureHandler(res.data)));
+      emit(AddLocationsFailed(res.data));
     }
   }
 }

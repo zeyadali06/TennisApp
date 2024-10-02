@@ -14,11 +14,13 @@ class SearchForLoactionCubit extends Cubit<SearchForLoactionState> {
 
   Future<void> searchForLoaction(String place) async {
     emit(SearchForLoactionLoading());
+
     RequestResault res = await locationRepo.searchForPlaces(place);
+
     if (res is RequestSuccess) {
-      emit(SearchForLoactionSuccessed(suggestions: res.data));
+      emit(SearchForLoactionSuccessed(res.data));
     } else if (res is RequestFailed) {
-      emit(SearchForLoactionFailed(error: WeatherAPIFailureHandler(res.data)));
+      emit(SearchForLoactionFailed(res.data));
     }
   }
 }

@@ -15,15 +15,13 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   Future<void> register(RegisterEntity registerEntity, String password) async {
     emit(RegisterLoading());
-    try {
-      RequestResault<dynamic, dynamic> res = await authRepo.register(registerEntity, password);
-      if (res is RequestSuccess) {
-        return emit(RegisterSuccess(res.data));
-      } else if (res is RequestFailed) {
-        return emit(RegisterFailed(res.data));
-      }
-    } catch (e) {
-      return emit(RegisterFailed(FirebaseFailureHandler(e)));
+
+    RequestResault<dynamic, dynamic> res = await authRepo.register(registerEntity, password);
+
+    if (res is RequestSuccess) {
+      return emit(RegisterSuccess(res.data));
+    } else if (res is RequestFailed) {
+      return emit(RegisterFailed(res.data));
     }
   }
 }

@@ -36,7 +36,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<RequestResault> forgetPassword(String email) async {
+  Future<RequestResault<UserModel, FirebaseFailureHandler>> forgetPassword(String email) async {
     try {
       await AccountData.resetPassword(email);
       return RequestResault.success(UserModel());
