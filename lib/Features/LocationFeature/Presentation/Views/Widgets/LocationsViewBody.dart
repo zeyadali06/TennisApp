@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
@@ -9,6 +9,7 @@ import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Views/Widgets/MyLocation.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Views/Widgets/SearchField.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/AddLocationsCubit/add_locations_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/GetMyLocationCubit/get_my_location_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/SearchForLoactionCubit/search_for_loaction_cubit.dart';
 
@@ -68,6 +69,18 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
             setState(() {});
           },
         ),
+        BlocListener<AddLocationsCubit, AddLocationsState>(
+          listener: (context, state) {
+            if (state is AddLocationsLoading) {
+              isLoading = true;
+              return setState(() {});
+            } else if (state is AddLocationsFailed) {
+              showSnackBar(context, state.error.message);
+            }
+            isLoading = false;
+            setState(() {});
+          },
+        ),
       ],
       child: ModalProgressHUD(
         inAsyncCall: isLoading,
@@ -76,8 +89,7 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: CustomScrollView(
               slivers: [
-                SliverFillRemaining(
-                  hasScrollBody: false,
+                SliverToBoxAdapter(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -120,6 +132,21 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                       if (showMyLocationSection) MyLocation(positionEntity: positionEntity),
                       if (showSerchFieldSection) SearchField(suggestions: suggestions),
                       const SizedBox(height: 30),
+                    ],
+                  ),
+                ),
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Column(
+                    children: [
+                      const Expanded(child: SizedBox()),
+                      CustomButton(
+                        onPressed: () async {
+                          await BlocProvider.of<AddLocationsCubit>(context).addLocation(positionEntity);
+                        },
+                        title: 'Add Location',
+                      ),
+                      const SizedBox(height: 90),
                     ],
                   ),
                 ),

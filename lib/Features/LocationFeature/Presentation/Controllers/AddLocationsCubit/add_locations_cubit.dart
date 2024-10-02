@@ -12,9 +12,9 @@ class AddLocationsCubit extends Cubit<AddLocationsState> {
 
   final LocationRepo locationRepo;
 
-  Future<void> addLocation(PositionEntity poistionEntity) async {
+  Future<void> addLocation(PositionEntity positionEntity) async {
     emit(AddLocationsLoading());
-    RequestResault res = await locationRepo.addLoaction(poistionEntity);
+    RequestResault res = await locationRepo.addLoaction(positionEntity);
     if (res is RequestSuccess) {
       emit(AddLocationsSuccessed());
     } else if (res is RequestFailed) {
