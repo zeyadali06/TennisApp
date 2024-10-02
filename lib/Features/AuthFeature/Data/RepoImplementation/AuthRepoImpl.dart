@@ -14,7 +14,7 @@ class AuthRepoImpl implements AuthRepo {
   Future<RequestResault<UserModel, FirebaseFailureHandler>> login(LoginEntity loginData, String password) async {
     try {
       UserCredential user = await SignIn.signIn(loginData.email!, password);
-      String fullName = await Firestore.getField(collectionPath: ConstantNames.usersDataCollection, docName: user.user!.uid, key: ConstantNames.fullName);
+      String fullName = await Firestore.getField(collectionPath: ConstantNames.usersDataCollection, docName: user.user!.uid, key: ConstantNames.fullNameField);
       UserModel userModel = UserModel(email: loginData.email, uid: user.user!.uid, fullName: fullName);
       ConstantNames.userModel = userModel;
       return RequestResault.success(userModel);

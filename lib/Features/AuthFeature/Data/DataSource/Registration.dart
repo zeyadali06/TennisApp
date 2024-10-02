@@ -12,13 +12,13 @@ class AccountData {
   // FullName
   static Future<String?> getFullNameFromFirestore(String uid) async {
     var d = await FirebaseFirestore.instance.collection(ConstantNames.usersDataCollection).doc(uid).get();
-    return d.data()![ConstantNames.fullName];
+    return d.data()![ConstantNames.fullNameField];
   }
 
   // Email
   static Future<String?> getEmailFromFirestore(String uid) async {
     var d = await FirebaseFirestore.instance.collection(ConstantNames.usersDataCollection).doc(uid).get();
-    return d.data()![ConstantNames.email];
+    return d.data()![ConstantNames.emailField];
   }
 
   static Future<String?> getEmailFromFirebaseAuth(String uid) async {
@@ -28,7 +28,7 @@ class AccountData {
 
   // UID
   static Future<String?> getUIDFromFirestore(String email) async {
-    QuerySnapshot uidDocument = await FirebaseFirestore.instance.collection(ConstantNames.usersDataCollection).where(ConstantNames.email, isEqualTo: email).limit(1).get();
+    QuerySnapshot uidDocument = await FirebaseFirestore.instance.collection(ConstantNames.usersDataCollection).where(ConstantNames.emailField, isEqualTo: email).limit(1).get();
     return uidDocument.docs[0].id;
   }
 
@@ -47,8 +47,8 @@ class AccountData {
 
 class Register {
   static Future<UserCredential> register(Map<String, dynamic> userData, String password) async {
-    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: userData[ConstantNames.email], password: password);
-    userData[ConstantNames.uid] = userCredential.user!.uid;
+    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: userData[ConstantNames.emailField], password: password);
+    userData[ConstantNames.uidField] = userCredential.user!.uid;
     await FirebaseFirestore.instance.collection(ConstantNames.usersDataCollection).doc(userCredential.user!.uid).set(userData, SetOptions(merge: true));
     return userCredential;
   }

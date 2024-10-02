@@ -7,7 +7,7 @@ class LoginEntity {
 
   Map<String, dynamic> toMap() {
     return {
-      ConstantNames.email: email,
+      ConstantNames.emailField: email,
     };
   }
 }
