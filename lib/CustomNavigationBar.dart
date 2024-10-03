@@ -21,7 +21,7 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
       CustomGradiantContainer(child: Container()),
       CustomGradiantContainer(child: Container()),
       AppRouter.homeView,
-      CustomGradiantContainer(child: Container()),
+      AppRouter.locationsManagerView,
       AppRouter.locationsView,
     ];
   }

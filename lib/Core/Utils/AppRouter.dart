@@ -3,18 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/CustomNavigationBar.dart';
 import 'package:tennis_app/Core/Utils/DependencyInjection.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView/HomeView.dart';
+import 'package:tennis_app/Features/AuthFeature/Data/RepoImplementation/AuthRepoImpl.dart';
+import 'package:tennis_app/Features/AuthFeature/Domain/UseCases/ForgetPasswordUseCase.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/LoginView/LoginView.dart';
 import 'package:tennis_app/Features/SplashFeature/Presentation/Views/SplashView/SplashView.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/RegisterView/RegisterView.dart';
-import 'package:tennis_app/Features/AuthFeature/Presentation/Views/AuthOptionsView/AuthOptionsView.dart';
-import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsView/LocationsView.dart';
-import 'package:tennis_app/Features/AuthFeature/Data/RepoImplementation/AuthRepoImpl.dart';
-import 'package:tennis_app/Features/AuthFeature/Domain/UseCases/ForgetPasswordUseCase.dart';
-import 'package:tennis_app/Features/AuthFeature/Presentation/Views/ForgetPassowrdView/ForgetPasswordView.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/RepoImplementation/LoactionRepoImpl.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/LoginCubit/login_cubit.dart';
+import 'package:tennis_app/Features/AuthFeature/Presentation/Views/AuthOptionsView/AuthOptionsView.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsView/LocationsView.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/RepoImplementation/LocationManagerRepoImpl.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/RegisterCubit/register_cubit.dart';
+import 'package:tennis_app/Features/AuthFeature/Presentation/Views/ForgetPassowrdView/ForgetPasswordView.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsManagerView/LocationsManagerView.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/AddLocationsCubit/add_locations_cubit.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/ForgetPasswordCubit/forget_password_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/GetMyLocationCubit/get_my_location_cubit.dart';
@@ -47,6 +48,7 @@ abstract class AppRouter {
     ],
     child: const LocationsView(),
   );
+  static const Widget locationsManagerView = LocationsManagerView();
   static const Widget navigationBar = CustomNavigationBar();
   static const Widget splashView = SplashView();
   static const Widget authOptions = AuthOptionsView();
