@@ -3,19 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Failure/FirebaseFailureHandler.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
-import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationRepo.dart';
+import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
 
 part 'add_locations_state.dart';
 
 class AddLocationsCubit extends Cubit<AddLocationsState> {
-  AddLocationsCubit(this.locationRepo) : super(AddLocationsInitial());
+  AddLocationsCubit(this.locationManagerRepo) : super(AddLocationsInitial());
 
-  final LocationRepo locationRepo;
+  final LocationManagerRepo locationManagerRepo;
 
   Future<void> addLocation(PositionEntity positionEntity) async {
     emit(AddLocationsLoading());
 
-    RequestResault res = await locationRepo.addLoaction(positionEntity);
+    RequestResault res = await locationManagerRepo.addLoaction(positionEntity);
     
     if (res is RequestSuccess) {
       emit(AddLocationsSuccessed());

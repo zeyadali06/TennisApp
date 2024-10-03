@@ -16,7 +16,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   Future<void> register(RegisterEntity registerEntity, String password) async {
     emit(RegisterLoading());
 
-    RequestResault<dynamic, dynamic> res = await authRepo.register(registerEntity, password);
+    RequestResault<dynamic, dynamic> res = await authRepo.signUp(registerEntity, password);
 
     if (res is RequestSuccess) {
       return emit(RegisterSuccess(res.data));

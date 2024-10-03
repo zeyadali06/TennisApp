@@ -2,10 +2,8 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:tennis_app/Core/Functions/GetPlaceMarkAsString.dart';
-import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
-import 'package:tennis_app/Core/Failure/FirebaseFailureHandler.dart';
+import 'package:tennis_app/Core/Functions/GetPlaceMarkAsString.dart';
 import 'package:tennis_app/Core/Failure/GeoLocatorFailureHandler.dart';
 import 'package:tennis_app/Core/Failure/WeatherAPIFailureHandler.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/Models/PlaceModel.dart';
@@ -13,10 +11,9 @@ import 'package:tennis_app/Features/LocationFeature/Data/Mappers/LocationMapper.
 import 'package:tennis_app/Features/LocationFeature/Data/DataSource/PlacesServices.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationRepo.dart';
-import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
 
-class LoactionRepoImpl implements LocationRepo {
-  LoactionRepoImpl({required this.placesServices});
+class LocationRepoImpl implements LocationRepo {
+  LocationRepoImpl({required this.placesServices});
   PlacesServices placesServices;
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
 
@@ -41,27 +38,6 @@ class LoactionRepoImpl implements LocationRepo {
   }
 
   @override
-  Future<RequestResault<void, FirebaseFailureHandler>> addLoaction(PositionEntity poistionEntity) async {
-    try {
-      var res = await Firestore.getField(collectionPath: ConstantNames.locationsCollection, docName: ConstantNames.userModel.uid!, key: ConstantNames.locationsField);
-      bool alreadyExist = false;
-      for (var ele in (res as List)) {
-        if (PositionEntity.fromJson(ele).compare(poistionEntity)) {
-          alreadyExist = true;
-          break;
-        }
-      }
-      if (!alreadyExist) {
-        res.add(poistionEntity.toMap());
-      }
-      await Firestore.updateField(collectionPath: ConstantNames.locationsCollection, docName: ConstantNames.userModel.uid!, data: {ConstantNames.locationsField: res});
-      return RequestResault.success(null);
-    } catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(e));
-    }
-  }
-
-  @override
   Future<RequestResault<List<PositionEntity>, WeatherAPIFailureHandler>> searchForPlaces(String place) async {
     try {
       var res = await placesServices.searchForPlaces(place);
@@ -81,12 +57,6 @@ class LoactionRepoImpl implements LocationRepo {
     } catch (e) {
       return RequestResault.failure(WeatherAPIFailureHandler(0));
     }
-  }
-
-  @override
-  Future<RequestResault> removeLoaction(PositionEntity poistionEntity) {
-    // TODO: implement removeLoaction
-    throw UnimplementedError();
   }
 
   Future<Placemark> getPlace(double latitude, double longitude) async {

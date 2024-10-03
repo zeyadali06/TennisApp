@@ -4,20 +4,27 @@ import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Core/Failure/FirebaseFailureHandler.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/Models/UserModel.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/Entities/LoginEntity.dart';
-import 'package:tennis_app/Features/AuthFeature/Data/DataSource/Registration.dart';
+import 'package:tennis_app/Features/AuthFeature/Data/DataSource/Authentication.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/RepoInterface/AuthRepo.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/Entities/RegisterEntity.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
 
 class AuthRepoImpl implements AuthRepo {
+  AuthRepoImpl({required this.firestore, required this.signIn, required this.register, required this.accountData});
+
+  final Firestore firestore;
+  final SignIn signIn;
+  final Register register;
+  final AccountData accountData;
+
   @override
   Future<RequestResault<UserModel, FirebaseFailureHandler>> login(LoginEntity loginData, String password) async {
     try {
-      UserCredential user = await SignIn.signIn(loginData.email!, password);
-      String fullName = await Firestore.getField(collectionPath: ConstantNames.usersDataCollection, docName: user.user!.uid, key: ConstantNames.fullNameField);
+      UserCredential user = await signIn.signIn(loginData.email!, password);
+      String fullName = await firestore.getField(collectionPath: ConstantNames.usersDataCollection, docName: user.user!.uid, key: ConstantNames.fullNameField);
       UserModel userModel = UserModel(email: loginData.email, uid: user.user!.uid, fullName: fullName);
       ConstantNames.userModel = userModel;
-      await Firestore.setField(collectionPath: ConstantNames.locationsCollection, docName: user.user!.uid, data: {ConstantNames.locationsField: []});
+      await firestore.setField(collectionPath: ConstantNames.locationsCollection, docName: user.user!.uid, data: {ConstantNames.locationsField: []});
       return RequestResault.success(userModel);
     } catch (e) {
       return RequestResault.failure(FirebaseFailureHandler(e));
@@ -25,12 +32,12 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<RequestResault<UserModel, FirebaseFailureHandler>> register(RegisterEntity registerData, String password) async {
+  Future<RequestResault<UserModel, FirebaseFailureHandler>> signUp(RegisterEntity registerData, String password) async {
     try {
-      UserCredential user = await Register.register(registerData.toMap(), password);
+      UserCredential user = await register.register(registerData.toMap(), password);
       UserModel userModel = UserModel(email: registerData.email, uid: user.user!.uid, fullName: registerData.fullName);
       ConstantNames.userModel = userModel;
-      await Firestore.setField(collectionPath: ConstantNames.locationsCollection, docName: user.user!.uid, data: {ConstantNames.locationsField: []});
+      await firestore.setField(collectionPath: ConstantNames.locationsCollection, docName: user.user!.uid, data: {ConstantNames.locationsField: []});
       return RequestResault.success(userModel);
     } catch (e) {
       return RequestResault.failure(FirebaseFailureHandler(e));
@@ -40,7 +47,7 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future<RequestResault<UserModel, FirebaseFailureHandler>> forgetPassword(String email) async {
     try {
-      await AccountData.resetPassword(email);
+      await accountData.resetPassword(email);
       return RequestResault.success(UserModel());
     } catch (e) {
       return RequestResault.failure(FirebaseFailureHandler(e));
