@@ -8,8 +8,8 @@ import 'package:tennis_app/Core/Formatters/Formatters.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/Entities/LoginEntity.dart';
-import 'package:tennis_app/Features/AuthFeature/Presentation/Views/Widgets/AuthViewHeader.dart';
-import 'package:tennis_app/Features/AuthFeature/Presentation/Views/Widgets/InputDataSection.dart';
+import 'package:tennis_app/Features/AuthFeature/Presentation/Views/CommonWidgets/AuthViewHeader.dart';
+import 'package:tennis_app/Core/Widgets/InputDataSection.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/LoginCubit/login_cubit.dart';
 
 // ignore: must_be_immutable

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tennis_app/Features/LocationFeature/Presentation/Views/Widgets/LocationsViewBody.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsView/Widgets/LocationsViewBody.dart';
 
 class LocationsView extends StatelessWidget {
   const LocationsView({super.key});

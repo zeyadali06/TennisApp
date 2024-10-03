@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tennis_app/Features/AuthFeature/Presentation/Views/Widgets/ForgetPasswordViewBody.dart';
+import 'package:tennis_app/Features/AuthFeature/Presentation/Views/ForgetPassowrdView/Widgets/ForgetPasswordViewBody.dart';
 
 class ForgetPasswordView extends StatelessWidget {
   const ForgetPasswordView({super.key});
