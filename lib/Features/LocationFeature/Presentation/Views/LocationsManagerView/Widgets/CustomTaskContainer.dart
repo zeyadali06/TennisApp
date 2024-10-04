@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/LocationManagerCubit/location_manager_cubit.dart';
 
 class CustomTaskContainer extends StatefulWidget {
-  const CustomTaskContainer({super.key, required this.positionEntity, this.onDismissed, required this.isDeafult});
+  const CustomTaskContainer({super.key, required this.positionEntity, this.onDismissed, required this.isNotDeafult});
 
   final PositionEntity positionEntity;
   final Future<void> Function(DismissDirection direction)? onDismissed;
-  final bool isDeafult;
+  final bool isNotDeafult;
 
   @override
   State<CustomTaskContainer> createState() => _CustomTaskContainerState();
@@ -39,7 +41,10 @@ class _CustomTaskContainerState extends State<CustomTaskContainer> {
           Dismissible(
             key: UniqueKey(),
             direction: DismissDirection.horizontal,
-            onDismissed: widget.onDismissed,
+            onDismissed: (DismissDirection dismissDirection) async {
+              await BlocProvider.of<LocationManagerCubit>(context).deleteLocation(widget.positionEntity);
+              widget.onDismissed?.call(dismissDirection);
+            },
             child: Container(
               height: height - 10,
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: const Color(0xff222c48)),
@@ -53,13 +58,15 @@ class _CustomTaskContainerState extends State<CustomTaskContainer> {
                     minVerticalPadding: 0,
                     contentPadding: const EdgeInsets.all(10),
                     tileColor: Colors.transparent,
-                    trailing: widget.isDeafult
+                    trailing: widget.isNotDeafult
                         ? CustomButton(
                             fontSize: 14,
                             verticatPadding: 0,
                             horizontalPadding: 0,
-                            title: 'Make\nDefault',
-                            onPressed: () async {},
+                            title: 'Set As\nDefault',
+                            onPressed: () async {
+                              await BlocProvider.of<LocationManagerCubit>(context).setLocationAsDefault(widget.positionEntity);
+                            },
                           )
                         : null,
                     title: Text(

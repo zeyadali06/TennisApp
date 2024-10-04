@@ -7,6 +7,7 @@ class ConstantNames {
   static const String emailField = 'Email';
   static const String uidField = 'UID';
   static const String locationsField = 'locationsField';
+  static const String defaultLocationField = 'defaultLocationField';
   static const String longitudeField = 'longitudeField';
   static const String latitudeField = 'latitudeField';
   static const String placeField = 'placemarkField';

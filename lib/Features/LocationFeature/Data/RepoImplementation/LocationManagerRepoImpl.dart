@@ -8,43 +8,120 @@ import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/Locatio
 class LocationManagerRepoImpl implements LocationManagerRepo {
   LocationManagerRepoImpl({required this.firestore});
 
+  @override
+  List<PositionEntity> locations = [];
   final Firestore firestore;
 
   @override
-  Future<RequestResault<void, FirebaseFailureHandler>> addLoaction(PositionEntity poistionEntity) async {
+  Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>> getLocations() async {
     try {
-      var res = await firestore.getField(collectionPath: ConstantNames.locationsCollection, docName: ConstantNames.userModel.uid!, key: ConstantNames.locationsField);
-      bool alreadyExist = false;
-      for (var ele in (res as List)) {
-        if (PositionEntity.fromJson(ele).compare(poistionEntity)) {
-          alreadyExist = true;
-          break;
-        }
-      }
-      if (!alreadyExist) {
-        res.add(poistionEntity.toMap());
-      }
-      await firestore.updateField(collectionPath: ConstantNames.locationsCollection, docName: ConstantNames.userModel.uid!, data: {ConstantNames.locationsField: res});
-      return RequestResault.success(null);
+      List<PositionEntity> poistionEntities = await _getAllLocations();
+
+      return RequestResault.success(poistionEntities);
     } catch (e) {
       return RequestResault.failure(FirebaseFailureHandler(e));
     }
   }
 
   @override
-  Future<RequestResault<void, FirebaseFailureHandler>> deleteLoaction(PositionEntity poistionEntity) async {
+  Future<RequestResault<List<PositionEntity>, dynamic>> addLoaction(PositionEntity positionEntity) async {
     try {
-      var res = await firestore.getField(collectionPath: ConstantNames.locationsCollection, docName: ConstantNames.userModel.uid!, key: ConstantNames.locationsField);
-      for (int i = 0; i < (res as List).length; i++) {
-        if (PositionEntity.fromJson(res[i]).compare(poistionEntity)) {
-          res.remove(i);
+      bool alreadyExist = false;
+
+      for (PositionEntity ele in locations) {
+        if (ele.compare(positionEntity)) {
+          alreadyExist = true;
           break;
         }
       }
-      await firestore.updateField(collectionPath: ConstantNames.locationsCollection, docName: ConstantNames.userModel.uid!, data: {ConstantNames.locationsField: res});
-      return RequestResault.success(null);
+
+      if (!alreadyExist) {
+        locations.add(positionEntity);
+
+        List<Map<String, dynamic>> convertedData = converter(locations);
+
+        await firestore.updateField(
+          collectionPath: ConstantNames.locationsCollection,
+          docName: ConstantNames.userModel.uid!,
+          data: {ConstantNames.locationsField: convertedData},
+        );
+      } else {
+        return RequestResault.failure("Location already exist");
+      }
+
+      return RequestResault.success(locations);
     } catch (e) {
       return RequestResault.failure(FirebaseFailureHandler(e));
     }
+  }
+
+  @override
+  Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>> deleteLoaction(PositionEntity positionEntity) async {
+    try {
+      for (int i = 0; i < locations.length; i++) {
+        if (locations[i].compare(positionEntity)) {
+          locations.removeAt(i);
+          break;
+        }
+      }
+
+      List<Map<String, dynamic>> convertedData = converter(locations);
+
+      await firestore.updateField(
+        collectionPath: ConstantNames.locationsCollection,
+        docName: ConstantNames.userModel.uid!,
+        data: {ConstantNames.locationsField: convertedData},
+      );
+
+      return RequestResault.success(locations);
+    } catch (e) {
+      return RequestResault.failure(FirebaseFailureHandler(e));
+    }
+  }
+
+  @override
+  Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>> setLocationAsDefault(PositionEntity positionEntity) async {
+    try {
+      for (int i = 0; i < locations.length; i++) {
+        if (locations[i].compare(positionEntity)) {
+          locations.removeAt(i);
+          locations.insert(0, positionEntity);
+          break;
+        }
+      }
+
+      List<Map<String, dynamic>> convertedData = converter(locations);
+
+      await firestore.updateField(
+        collectionPath: ConstantNames.locationsCollection,
+        docName: ConstantNames.userModel.uid!,
+        data: {ConstantNames.locationsField: convertedData},
+      );
+
+      return RequestResault.success(locations);
+    } catch (e) {
+      return RequestResault.failure(FirebaseFailureHandler(e));
+    }
+  }
+
+  List<Map<String, dynamic>> converter(List<PositionEntity> locations) {
+    List<Map<String, dynamic>> convertedData = [];
+    for (PositionEntity element in locations) {
+      convertedData.add(element.toMap());
+    }
+
+    return convertedData;
+  }
+
+  Future<List<PositionEntity>> _getAllLocations() async {
+    var res = await firestore.getField(collectionPath: ConstantNames.locationsCollection, docName: ConstantNames.userModel.uid!, key: ConstantNames.locationsField);
+    List<PositionEntity> poistionEntities = [];
+
+    for (var ele in (res as List)) {
+      poistionEntities.add(PositionEntity.fromJson(ele));
+    }
+
+    locations = poistionEntities;
+    return poistionEntities;
   }
 }

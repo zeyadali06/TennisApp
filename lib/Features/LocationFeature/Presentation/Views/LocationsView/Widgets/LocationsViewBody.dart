@@ -77,6 +77,8 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
               return setState(() {});
             } else if (state is AddLocationsFailed) {
               showSnackBar(context, state.error.message);
+            } else if (state is AddLocationsValidationFailed) {
+              showSnackBar(context, state.error);
             }
             isLoading = false;
             setState(() {});
@@ -143,7 +145,13 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                       const Expanded(child: SizedBox()),
                       CustomButton(
                         onPressed: () async {
-                          await BlocProvider.of<AddLocationsCubit>(context).addLocation(positionEntity);
+                          bool validate;
+                          if (showMyLocationSection) {
+                            validate = false;
+                          } else {
+                            validate = true;
+                          }
+                          await BlocProvider.of<AddLocationsCubit>(context).addLocation(positionEntity, validate, context);
                         },
                         title: 'Add Location',
                       ),

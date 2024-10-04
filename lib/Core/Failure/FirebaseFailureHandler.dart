@@ -38,6 +38,8 @@ class FirebaseFailureHandler extends RequestFailed {
       } else {
         message = 'Error try again later';
       }
+    } else if (e is String) {
+      message = e;
     } else {
       message = 'Error try again later';
     }

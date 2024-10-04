@@ -25,8 +25,8 @@ class SearchForLoactionCubit extends Cubit<SearchForLoactionState> {
     }
   }
 
-  Future<void> choosePoistionEntity(PositionEntity poistionEntity) async {
-    emit(ChooseLocation(poistionEntity));
+  Future<void> choosePositionEntity(PositionEntity positionEntity) async {
+    emit(ChooseLocation(positionEntity));
     emit(ChooseLocationFinished());
   }
 }

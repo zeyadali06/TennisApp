@@ -24,7 +24,6 @@ class AuthRepoImpl implements AuthRepo {
       String fullName = await firestore.getField(collectionPath: ConstantNames.usersDataCollection, docName: user.user!.uid, key: ConstantNames.fullNameField);
       UserModel userModel = UserModel(email: loginData.email, uid: user.user!.uid, fullName: fullName);
       ConstantNames.userModel = userModel;
-      await firestore.setField(collectionPath: ConstantNames.locationsCollection, docName: user.user!.uid, data: {ConstantNames.locationsField: []});
       return RequestResault.success(userModel);
     } catch (e) {
       return RequestResault.failure(FirebaseFailureHandler(e));

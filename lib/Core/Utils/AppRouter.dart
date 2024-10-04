@@ -19,6 +19,7 @@ import 'package:tennis_app/Features/LocationFeature/Presentation/Views/Locations
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/AddLocationsCubit/add_locations_cubit.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/ForgetPasswordCubit/forget_password_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/GetMyLocationCubit/get_my_location_cubit.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/LocationManagerCubit/location_manager_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/SearchForLoactionCubit/search_for_loaction_cubit.dart';
 
 abstract class AppRouter {
@@ -26,14 +27,22 @@ abstract class AppRouter {
     create: (context) => LoginCubit(getit.get<AuthRepoImpl>()),
     child: const LoginView(),
   );
+
   static final Widget forgetPasswordView = BlocProvider(
     create: (context) => ForgetPasswordCubit(getit.get<ForgetPasswordUseCase>()),
     child: const ForgetPasswordView(),
   );
+
   static final Widget registerView = BlocProvider(
     create: (context) => RegisterCubit(getit.get<AuthRepoImpl>()),
     child: const RegisterView(),
   );
+
+  static final Widget locationsManagerView = BlocProvider(
+    create: (context) => LocationManagerCubit(getit.get<LocationManagerRepoImpl>()),
+    child: const LocationsManagerView(),
+  );
+
   static final Widget locationsView = MultiBlocProvider(
     providers: [
       BlocProvider(
@@ -48,7 +57,7 @@ abstract class AppRouter {
     ],
     child: const LocationsView(),
   );
-  static const Widget locationsManagerView = LocationsManagerView();
+
   static const Widget navigationBar = CustomNavigationBar();
   static const Widget splashView = SplashView();
   static const Widget authOptions = AuthOptionsView();

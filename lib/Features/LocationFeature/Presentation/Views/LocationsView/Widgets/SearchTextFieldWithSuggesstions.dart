@@ -27,7 +27,7 @@ class SearchTextFieldWithSuggesstions extends StatelessWidget {
       },
       onSelected: (PositionEntity option) {
         BlocProvider.of<SearchForLoactionCubit>(context).place = option.place;
-        BlocProvider.of<SearchForLoactionCubit>(context).choosePoistionEntity(option);
+        BlocProvider.of<SearchForLoactionCubit>(context).choosePositionEntity(option);
       },
       fieldViewBuilder: (BuildContext context, TextEditingController textEditingController, FocusNode focusNode, VoidCallback onFieldSubmitted) {
         textEditingController.text = BlocProvider.of<SearchForLoactionCubit>(context).place;
