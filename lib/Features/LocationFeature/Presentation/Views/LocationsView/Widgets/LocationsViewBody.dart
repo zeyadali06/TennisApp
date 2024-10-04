@@ -145,13 +145,15 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                       const Expanded(child: SizedBox()),
                       CustomButton(
                         onPressed: () async {
-                          bool validate;
-                          if (showMyLocationSection) {
+                          bool validate = true;
+                          bool startExecution = true;
+                          if (!showMyLocationSection && !showSerchFieldSection) {
+                            startExecution = false;
+                          } else if (showMyLocationSection) {
                             validate = false;
-                          } else {
-                            validate = true;
                           }
-                          await BlocProvider.of<AddLocationsCubit>(context).addLocation(positionEntity, validate, context);
+                          
+                          await BlocProvider.of<AddLocationsCubit>(context).addLocation(positionEntity, startExecution, validate, context);
                         },
                         title: 'Add Location',
                       ),
