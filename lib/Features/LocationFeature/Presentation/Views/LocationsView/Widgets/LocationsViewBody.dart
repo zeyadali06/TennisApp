@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Functions/SnackBar.dart';
-import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
+import 'package:tennis_app/Core/Widgets/ViewHeader.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
@@ -97,20 +97,7 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 30),
-                      const FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          'Hello',
-                          style: TextStyle(color: Color(0xff0053bd), fontSize: 22, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          ConstantNames.userModel.fullName.toString(),
-                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
-                        ),
-                      ),
+                      const ViewHeader(),
                       const SizedBox(height: 20),
                       Row(
                         children: [
