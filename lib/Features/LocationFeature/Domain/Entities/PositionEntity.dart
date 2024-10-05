@@ -19,7 +19,9 @@ class PositionEntity {
     return {ConstantNames.longitudeField: longitude, ConstantNames.latitudeField: latitude, ConstantNames.placeField: place};
   }
 
-  bool compare(PositionEntity other) {
-    return other.longitude == longitude && other.latitude == latitude;
+  @override
+  // ignore: non_nullable_equals_parameter, hash_and_equals
+  bool operator ==(dynamic other) {
+    return other is PositionEntity && other.longitude == longitude && other.latitude == latitude;
   }
 }

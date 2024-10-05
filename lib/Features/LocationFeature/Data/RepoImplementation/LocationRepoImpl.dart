@@ -19,14 +19,12 @@ class LocationRepoImpl implements LocationRepo {
 
   @override
   Future<RequestResault<PositionEntity, GeolocatorFailureHandler>> getMyLocation() async {
-    final bool hasPermission = await _handlePermission();
-    final Position position;
-
-    if (!hasPermission) {
-      return RequestResault.failure(GeolocatorFailureHandler(1));
-    }
-
     try {
+      final bool hasPermission = await _handlePermission();
+      final Position position;
+      if (!hasPermission) {
+        return RequestResault.failure(GeolocatorFailureHandler(1));
+      }
       position = await _geolocatorPlatform.getCurrentPosition();
       Placemark placemark = await getPlace(position.latitude, position.longitude);
       return RequestResault.success(LocationMapper.toPositionEntity(position, getPlaceMarkAsString(placemark)));

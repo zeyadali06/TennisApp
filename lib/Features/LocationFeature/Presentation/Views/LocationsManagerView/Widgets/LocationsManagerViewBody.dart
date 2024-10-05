@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
+import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsManagerView/Widgets/CustomTaskContainer.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/LocationManagerCubit/location_manager_cubit.dart';
@@ -52,9 +53,12 @@ class _LocationsManagerViewBodyState extends State<LocationsManagerViewBody> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 20),
-                        const Text(
-                          'Default Location',
-                          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                        const FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            'Default Location',
+                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         if (locations.isNotEmpty)
@@ -67,16 +71,21 @@ class _LocationsManagerViewBodyState extends State<LocationsManagerViewBody> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'No Locations Found',
-                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                              ScaleDown(
+                                child: Text(
+                                  'No Locations Found',
+                                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                ),
                               ),
                             ],
                           ),
                         const SizedBox(height: 30),
-                        const Text(
-                          'Another Locations',
-                          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                        const FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            'Another Locations',
+                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         if (locations.length <= 1)
@@ -84,9 +93,11 @@ class _LocationsManagerViewBodyState extends State<LocationsManagerViewBody> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'No Locations Found',
-                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                              ScaleDown(
+                                child: Text(
+                                  'No Locations Found',
+                                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                ),
                               ),
                             ],
                           ),

@@ -29,7 +29,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
       bool alreadyExist = false;
 
       for (PositionEntity ele in locations) {
-        if (ele.compare(positionEntity)) {
+        if (ele == positionEntity) {
           alreadyExist = true;
           break;
         }
@@ -59,7 +59,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
   Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>> deleteLoaction(PositionEntity positionEntity) async {
     try {
       for (int i = 0; i < locations.length; i++) {
-        if (locations[i].compare(positionEntity)) {
+        if (locations[i] == positionEntity) {
           locations.removeAt(i);
           break;
         }
@@ -83,7 +83,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
   Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>> setLocationAsDefault(PositionEntity positionEntity) async {
     try {
       for (int i = 0; i < locations.length; i++) {
-        if (locations[i].compare(positionEntity)) {
+        if (locations[i] == positionEntity) {
           locations.removeAt(i);
           locations.insert(0, positionEntity);
           break;

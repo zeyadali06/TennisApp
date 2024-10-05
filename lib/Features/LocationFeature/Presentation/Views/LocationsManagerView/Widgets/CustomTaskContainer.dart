@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
+import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/LocationManagerCubit/location_manager_cubit.dart';
 
@@ -33,7 +34,12 @@ class _CustomTaskContainerState extends State<CustomTaskContainer> {
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Delete Poistion ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white)),
+                ScaleDown(
+                  child: Text(
+                    "Delete Location ",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white),
+                  ),
+                ),
                 Icon(Icons.delete, color: Colors.white),
               ],
             ),
@@ -46,7 +52,7 @@ class _CustomTaskContainerState extends State<CustomTaskContainer> {
               widget.onDismissed?.call(dismissDirection);
             },
             child: Container(
-              height: height - 10,
+              height: height - 8,
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: const Color(0xff222c48)),
               child: Center(
                 child: Card(

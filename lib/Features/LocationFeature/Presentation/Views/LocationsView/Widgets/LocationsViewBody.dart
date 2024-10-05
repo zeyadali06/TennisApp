@@ -97,13 +97,19 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 30),
-                      const Text(
-                        'Hello',
-                        style: TextStyle(color: Color(0xff0053bd), fontSize: 22, fontWeight: FontWeight.bold),
+                      const FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          'Hello',
+                          style: TextStyle(color: Color(0xff0053bd), fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      Text(
-                        ConstantNames.userModel.fullName.toString(),
-                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          ConstantNames.userModel.fullName.toString(),
+                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
+                        ),
                       ),
                       const SizedBox(height: 20),
                       Row(
@@ -152,7 +158,7 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                           } else if (showMyLocationSection) {
                             validate = false;
                           }
-                          
+
                           await BlocProvider.of<AddLocationsCubit>(context).addLocation(positionEntity, startExecution, validate, context);
                         },
                         title: 'Add Location',

@@ -1,4 +1,5 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
-    "cmake.sourceDirectory": "D:/Cellula_Intern/TennisApp/TennisApp/windows/runner"
+    "cmake.sourceDirectory": "D:/Cellula_Intern/TennisApp/TennisApp/windows/runner",
+    "dotnet.defaultSolution": "disable"
 }
