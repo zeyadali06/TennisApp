@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_app/Core/Widgets/ScaleDownWidget.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 
 class MyLocation extends StatelessWidget {
@@ -11,8 +12,7 @@ class MyLocation extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 15),
-        const FittedBox(
-          fit: BoxFit.scaleDown,
+        const FittedWidget(
           child: Text(
             'Your Location:',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
@@ -24,16 +24,14 @@ class MyLocation extends StatelessWidget {
           style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
         ),
         const SizedBox(height: 10),
-        FittedBox(
-          fit: BoxFit.scaleDown,
+        FittedWidget(
           child: Text(
             'Latitude: ${positionEntity.latitude}',
             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
           ),
         ),
         const SizedBox(height: 10),
-        FittedBox(
-          fit: BoxFit.scaleDown,
+        FittedWidget(
           child: Text(
             'Longitude: ${positionEntity.longitude}',
             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),

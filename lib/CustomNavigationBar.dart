@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_app/Core/Utils/AppRouter.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
+import 'package:tennis_app/Core/Widgets/ScaleDownWidget.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   const CustomNavigationBar({super.key});
@@ -42,8 +43,7 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            FittedBox(
-              fit: BoxFit.scaleDown,
+            FittedWidget(
               child: Icon(
                 iconData,
                 shadows: isSelected ? const [Shadow(color: Colors.white, blurRadius: 4)] : null,
@@ -52,8 +52,7 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
               ),
             ),
             if (!isSelected)
-              FittedBox(
-                fit: BoxFit.scaleDown,
+              FittedWidget(
                 child: Text(
                   label,
                   style: const TextStyle(fontSize: 8, color: Colors.white, fontWeight: FontWeight.w300),

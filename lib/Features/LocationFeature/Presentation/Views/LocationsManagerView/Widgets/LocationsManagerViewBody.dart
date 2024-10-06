@@ -4,6 +4,7 @@ import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
+import 'package:tennis_app/Core/Widgets/ScaleDownWidget.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsManagerView/Widgets/CustomTaskContainer.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/LocationManagerCubit/location_manager_cubit.dart';
@@ -53,8 +54,7 @@ class _LocationsManagerViewBodyState extends State<LocationsManagerViewBody> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 20),
-                        const FittedBox(
-                          fit: BoxFit.scaleDown,
+                        const FittedWidget(
                           child: Text(
                             'Default Location',
                             style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
@@ -80,8 +80,7 @@ class _LocationsManagerViewBodyState extends State<LocationsManagerViewBody> {
                             ],
                           ),
                         const SizedBox(height: 30),
-                        const FittedBox(
-                          fit: BoxFit.scaleDown,
+                        const FittedWidget(
                           child: Text(
                             'Another Locations',
                             style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:tennis_app/Core/Widgets/ScaleDownWidget.dart';
 
 class CustomCalendar extends StatefulWidget {
   const CustomCalendar({super.key, required this.onDaySelected});
@@ -70,14 +71,18 @@ class _CustomCalendarState extends State<CustomCalendar> {
         child: Column(
           children: [
             const Expanded(flex: 2, child: SizedBox(height: 5)),
-            Text(
-              weekdays[day.weekday].toString(),
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w200, fontSize: 8),
+            FittedWidget(
+              child: Text(
+                weekdays[day.weekday].toString(),
+                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w200, fontSize: 8),
+              ),
             ),
             const Expanded(flex: 2, child: SizedBox(height: 5)),
-            Text(
-              day.day.toString(),
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+            FittedWidget(
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+              ),
             ),
             const Expanded(flex: 2, child: SizedBox(height: 5)),
           ],
@@ -91,14 +96,18 @@ class _CustomCalendarState extends State<CustomCalendar> {
       child: Column(
         children: [
           const Expanded(flex: 2, child: SizedBox(height: 5)),
-          Text(
-            weekdays[day.weekday].toString(),
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w200, fontSize: 8),
+          FittedWidget(
+            child: Text(
+              weekdays[day.weekday].toString(),
+              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w200, fontSize: 8),
+            ),
           ),
           const Expanded(child: SizedBox(height: 5)),
-          Text(
-            day.day.toString(),
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          FittedWidget(
+            child: Text(
+              day.day.toString(),
+              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+            ),
           ),
           const Expanded(flex: 2, child: SizedBox(height: 5)),
         ],
@@ -116,14 +125,18 @@ class _CustomCalendarState extends State<CustomCalendar> {
         child: Column(
           children: [
             const Expanded(flex: 2, child: SizedBox(height: 5)),
-            Text(
-              weekdays[day.weekday].toString(),
-              style: const TextStyle(color: Color(0xff014aa8), fontSize: 8),
+            FittedWidget(
+              child: Text(
+                weekdays[day.weekday].toString(),
+                style: const TextStyle(color: Color(0xff014aa8), fontSize: 8),
+              ),
             ),
             const Expanded(child: SizedBox(height: 5)),
-            Text(
-              day.day.toString(),
-              style: const TextStyle(color: Color(0xff014aa8), fontWeight: FontWeight.bold, fontSize: 20),
+            FittedWidget(
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(color: Color(0xff014aa8), fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
             const Expanded(flex: 2, child: SizedBox(height: 5)),
           ],

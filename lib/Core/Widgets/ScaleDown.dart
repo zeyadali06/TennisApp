@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_app/Core/Widgets/ScaleDownWidget.dart';
 
 class ScaleDown extends StatelessWidget {
   const ScaleDown({super.key, this.child});
@@ -8,8 +9,7 @@ class ScaleDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      child: FittedBox(
-        fit: BoxFit.scaleDown,
+      child: FittedWidget(
         child: child,
       ),
     );

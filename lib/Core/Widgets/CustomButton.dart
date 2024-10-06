@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_app/Core/Widgets/ScaleDownWidget.dart';
 
 // ignore: must_be_immutable
 class CustomButton extends StatelessWidget {
@@ -33,8 +34,7 @@ class CustomButton extends StatelessWidget {
       color: backgroundColor,
       padding: EdgeInsets.symmetric(vertical: verticatPadding, horizontal: horizontalPadding),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-      child: FittedBox(
-        fit: BoxFit.scaleDown,
+      child: FittedWidget(
         child: Text(
           title,
           style: TextStyle(color: textColor, fontSize: fontSize, fontWeight: fontWeight),
