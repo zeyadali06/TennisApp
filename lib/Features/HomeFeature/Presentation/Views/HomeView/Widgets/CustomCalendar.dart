@@ -26,12 +26,13 @@ class _CustomCalendarState extends State<CustomCalendar> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 70,
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(.15),
         borderRadius: BorderRadius.circular(15),
       ),
       child: TableCalendar(
-        rowHeight: 60,
+        rowHeight: 70,
         headerVisible: false,
         focusedDay: _focusedDay,
         daysOfWeekVisible: false,
