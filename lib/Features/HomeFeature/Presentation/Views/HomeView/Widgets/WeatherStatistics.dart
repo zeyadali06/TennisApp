@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_app/Core/Widgets/ScaleDownWidget.dart';
-import 'package:tennis_app/Features/HomeFeature/Domain/Entities/CurrentWeatherEntity.dart';
+import 'package:tennis_app/Features/HomeFeature/Domain/Entities/WeatherEntity.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView/Widgets/WeatherIcon.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView/Widgets/StatisticsPieChart.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView/Widgets/TemperatureStatistic.dart';
@@ -8,7 +8,7 @@ import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView/Widg
 class WeartherStatistics extends StatelessWidget {
   const WeartherStatistics({super.key, required this.currentWeatherEntity});
 
-  final CurrentWeatherEntity currentWeatherEntity;
+  final WeatherEntity currentWeatherEntity;
 
   @override
   Widget build(BuildContext context) {

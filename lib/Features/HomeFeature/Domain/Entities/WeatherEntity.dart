@@ -1,4 +1,4 @@
-class CurrentWeatherEntity {
+class WeatherEntity {
   final double tempC;
   final double windKph;
   final int humidity;
@@ -9,7 +9,7 @@ class CurrentWeatherEntity {
   final String lastUpdated;
   final String icon;
 
-  CurrentWeatherEntity({
+  WeatherEntity({
     required this.tempC,
     required this.windKph,
     required this.humidity,
@@ -21,8 +21,8 @@ class CurrentWeatherEntity {
     required this.icon,
   });
 
-  factory CurrentWeatherEntity.init() {
-    return CurrentWeatherEntity(
+  factory WeatherEntity.init() {
+    return WeatherEntity(
       tempC: 0,
       windKph: 0,
       humidity: 0,

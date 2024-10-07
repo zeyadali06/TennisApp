@@ -8,7 +8,7 @@ final class HomeViewInitial extends HomeViewState {}
 final class HomeViewLoading extends HomeViewState {}
 
 final class HomeViewSuccess extends HomeViewState {
-  final CurrentWeatherEntity currentWeatherEntity;
+  final WeatherEntity currentWeatherEntity;
 
   HomeViewSuccess(this.currentWeatherEntity);
 }
