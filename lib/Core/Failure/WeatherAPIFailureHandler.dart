@@ -8,6 +8,10 @@ class WeatherAPIFailureHandler extends RequestFailed {
         message = 'Search for anything';
       } else if (e == 1006) {
         message = 'Please, enter valid location';
+      } else if (e == 0) {
+        message = 'Choose location first';
+      } else {
+        message = 'Error try again later';
       }
     } else {
       message = 'Error try again later';

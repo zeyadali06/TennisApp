@@ -8,7 +8,7 @@ class WeatherIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: imageUrl,
+      imageUrl: "https:$imageUrl",
       height: 70,
       width: 70,
       fit: BoxFit.fill,
@@ -18,7 +18,7 @@ class WeatherIcon extends StatelessWidget {
         );
       },
       errorWidget: (context, url, error) {
-        return const Placeholder();
+        return const Column();
       },
     );
   }

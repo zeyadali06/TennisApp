@@ -33,24 +33,9 @@ void setup() {
     Firestore(),
   );
 
-  getit.registerSingleton<AuthRepoImpl>(
-    AuthRepoImpl(
-      accountData: getit.get<AccountData>(),
-      firestore: getit.get<Firestore>(),
-      register: getit.get<Register>(),
-      signIn: getit.get<SignIn>(),
-    ),
-  );
-
   getit.registerSingleton<WeatherApiServices>(
     WeatherApiServices(
       dio: getit.get<Dio>(),
-    ),
-  );
-
-  getit.registerSingleton<HomeRepoImpl>(
-    HomeRepoImpl(
-      weatherApiServices: getit.get<WeatherApiServices>(),
     ),
   );
 
@@ -60,15 +45,32 @@ void setup() {
     ),
   );
 
+  getit.registerSingleton<LocationManagerRepoImpl>(
+    LocationManagerRepoImpl(
+      firestore: getit.get<Firestore>(),
+    ),
+  );
+
+  getit.registerSingleton<HomeRepoImpl>(
+    HomeRepoImpl(
+      weatherApiServices: getit.get<WeatherApiServices>(),
+      locationManagerRepo: getit.get<LocationManagerRepoImpl>(),
+    ),
+  );
+
   getit.registerSingleton<LocationRepoImpl>(
     LocationRepoImpl(
       placesServices: getit.get<LocationServices>(),
     ),
   );
 
-  getit.registerSingleton<LocationManagerRepoImpl>(
-    LocationManagerRepoImpl(
+  getit.registerSingleton<AuthRepoImpl>(
+    AuthRepoImpl(
+      locationManagerRepo: getit.get<LocationManagerRepoImpl>(),
+      accountData: getit.get<AccountData>(),
       firestore: getit.get<Firestore>(),
+      register: getit.get<Register>(),
+      signIn: getit.get<SignIn>(),
     ),
   );
 

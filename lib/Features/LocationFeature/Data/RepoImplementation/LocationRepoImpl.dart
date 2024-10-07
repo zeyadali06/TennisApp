@@ -53,7 +53,7 @@ class LocationRepoImpl implements LocationRepo {
     } on DioException catch (e) {
       return RequestResault.failure(WeatherAPIFailureHandler(e.response!.data["error"]["code"]));
     } catch (e) {
-      return RequestResault.failure(WeatherAPIFailureHandler(0));
+      return RequestResault.failure(WeatherAPIFailureHandler(e));
     }
   }
 

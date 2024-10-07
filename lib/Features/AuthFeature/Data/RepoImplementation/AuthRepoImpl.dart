@@ -8,14 +8,16 @@ import 'package:tennis_app/Features/AuthFeature/Data/DataSource/Authentication.d
 import 'package:tennis_app/Features/AuthFeature/Domain/RepoInterface/AuthRepo.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/Entities/RegisterEntity.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
+import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
 
 class AuthRepoImpl implements AuthRepo {
-  AuthRepoImpl({required this.firestore, required this.signIn, required this.register, required this.accountData});
+  AuthRepoImpl({required this.firestore, required this.signIn, required this.register, required this.accountData, required this.locationManagerRepo});
 
   final Firestore firestore;
   final SignIn signIn;
   final Register register;
   final AccountData accountData;
+  final LocationManagerRepo locationManagerRepo;
 
   @override
   Future<RequestResault<UserModel, FirebaseFailureHandler>> login(LoginEntity loginData, String password) async {
@@ -24,6 +26,7 @@ class AuthRepoImpl implements AuthRepo {
       String fullName = await firestore.getField(collectionPath: ConstantNames.usersDataCollection, docName: user.user!.uid, key: ConstantNames.fullNameField);
       UserModel userModel = UserModel(email: loginData.email, uid: user.user!.uid, fullName: fullName);
       ConstantNames.userModel = userModel;
+      await locationManagerRepo.getLocations();
       return RequestResault.success(userModel);
     } catch (e) {
       return RequestResault.failure(FirebaseFailureHandler(e));

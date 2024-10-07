@@ -10,23 +10,10 @@ import 'package:tennis_app/Features/LocationFeature/Presentation/Views/Locations
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/LocationManagerCubit/location_manager_cubit.dart';
 
 // ignore: must_be_immutable
-class LocationsManagerViewBody extends StatefulWidget {
-  const LocationsManagerViewBody({super.key});
+class LocationsManagerViewBody extends StatelessWidget {
+  LocationsManagerViewBody({super.key});
 
-  @override
-  State<LocationsManagerViewBody> createState() => _LocationsManagerViewBodyState();
-}
-
-class _LocationsManagerViewBodyState extends State<LocationsManagerViewBody> {
   bool isLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await BlocProvider.of<LocationManagerCubit>(context).getLocations();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

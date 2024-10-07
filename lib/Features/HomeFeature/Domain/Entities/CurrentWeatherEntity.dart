@@ -20,4 +20,18 @@ class CurrentWeatherEntity {
     required this.lastUpdated,
     required this.icon,
   });
+
+  factory CurrentWeatherEntity.init() {
+    return CurrentWeatherEntity(
+      tempC: 0,
+      windKph: 0,
+      humidity: 0,
+      uv: 0,
+      feelslikeC: 0,
+      visKm: 0,
+      pressureMb: 0,
+      lastUpdated: "",
+      icon: "",
+    );
+  }
 }
