@@ -7,10 +7,11 @@ class WeatherApiServices {
 
   final Dio dio;
 
-  Future getForcastWeather(String place, int numberOfDays, int hour) async {
+  Future getForcastWeather(DateTime dateTime, String place, int numberOfDays) async {
     try {
+      String date = "${dateTime.year}-${dateTime.month}-${dateTime.day}";
       var response = await dio.request(
-        '${ConstantNames.baseURL}forecast.json?q=$place&days=$numberOfDays&hour=$hour&key=${dotenv.env[ConstantNames.apiKey]}',
+        '${ConstantNames.baseURL}forecast.json?q=$place&days=$numberOfDays&dt=$date&hour=${dateTime.hour}&key=${dotenv.env[ConstantNames.apiKey]}',
         options: Options(
           method: 'GET',
         ),

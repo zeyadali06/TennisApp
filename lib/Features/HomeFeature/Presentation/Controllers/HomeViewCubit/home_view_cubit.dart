@@ -14,7 +14,7 @@ class HomeViewCubit extends Cubit<HomeViewState> {
   final HomeRepo homeRepo;
   final LocationManagerRepo locationManagerRepo;
 
-  Future<void> getWeather() async {
+  Future<void> getCurrentWeather() async {
     emit(HomeViewLoading());
     RequestResault<dynamic, dynamic> res = await homeRepo.getCurrentWeather();
     if (res is RequestSuccess) {

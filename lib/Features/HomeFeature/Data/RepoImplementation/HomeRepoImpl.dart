@@ -27,7 +27,33 @@ class HomeRepoImpl extends HomeRepo {
           return RequestResault.failure(WeatherAPIFailureHandler(-1));
         }
       }
-      
+
+      String location = "${locationManagerRepo.locations[0].latitude},${locationManagerRepo.locations[0].longitude}";
+      var response = await weatherApiServices.getCurrentWeather(location, DateTime.now().hour);
+      CurrentWeatherModel currentWeatherModel = CurrentWeatherModel.fromJson(response['current']);
+      CurrentWeatherEntity currentWeatherEntity = WeatherMapper.toCurrentWeatherEnitiy(currentWeatherModel);
+      return RequestResault.success(currentWeatherEntity);
+    } on DioException catch (e) {
+      return RequestResault.failure(WeatherAPIFailureHandler(e.response!.data["error"]["code"]));
+    } catch (e) {
+      return RequestResault.failure(WeatherAPIFailureHandler(e));
+    }
+  }
+
+  @override
+  Future<RequestResault<CurrentWeatherEntity, WeatherAPIFailureHandler>> getForecastWeather(DateTime date) async {
+    try {
+      if (locationManagerRepo.locations.isEmpty) {
+        var res = await locationManagerRepo.getLocations();
+        if (res is RequestSuccess) {
+          if (res.data.isEmpty) {
+            return RequestResault.failure(WeatherAPIFailureHandler(0));
+          }
+        } else if (res is RequestFailed) {
+          return RequestResault.failure(WeatherAPIFailureHandler(-1));
+        }
+      }
+
       String location = "${locationManagerRepo.locations[0].latitude},${locationManagerRepo.locations[0].longitude}";
       var response = await weatherApiServices.getCurrentWeather(location, DateTime.now().hour);
       CurrentWeatherModel currentWeatherModel = CurrentWeatherModel.fromJson(response['current']);

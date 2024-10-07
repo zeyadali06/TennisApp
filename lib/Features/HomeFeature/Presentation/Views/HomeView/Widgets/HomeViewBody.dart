@@ -18,7 +18,7 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await BlocProvider.of<HomeViewCubit>(context).getWeather();
+      await BlocProvider.of<HomeViewCubit>(context).getCurrentWeather();
     });
 
     return BlocConsumer<HomeViewCubit, HomeViewState>(
@@ -50,7 +50,7 @@ class HomeViewBody extends StatelessWidget {
                       CustomCalendar(
                         onDaySelected: (dateTime) async {
                           if (!isSameDay(dateTime, DateTime.now())) {
-                            await BlocProvider.of<HomeViewCubit>(context).getWeather();
+                            await BlocProvider.of<HomeViewCubit>(context).getCurrentWeather();
                           }
                         },
                       ),
