@@ -79,7 +79,7 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.grey.withOpacity(.15),
+                color: const Color(0xff191e37),
               ),
               child: Row(
                 children: [

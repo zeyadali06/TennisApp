@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:tennis_app/Core/Widgets/ViewHeader.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView/Widgets/CustomCalendar.dart';
@@ -26,7 +25,7 @@ class HomeViewBody extends StatelessWidget {
                   CustomCalendar(onDaySelected: (dateTime) async {}),
                   const SizedBox(height: 30),
                   const WeartherStatistics(),
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 90),
                 ],
               ),
             ),

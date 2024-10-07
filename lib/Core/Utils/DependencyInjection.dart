@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/DataSource/Authentication.dart';
-import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
-import 'package:tennis_app/Features/LocationFeature/Data/DataSource/PlacesServices.dart';
+import 'package:tennis_app/Features/HomeFeature/Data/DataSource/WeatherApiServices.dart';
+import 'package:tennis_app/Features/HomeFeature/Data/RepoImplementation/HomeRepoImpl.dart';
+import 'package:tennis_app/Features/LocationFeature/Data/DataSource/LocationServices.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/RepoImplementation/AuthRepoImpl.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/UseCases/ForgetPasswordUseCase.dart';
+import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/RepoImplementation/LocationRepoImpl.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/RepoImplementation/LocationManagerRepoImpl.dart';
 
@@ -40,20 +42,34 @@ void setup() {
     ),
   );
 
-  getit.registerSingleton<PlacesServices>(
-    PlacesServices(
+  getit.registerSingleton<WeatherApiServices>(
+    WeatherApiServices(
+      dio: getit.get<Dio>(),
+    ),
+  );
+
+  getit.registerSingleton<HomeRepoImpl>(
+    HomeRepoImpl(
+      weatherApiServices: getit.get<WeatherApiServices>(),
+    ),
+  );
+
+  getit.registerSingleton<LocationServices>(
+    LocationServices(
       dio: getit.get<Dio>(),
     ),
   );
 
   getit.registerSingleton<LocationRepoImpl>(
     LocationRepoImpl(
-      placesServices: getit.get<PlacesServices>(),
+      placesServices: getit.get<LocationServices>(),
     ),
   );
 
   getit.registerSingleton<LocationManagerRepoImpl>(
-    LocationManagerRepoImpl(firestore: getit.get<Firestore>()),
+    LocationManagerRepoImpl(
+      firestore: getit.get<Firestore>(),
+    ),
   );
 
   getit.registerSingleton<ForgetPasswordUseCase>(

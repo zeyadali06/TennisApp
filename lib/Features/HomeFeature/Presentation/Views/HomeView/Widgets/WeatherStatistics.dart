@@ -52,7 +52,7 @@ class WeartherStatistics extends StatelessWidget {
                 flex: 5,
                 child: Center(
                   child: FittedWidget(
-                    child: StatisticsPieChart(value: -33, minValue: -50, maxValue: 56.7, title: 'Feels Like'),
+                    child: StatisticsPieChart(value: 23, minValue: -50, maxValue: 56.7, title: 'Feels Like'),
                   ),
                 ),
               ),

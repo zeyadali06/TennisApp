@@ -8,13 +8,13 @@ import 'package:tennis_app/Core/Failure/GeoLocatorFailureHandler.dart';
 import 'package:tennis_app/Core/Failure/WeatherAPIFailureHandler.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/Models/PlaceModel.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/Mappers/LocationMapper.dart';
-import 'package:tennis_app/Features/LocationFeature/Data/DataSource/PlacesServices.dart';
+import 'package:tennis_app/Features/LocationFeature/Data/DataSource/LocationServices.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationRepo.dart';
 
 class LocationRepoImpl implements LocationRepo {
   LocationRepoImpl({required this.placesServices});
-  PlacesServices placesServices;
+  LocationServices placesServices;
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
 
   @override

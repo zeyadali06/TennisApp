@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
 
-class PlacesServices {
-  PlacesServices({required this.dio});
+class LocationServices {
+  LocationServices({required this.dio});
   Dio dio;
 
   Future searchForPlaces(String place) async {
