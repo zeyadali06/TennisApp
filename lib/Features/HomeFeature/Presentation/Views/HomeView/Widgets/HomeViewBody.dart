@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:tennis_app/Core/Widgets/ViewHeader.dart';
@@ -13,7 +12,6 @@ import 'package:tennis_app/Features/HomeFeature/Presentation/Controllers/HomeVie
 // ignore: must_be_immutable
 class HomeViewBody extends StatelessWidget {
   HomeViewBody({super.key});
-  bool isLoading = false;
   WeatherEntity currentWeatherEntity = WeatherEntity.init();
 
   @override
@@ -24,57 +22,50 @@ class HomeViewBody extends StatelessWidget {
 
     return BlocConsumer<HomeViewCubit, HomeViewState>(
       listener: (context, state) {
-        if (state is HomeViewLoading) {
-          isLoading = true;
-          return;
-        } else if (state is HomeViewFailed) {
+        if (state is HomeViewFailed) {
           showSnackBar(context, state.error.message);
         } else if (state is HomeViewSuccess) {
           currentWeatherEntity = state.currentWeatherEntity;
         }
-        isLoading = false;
       },
       builder: (context, state) {
-        return ModalProgressHUD(
-          inAsyncCall: isLoading,
-          child: CustomScrollView(
-            slivers: [
-              SliverFillRemaining(
-                hasScrollBody: false,
-                child: CustomGradiantContainer(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 30),
-                        const ViewHeader(),
-                        const SizedBox(height: 30),
-                        CustomCalendar(
-                          onDaySelected: (dateTime) async {
-                            if (isSameDay(dateTime, DateTime.now())) {
-                              await BlocProvider.of<HomeViewCubit>(context).getCurrentWeather();
-                            } else {
-                              DateTime date = DateTime(
-                                dateTime.year,
-                                dateTime.month,
-                                dateTime.day,
-                                DateTime.now().hour,
-                              );
-                              await BlocProvider.of<HomeViewCubit>(context).getForcastWeather(date);
-                            }
-                          },
-                        ),
-                        const SizedBox(height: 30),
-                        WeartherStatistics(currentWeatherEntity: currentWeatherEntity),
-                        const SizedBox(height: 90),
-                      ],
-                    ),
+        return CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: CustomGradiantContainer(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 30),
+                      const ViewHeader(),
+                      const SizedBox(height: 30),
+                      CustomCalendar(
+                        onDaySelected: (dateTime) async {
+                          if (isSameDay(dateTime, DateTime.now())) {
+                            await BlocProvider.of<HomeViewCubit>(context).getCurrentWeather();
+                          } else {
+                            DateTime date = DateTime(
+                              dateTime.year,
+                              dateTime.month,
+                              dateTime.day,
+                              DateTime.now().hour,
+                            );
+                            await BlocProvider.of<HomeViewCubit>(context).getForcastWeather(date);
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 30),
+                      WeartherStatistics(currentWeatherEntity: currentWeatherEntity),
+                      const SizedBox(height: 90),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );

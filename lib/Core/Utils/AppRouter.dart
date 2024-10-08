@@ -40,17 +40,7 @@ abstract class AppRouter {
     child: const RegisterView(),
   );
 
-  static final Widget locationsManagerView = BlocProvider(
-    create: (context) => LocationManagerCubit(getit.get<LocationManagerRepoImpl>()),
-    child: const LocationsManagerView(),
-  );
-
-  static final Widget homeView = BlocProvider(
-    create: (context) => HomeViewCubit(getit.get<HomeRepoImpl>(), getit.get<LocationManagerRepoImpl>()),
-    child: const HomeView(),
-  );
-
-  static final Widget locationsView = MultiBlocProvider(
+  static final Widget navigationBar = MultiBlocProvider(
     providers: [
       BlocProvider(
         create: (context) => GetMyLocationCubit(getit.get<LocationRepoImpl>()),
@@ -61,13 +51,21 @@ abstract class AppRouter {
       BlocProvider(
         create: (context) => AddLocationsCubit(getit.get<LocationManagerRepoImpl>()),
       ),
+      BlocProvider(
+        create: (context) => HomeViewCubit(getit.get<HomeRepoImpl>(), getit.get<LocationManagerRepoImpl>()),
+      ),
+      BlocProvider(
+        create: (context) => LocationManagerCubit(getit.get<LocationManagerRepoImpl>()),
+      ),
     ],
-    child: const LocationsView(),
+    child: const CustomNavigationBar(),
   );
 
-  static const Widget navigationBar = CustomNavigationBar();
-  static const Widget splashView = SplashView();
+  static const Widget locationsManagerView = LocationsManagerView();
+  static const Widget locationsView = LocationsView();
   static const Widget authOptions = AuthOptionsView();
+  static const Widget splashView = SplashView();
+  static const Widget homeView = HomeView();
 
   static MaterialPageRoute goTo(BuildContext context, Widget toView) {
     return MaterialPageRoute(builder: (context) {

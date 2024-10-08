@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Core/Failure/WeatherAPIFailureHandler.dart';
@@ -29,6 +31,9 @@ class HomeRepoImpl extends HomeRepo {
       WeatherEntity weatherEntity = WeatherMapper.fromCurrentWeatherModel(currentWeatherModel);
       return RequestResault.success(weatherEntity);
     } on DioException catch (e) {
+      if (e.error is SocketException || e.error == HttpException) {
+        return RequestResault.failure(WeatherAPIFailureHandler(0));
+      }
       return RequestResault.failure(WeatherAPIFailureHandler(e.response!.data["error"]["code"]));
     } catch (e) {
       return RequestResault.failure(WeatherAPIFailureHandler(e));
