@@ -1,0 +1,44 @@
+LocationFeature:
+    Data:
+        DataSource:
+            LocationServices: contain searchForPlaces function that recommend places from weatherapi according to the place that 
+                              the user enter.
+            
+        Mappers:
+            LocationMapper: contains toPlaceEntity to convert PlaceModel to PlaceEntity
+                            and toPositionEntity that convert Poistion to PositionEntity
+        
+        Models: 
+            PlaceModel: model contains data returned from weatherapi search.json endpoint
+
+        RepoImplementation:
+            LocationManagerRepoImpl: contains function that manage loctions like getLocations, addLoaction, deleteLoaction and setLocationAsDefault
+                                     note that locations stored in firestore
+            LocationRepoImpl: contains two function getMyLocation and searchForPlaces
+
+    Domain:
+        Entities:
+            PlaceEntity: to simplify PlaceModel retrevied from weatherapi
+            PositionEntity: to simplify location data retrevied from Poistion class
+
+        RepoInterface:
+            LocationRepo: abstract class that contains getMyLocation and searchForPlaces functions
+            LocationManagerRepo: abstract class that contains getLocations, addLoaction, deleteLoaction and setLocationAsDefault functions and 
+                                 contain list of locations called locations to store locations of the user while app is running
+
+    Presentation:
+        Controllers:
+            AddLocationsCubit: contains addLocation function and five states (AddLocationsInitial, AddLocationsLoading
+                               AddLocationsSuccessed, AddLocationsValidationFailed and AddLocationsFailed)
+            GetMyLocationCubit: contains getMyLocation function and four states (MyLocationInitial, CheckLocationLoading
+                                GetLocationSuccessed and GetLocationFailed)
+            LocationManagerCubit: contains getLocations, deleteLocation and setLocationAsDefault functions and four states 
+                                  (LocationManagerInitial, LocationManagerLoading, LocationManagerSuccessed and LocationManagerFailed)
+            SearchForLocationCubit: contains searchForLoaction function and five states (SearchForLoactionInitial, SearchForLoactionLoading
+                                    ChooseLocation, SearchForLoactionSuccessed and SearchForLoactionFailed)
+
+        Views:
+            LocationsManagerView: contain the UI code that enable the user to manage locations like deleting or 
+                                  set location as default
+            LocationsView: contain the UI code that enable the user to either search for the place or get his location automaticlly and add this location
+

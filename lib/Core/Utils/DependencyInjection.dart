@@ -60,7 +60,7 @@ void setup() {
 
   getit.registerSingleton<LocationRepoImpl>(
     LocationRepoImpl(
-      placesServices: getit.get<LocationServices>(),
+      locationServices: getit.get<LocationServices>(),
     ),
   );
 

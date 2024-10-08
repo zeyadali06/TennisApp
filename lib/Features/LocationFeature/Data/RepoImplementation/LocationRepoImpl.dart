@@ -13,8 +13,8 @@ import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEnti
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationRepo.dart';
 
 class LocationRepoImpl implements LocationRepo {
-  LocationRepoImpl({required this.placesServices});
-  LocationServices placesServices;
+  LocationRepoImpl({required this.locationServices});
+  LocationServices locationServices;
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
 
   @override
@@ -38,7 +38,7 @@ class LocationRepoImpl implements LocationRepo {
   @override
   Future<RequestResault<List<PositionEntity>, WeatherAPIFailureHandler>> searchForPlaces(String place) async {
     try {
-      var res = await placesServices.searchForPlaces(place);
+      var res = await locationServices.searchForPlaces(place);
 
       List<PositionEntity> places = [];
 
