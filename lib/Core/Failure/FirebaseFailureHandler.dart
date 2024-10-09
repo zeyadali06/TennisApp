@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tennis_app/Core/Failure/NoInternetException.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 
 class FirebaseFailureHandler extends RequestFailed {
@@ -38,6 +39,8 @@ class FirebaseFailureHandler extends RequestFailed {
       } else {
         message = 'Error try again later';
       }
+    } else if (e is NoInternetException) {
+      message = e.message;
     } else if (e is String) {
       message = e;
     } else {

@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:tennis_app/Core/Failure/NoInternetException.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
+import 'package:tennis_app/Core/Functions/Check_Network.dart';
 import 'package:tennis_app/Core/Functions/GetPlaceMarkAsString.dart';
 import 'package:tennis_app/Core/Failure/GeoLocatorFailureHandler.dart';
 import 'package:tennis_app/Core/Failure/WeatherAPIFailureHandler.dart';
@@ -20,13 +22,18 @@ class LocationRepoImpl implements LocationRepo {
   @override
   Future<RequestResault<PositionEntity, GeolocatorFailureHandler>> getMyLocation() async {
     try {
+      bool connStatus = await checkConn();
+      if (!connStatus) {
+        return RequestResault.failure(GeolocatorFailureHandler(NoInternetException()));
+      }
+
       final bool hasPermission = await _handlePermission();
       final Position position;
       if (!hasPermission) {
         return RequestResault.failure(GeolocatorFailureHandler(1));
       }
       position = await _geolocatorPlatform.getCurrentPosition();
-      Placemark placemark = await getPlace(position.latitude, position.longitude);
+      Placemark placemark = await _getPlace(position.latitude, position.longitude);
       return RequestResault.success(LocationMapper.toPositionEntity(position, getPlaceMarkAsString(placemark)));
     } on LocationServiceDisabledException {
       return RequestResault.failure(GeolocatorFailureHandler(1));
@@ -38,6 +45,11 @@ class LocationRepoImpl implements LocationRepo {
   @override
   Future<RequestResault<List<PositionEntity>, WeatherAPIFailureHandler>> searchForPlaces(String place) async {
     try {
+      bool connStatus = await checkConn();
+      if (!connStatus) {
+        return RequestResault.failure(WeatherAPIFailureHandler(NoInternetException()));
+      }
+
       var res = await locationServices.searchForPlaces(place);
 
       List<PositionEntity> places = [];
@@ -57,7 +69,7 @@ class LocationRepoImpl implements LocationRepo {
     }
   }
 
-  Future<Placemark> getPlace(double latitude, double longitude) async {
+  Future<Placemark> _getPlace(double latitude, double longitude) async {
     List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
     return placemarks[0];
   }

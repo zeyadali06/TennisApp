@@ -1,14 +1,15 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
+import 'package:tennis_app/Core/Functions/Check_Network.dart';
+import 'package:tennis_app/Core/Failure/NoInternetException.dart';
 import 'package:tennis_app/Core/Failure/WeatherAPIFailureHandler.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/Mappers/WeatherMapper.dart';
-import 'package:tennis_app/Features/HomeFeature/Data/Models/ForecastWeatherModel.dart';
+import 'package:tennis_app/Features/HomeFeature/Domain/Entities/WeatherEntity.dart';
 import 'package:tennis_app/Features/HomeFeature/Domain/RepoInterface/HomeRepo.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/Models/CurrentWeatherModel.dart';
+import 'package:tennis_app/Features/HomeFeature/Data/Models/ForecastWeatherModel.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/DataSource/WeatherApiServices.dart';
-import 'package:tennis_app/Features/HomeFeature/Domain/Entities/WeatherEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
 
 class HomeRepoImpl extends HomeRepo {
@@ -20,6 +21,11 @@ class HomeRepoImpl extends HomeRepo {
   @override
   Future<RequestResault<WeatherEntity, WeatherAPIFailureHandler>> getCurrentWeather() async {
     try {
+      bool connStatus = await checkConn();
+      if (!connStatus) {
+        return RequestResault.failure(WeatherAPIFailureHandler(NoInternetException()));
+      }
+
       var res = await _validateLocations();
       if (res is RequestFailed) {
         return RequestResault.failure(res.data);
@@ -43,6 +49,11 @@ class HomeRepoImpl extends HomeRepo {
   @override
   Future<RequestResault<WeatherEntity, WeatherAPIFailureHandler>> getForecastWeather(DateTime dateTime) async {
     try {
+      bool connStatus = await checkConn();
+      if (!connStatus) {
+        return RequestResault.failure(WeatherAPIFailureHandler(NoInternetException()));
+      }
+
       var res = await _validateLocations();
       if (res is RequestFailed) {
         return RequestResault.failure(res.data);

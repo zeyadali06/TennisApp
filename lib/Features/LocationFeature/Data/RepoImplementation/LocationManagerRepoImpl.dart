@@ -1,3 +1,5 @@
+import 'package:tennis_app/Core/Failure/NoInternetException.dart';
+import 'package:tennis_app/Core/Functions/Check_Network.dart';
 import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Core/Failure/FirebaseFailureHandler.dart';
@@ -15,6 +17,11 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
   @override
   Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>> getLocations() async {
     try {
+      bool connStatus = await checkConn();
+      if (!connStatus) {
+        return RequestResault.failure(FirebaseFailureHandler(NoInternetException()));
+      }
+
       List<PositionEntity> poistionEntities = await _getAllLocations();
 
       return RequestResault.success(poistionEntities);
@@ -38,7 +45,12 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
       if (!alreadyExist) {
         locations.add(positionEntity);
 
-        List<Map<String, dynamic>> convertedData = converter(locations);
+        List<Map<String, dynamic>> convertedData = _converter(locations);
+
+        bool connStatus = await checkConn();
+        if (!connStatus) {
+          return RequestResault.failure(FirebaseFailureHandler(NoInternetException()));
+        }
 
         await firestore.updateField(
           collectionPath: ConstantNames.locationsCollection,
@@ -58,6 +70,11 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
   @override
   Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>> deleteLoaction(PositionEntity positionEntity) async {
     try {
+      bool connStatus = await checkConn();
+      if (!connStatus) {
+        return RequestResault.failure(FirebaseFailureHandler(NoInternetException()));
+      }
+
       for (int i = 0; i < locations.length; i++) {
         if (locations[i] == positionEntity) {
           locations.removeAt(i);
@@ -65,7 +82,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
         }
       }
 
-      List<Map<String, dynamic>> convertedData = converter(locations);
+      List<Map<String, dynamic>> convertedData = _converter(locations);
 
       await firestore.updateField(
         collectionPath: ConstantNames.locationsCollection,
@@ -82,6 +99,11 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
   @override
   Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>> setLocationAsDefault(PositionEntity positionEntity) async {
     try {
+      bool connStatus = await checkConn();
+      if (!connStatus) {
+        return RequestResault.failure(FirebaseFailureHandler(NoInternetException()));
+      }
+
       for (int i = 0; i < locations.length; i++) {
         if (locations[i] == positionEntity) {
           locations.removeAt(i);
@@ -90,7 +112,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
         }
       }
 
-      List<Map<String, dynamic>> convertedData = converter(locations);
+      List<Map<String, dynamic>> convertedData = _converter(locations);
 
       await firestore.updateField(
         collectionPath: ConstantNames.locationsCollection,
@@ -104,7 +126,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
     }
   }
 
-  List<Map<String, dynamic>> converter(List<PositionEntity> locations) {
+  List<Map<String, dynamic>> _converter(List<PositionEntity> locations) {
     List<Map<String, dynamic>> convertedData = [];
     for (PositionEntity element in locations) {
       convertedData.add(element.toMap());

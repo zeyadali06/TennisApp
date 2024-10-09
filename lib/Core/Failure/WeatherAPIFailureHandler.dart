@@ -1,3 +1,4 @@
+import 'package:tennis_app/Core/Failure/NoInternetException.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 
 class WeatherAPIFailureHandler extends RequestFailed {
@@ -13,6 +14,8 @@ class WeatherAPIFailureHandler extends RequestFailed {
       } else {
         message = 'Error try again later';
       }
+    } else if (e is NoInternetException) {
+      message = e.message;
     } else {
       message = 'Error try again later';
     }
