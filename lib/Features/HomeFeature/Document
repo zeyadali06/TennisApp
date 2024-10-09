@@ -1,0 +1,32 @@
+HomeFeature:
+    Data:
+        DataSource:
+            WeatherApiServices: contains getForcastWeather and getCurrentWeather functions to get weather from the api
+        
+        Mappers:
+            WeatherMapper: contains fromCurrentWeatherModel and fromForecastWeatherModel functions that convert models to WeatherEntity
+        
+        Models:
+            CurrentWeatherModel: model that contains all data returned from weatherapi in current section
+            ForecastWeatherModel: model that contains all data returned from weatherapi in forecast section
+
+        RepoImplementation:
+            HomeRepoImpl: implements HomeRepo's two functions getCurrentWeather that get the weather of the current day
+                          and getForecastWeather to get the weather of other days
+    
+    Domain:
+        Entities: 
+            WeatherEntity: model that contains attributes used in the UI
+        
+        RepoInterface:
+            HomeRepo: abstract class contains two functions getCurrentWeather and getForecastWeather
+    
+    Presentation:
+        Controllers:
+            HomeViewCubit: contains getCurrentWeather and getForecastWeather functions with 4 state
+                           (HomeViewInitial, HomeViewLoading, HomeViewSuccess, HomeViewFailed)
+
+        Views: 
+            HomeView: containes UI code of the home screen to show weather statistics
+
+Video Link: https://drive.google.com/file/d/1IdLtwRRnvMQwyBbJvVk35fKbq4B2Hwty/view?usp=sharing
