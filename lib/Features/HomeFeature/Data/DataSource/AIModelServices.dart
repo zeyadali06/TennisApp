@@ -7,19 +7,23 @@ class AIModelServices {
   final Dio dio;
 
   Future getPrediction(List<int> features) async {
-    var headers = {'Content-Type': 'application/json'};
-    var data = json.encode({"features": features});
+    try {
+      var headers = {'Content-Type': 'application/json'};
+      var data = json.encode({"features": features});
 
-    var response = await dio.request(
-      '10.0.2.2:5001/predict',
-      options: Options(method: 'POST', headers: headers),
-      data: data,
-    );
+      var response = await dio.request(
+        '10.0.2.2:5001/predict',
+        options: Options(method: 'POST', headers: headers),
+        data: data,
+      );
 
-    if (response.statusCode == 200) {
-      return response.data;
-    } else {
-      return response.statusMessage;
+      if (response.statusCode == 200) {
+        return response.data;
+      } else {
+        return response.statusMessage;
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }
