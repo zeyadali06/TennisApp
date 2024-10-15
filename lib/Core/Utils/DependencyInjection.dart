@@ -50,17 +50,17 @@ void setup() {
     AIModelRepoImpl(aiModelServices: getit.get<AIModelServices>()),
   );
 
-  getit.registerSingleton<GetPredictionUseCase>(
-    GetPredictionUseCase(
-      aiModelRepo: getit.get<AIModelRepoImpl>(),
-      homeRepo: getit.get<HomeRepoImpl>(),
-    ),
-  );
-
   getit.registerSingleton<HomeRepoImpl>(
     HomeRepoImpl(
       weatherApiServices: getit.get<WeatherApiServices>(),
       locationManagerRepo: getit.get<LocationManagerRepoImpl>(),
+    ),
+  );
+  
+  getit.registerSingleton<GetPredictionUseCase>(
+    GetPredictionUseCase(
+      aiModelRepo: getit.get<AIModelRepoImpl>(),
+      homeRepo: getit.get<HomeRepoImpl>(),
     ),
   );
 

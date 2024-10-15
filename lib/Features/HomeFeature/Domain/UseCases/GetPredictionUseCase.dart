@@ -11,7 +11,7 @@ class GetPredictionUseCase {
   final AIModelRepo aiModelRepo;
   final HomeRepo homeRepo;
 
-  Future<RequestResault> getFeatures() async {
+  Future<RequestResault> getPrediction() async {
     try {
       late AIModelEntity aiModelEntity;
       var res = await homeRepo.getCurrentWeather();
