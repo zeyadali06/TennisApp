@@ -7,7 +7,7 @@ class WeatherApiServices {
 
   final Dio dio;
 
-  Future getForcastWeather(DateTime dateTime, String place, int numberOfDays) async {
+  Future getForecastWeather(DateTime dateTime, String place, int numberOfDays) async {
     try {
       String date = "${dateTime.year}-${dateTime.month}-${dateTime.day}";
       var response = await dio.request(

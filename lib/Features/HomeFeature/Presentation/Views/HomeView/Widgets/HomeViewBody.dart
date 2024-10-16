@@ -82,7 +82,7 @@ class HomeViewBody extends StatelessWidget {
                               dateTime.day,
                               DateTime.now().hour,
                             );
-                            await BlocProvider.of<HomeViewCubit>(context).getForcastWeather(date);
+                            await BlocProvider.of<HomeViewCubit>(context).getForecastWeather(date);
                           }
                         },
                       ),

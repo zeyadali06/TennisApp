@@ -29,7 +29,7 @@ class HomeViewCubit extends Cubit<HomeViewState> {
     }
   }
 
-  Future<void> getForcastWeather(DateTime dateTime) async {
+  Future<void> getForecastWeather(DateTime dateTime) async {
     emit(HomeViewLoading());
     RequestResault res = await anotherDayWeatherUseCase.getAnotherDayWeather(dateTime);
     if (res is RequestSuccess) {

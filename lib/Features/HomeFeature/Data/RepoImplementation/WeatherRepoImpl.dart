@@ -58,7 +58,7 @@ class WeatherRepoImpl extends WeatherRepo {
       }
 
       String location = getLatLon(locationManagerRepo.locations[0]);
-      var response = await weatherApiServices.getForcastWeather(dateTime, location, 1);
+      var response = await weatherApiServices.getForecastWeather(dateTime, location, 1);
       ForecastWeatherModel forecastWeatherModel = ForecastWeatherModel.fromJson(response['forecast']['forecastday'][0]);
 
       return RequestResault.success(forecastWeatherModel);
