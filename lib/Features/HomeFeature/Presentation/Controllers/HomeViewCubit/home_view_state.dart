@@ -18,3 +18,15 @@ final class HomeViewFailed extends HomeViewState {
 
   HomeViewFailed(this.error);
 }
+
+final class GetPredictionSuccess extends HomeViewState {
+  final bool resault;
+
+  GetPredictionSuccess(this.resault);
+}
+
+final class GetPredictionFailed extends HomeViewState {
+  final AIModelFailureHandler error;
+
+  GetPredictionFailed(this.error);
+}

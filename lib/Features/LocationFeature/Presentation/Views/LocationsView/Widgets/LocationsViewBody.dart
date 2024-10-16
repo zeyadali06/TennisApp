@@ -65,8 +65,6 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
               showSnackBar(context, "Location added successfully");
             } else if (state is AddLocationsFailed) {
               showSnackBar(context, state.error.message);
-            } else if (state is AddLocationsValidationFailed) {
-              showSnackBar(context, state.error);
             }
           },
         ),

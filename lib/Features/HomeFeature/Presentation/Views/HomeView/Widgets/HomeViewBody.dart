@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:tennis_app/Core/Widgets/ViewHeader.dart';
+import 'package:tennis_app/Core/Widgets/CustomButton.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:tennis_app/Features/HomeFeature/Domain/Entities/WeatherEntity.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView/Widgets/CustomCalendar.dart';
@@ -26,6 +27,34 @@ class HomeViewBody extends StatelessWidget {
           showSnackBar(context, state.error.message);
         } else if (state is HomeViewSuccess) {
           currentWeatherEntity = state.currentWeatherEntity;
+        } else if (state is GetPredictionSuccess) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Result'),
+                content: () {
+                  String text;
+                  if (state.resault) {
+                    text = "You can go to do excercises";
+                  } else {
+                    text = "It's not good to go for training";
+                  }
+                  return Text(text);
+                }.call(),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        } else if (state is GetPredictionFailed) {
+          showSnackBar(context, state.error.message);
         }
       },
       builder: (context, state) {
@@ -53,12 +82,23 @@ class HomeViewBody extends StatelessWidget {
                               dateTime.day,
                               DateTime.now().hour,
                             );
-                            await BlocProvider.of<HomeViewCubit>(context).getForcastWeather(date);
+                            await BlocProvider.of<HomeViewCubit>(context).getForecastWeather(date);
                           }
                         },
                       ),
                       const SizedBox(height: 30),
                       WeartherStatistics(currentWeatherEntity: currentWeatherEntity),
+                      const SizedBox(height: 30),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomButton(
+                              onPressed: () async => await BlocProvider.of<HomeViewCubit>(context).getPrediction(),
+                              title: "Go To Excercise",
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: 90),
                     ],
                   ),

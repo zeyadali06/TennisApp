@@ -1,9 +1,11 @@
 HomeFeature:
     Data:
         DataSource:
-            WeatherApiServices: contains getForcastWeather and getCurrentWeather functions to get weather from the api
+            AIModelServices: contains getPrediction function to send request to the ai model
+            WeatherApiServices: contains getForecastWeather and getCurrentWeather functions to get weather from the api
         
         Mappers:
+            AIModelMapper: contains fromCurrentWeatherModel and fromForecastWeatherModel functions that convert models to AIModelEntity
             WeatherMapper: contains fromCurrentWeatherModel and fromForecastWeatherModel functions that convert models to WeatherEntity
         
         Models:
@@ -11,22 +13,31 @@ HomeFeature:
             ForecastWeatherModel: model that contains all data returned from weatherapi in forecast section
 
         RepoImplementation:
-            HomeRepoImpl: implements HomeRepo's two functions getCurrentWeather that get the weather of the current day
-                          and getForecastWeather to get the weather of other days
+            AIModelRepoImpl: implements getPrediction function to predict if the user can go to play tennis or not
+            WeatherRepoImpl: implements WeatherRepo's two functions getCurrentWeather that get the weather of the current day
+                             and getForecastWeather to get the weather of other days
     
     Domain:
-        Entities: 
+        Entities:
+            AIModelEntity: model that contains attributes used in the UI
             WeatherEntity: model that contains attributes used in the UI
         
         RepoInterface:
-            HomeRepo: abstract class contains two functions getCurrentWeather and getForecastWeather
-    
+            AIModelRepo: abstract class that contains getPrediction function
+            WeatherRepo: abstract class that contains getCurrentWeather and getForecastWeather functions
+        
+        UseCases:
+            CurrentDayWeatherUseCase: uses getCurrentWeather from WeatherRepo to get the weather of the current day
+            AnotherDayWeatherUseCase: uses getForecastWeather from WeatherRepo to get the weather of other days
+            GetPredictionUseCase: uses getCurrentWeather from WeatherRepo to get the weather statistics and then uses 
+                                  getPrediction from AIModelRepo to send request to the model and get prediction
+
     Presentation:
         Controllers:
-            HomeViewCubit: contains getCurrentWeather and getForecastWeather functions with 4 state
-                           (HomeViewInitial, HomeViewLoading, HomeViewSuccess, HomeViewFailed)
+            HomeViewCubit: contains getCurrentWeather, getForecastWeather and getPrediction functions and 6 states
+                           (HomeViewInitial, HomeViewLoading, HomeViewSuccess, HomeViewFailed, GetPredictionSuccess, GetPredictionFailed)
 
         Views: 
             HomeView: containes UI code of the home screen to show weather statistics
 
-Video Link: https://drive.google.com/file/d/1IdLtwRRnvMQwyBbJvVk35fKbq4B2Hwty/view?usp=sharing
+Video Link: https://drive.google.com/file/d/1x6cjlIgZXG7CABhK7s3l8UVLTrnbKH-g/view?usp=sharing

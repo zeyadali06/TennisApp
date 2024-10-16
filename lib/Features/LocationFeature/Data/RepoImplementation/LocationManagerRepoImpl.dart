@@ -1,8 +1,10 @@
-import 'package:tennis_app/Core/Failure/NoInternetException.dart';
-import 'package:tennis_app/Core/Functions/Check_Network.dart';
 import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
+import 'package:tennis_app/Core/Functions/Check_Network.dart';
 import 'package:tennis_app/Core/Failure/FirebaseFailureHandler.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/TryAgainException.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/NoInternetException.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/LocationAlreadyExistException.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
@@ -26,12 +28,12 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
 
       return RequestResault.success(poistionEntities);
     } catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(e));
+      return RequestResault.failure(FirebaseFailureHandler(TryAgainException()));
     }
   }
 
   @override
-  Future<RequestResault<List<PositionEntity>, dynamic>> addLoaction(PositionEntity positionEntity) async {
+  Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>> addLoaction(PositionEntity positionEntity) async {
     try {
       bool alreadyExist = false;
 
@@ -58,12 +60,12 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
           data: {ConstantNames.locationsField: convertedData},
         );
       } else {
-        return RequestResault.failure("Location already exist");
+        return RequestResault.failure(FirebaseFailureHandler(LocationAlreadyExistException()));
       }
 
       return RequestResault.success(locations);
     } catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(e));
+      return RequestResault.failure(FirebaseFailureHandler(TryAgainException()));
     }
   }
 
@@ -92,7 +94,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
 
       return RequestResault.success(locations);
     } catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(e));
+      return RequestResault.failure(FirebaseFailureHandler(TryAgainException()));
     }
   }
 
@@ -122,7 +124,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
 
       return RequestResault.success(locations);
     } catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(e));
+      return RequestResault.failure(FirebaseFailureHandler(TryAgainException()));
     }
   }
 

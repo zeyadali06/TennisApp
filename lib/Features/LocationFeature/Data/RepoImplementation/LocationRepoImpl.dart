@@ -2,16 +2,16 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:tennis_app/Core/Failure/NoInternetException.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Core/Functions/Check_Network.dart';
-import 'package:tennis_app/Core/Functions/GetPlaceMarkAsString.dart';
 import 'package:tennis_app/Core/Failure/GeoLocatorFailureHandler.dart';
 import 'package:tennis_app/Core/Failure/WeatherAPIFailureHandler.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/TryAgainException.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/NoInternetException.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/Models/PlaceModel.dart';
-import 'package:tennis_app/Features/LocationFeature/Data/Mappers/LocationMapper.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/WeatherAPIFailureHandlerCodes.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/LocationPermissionDeniedException.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/DataSource/LocationServices.dart';
-import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationRepo.dart';
 
 class LocationRepoImpl implements LocationRepo {
@@ -20,30 +20,44 @@ class LocationRepoImpl implements LocationRepo {
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
 
   @override
-  Future<RequestResault<PositionEntity, GeolocatorFailureHandler>> getMyLocation() async {
+  Future<RequestResault<Position, GeoLocatorFailureHandler>> getMyPosition() async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(GeolocatorFailureHandler(NoInternetException()));
+        return RequestResault.failure(GeoLocatorFailureHandler(NoInternetException()));
       }
 
       final bool hasPermission = await _handlePermission();
-      final Position position;
       if (!hasPermission) {
-        return RequestResault.failure(GeolocatorFailureHandler(1));
+        return RequestResault.failure(GeoLocatorFailureHandler(LocationPermissionDeniedException()));
       }
-      position = await _geolocatorPlatform.getCurrentPosition();
-      Placemark placemark = await _getPlace(position.latitude, position.longitude);
-      return RequestResault.success(LocationMapper.toPositionEntity(position, getPlaceMarkAsString(placemark)));
+
+      final Position position = await _geolocatorPlatform.getCurrentPosition();
+      return RequestResault.success(position);
     } on LocationServiceDisabledException {
-      return RequestResault.failure(GeolocatorFailureHandler(1));
+      return RequestResault.failure(GeoLocatorFailureHandler(LocationPermissionDeniedException()));
     } catch (e) {
-      return RequestResault.failure(GeolocatorFailureHandler(0));
+      return RequestResault.failure(GeoLocatorFailureHandler(TryAgainException()));
     }
   }
 
   @override
-  Future<RequestResault<List<PositionEntity>, WeatherAPIFailureHandler>> searchForPlaces(String place) async {
+  Future<RequestResault<Placemark, GeoLocatorFailureHandler>> getMyPlaceMark(double latitude, double longitude) async {
+    try {
+      bool connStatus = await checkConn();
+      if (!connStatus) {
+        return RequestResault.failure(GeoLocatorFailureHandler(NoInternetException()));
+      }
+
+      List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+      return RequestResault.success(placemarks[0]);
+    } catch (e) {
+      return RequestResault.failure(GeoLocatorFailureHandler(TryAgainException()));
+    }
+  }
+
+  @override
+  Future<RequestResault<List<PlaceModel>, WeatherAPIFailureHandler>> searchForPlaces(String place) async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
@@ -52,26 +66,20 @@ class LocationRepoImpl implements LocationRepo {
 
       var res = await locationServices.searchForPlaces(place);
 
-      List<PositionEntity> places = [];
+      List<PlaceModel> places = [];
 
       if (res is List) {
         for (var locationJson in res) {
-          PlaceModel placeModel = PlaceModel.fromJson(locationJson);
-          places.add(PositionEntity(place: placeModel.name, longitude: placeModel.lon, latitude: placeModel.lat));
+          places.add(PlaceModel.fromJson(locationJson));
         }
       }
 
       return RequestResault.success(places);
     } on DioException catch (e) {
-      return RequestResault.failure(WeatherAPIFailureHandler(e.response!.data["error"]["code"]));
+      return RequestResault.failure(WeatherAPIFailureHandler(WeatherAPIFailureHandlerCodes(e.response!.data["error"]["code"])));
     } catch (e) {
-      return RequestResault.failure(WeatherAPIFailureHandler(e));
+      return RequestResault.failure(WeatherAPIFailureHandler(TryAgainException()));
     }
-  }
-
-  Future<Placemark> _getPlace(double latitude, double longitude) async {
-    List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
-    return placemarks[0];
   }
 
   Future<bool> _handlePermission() async {

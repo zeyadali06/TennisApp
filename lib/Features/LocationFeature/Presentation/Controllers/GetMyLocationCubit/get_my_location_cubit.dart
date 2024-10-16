@@ -3,19 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Core/Failure/GeoLocatorFailureHandler.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
-import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationRepo.dart';
+import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/GetMyLocationUseCase.dart';
 
 part 'get_my_location_state.dart';
 
 class GetMyLocationCubit extends Cubit<GetMyLocationState> {
-  GetMyLocationCubit(this.locationRepo) : super(MyLocationInitial());
+  GetMyLocationCubit(this.getMyLocationUseCase) : super(MyLocationInitial());
 
-  final LocationRepo locationRepo;
+  final GetMyLocationUseCase getMyLocationUseCase;
 
   Future<void> getMyLocation() async {
     emit(CheckLocationLoading());
 
-    RequestResault res = await locationRepo.getMyLocation();
+    RequestResault res = await getMyLocationUseCase.getMyLocation();
 
     if (res is RequestSuccess) {
       emit(GetLocationSuccessed(res.data));
