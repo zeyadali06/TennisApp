@@ -3,15 +3,19 @@ import 'package:get_it/get_it.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/DataSource/Authentication.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/DataSource/AIModelServices.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/DataSource/WeatherApiServices.dart';
-import 'package:tennis_app/Features/HomeFeature/Data/RepoImplementation/HomeRepoImpl.dart';
 import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/GetPredictionUseCase.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/DataSource/LocationServices.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/RepoImplementation/AuthRepoImpl.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/UseCases/ForgetPasswordUseCase.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/RepoImplementation/AIModelRepoImpl.dart';
+import 'package:tennis_app/Features/HomeFeature/Data/RepoImplementation/WeatherRepoImpl.dart';
+import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/AnotherDayWeatherUseCase.dart';
+import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/CurrentDayWeatherUseCase.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/RepoImplementation/LocationRepoImpl.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/RepoImplementation/LocationManagerRepoImpl.dart';
+import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/GetMyLocationUseCase.dart';
+import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/SearchForLocationsUseCase.dart';
 
 GetIt getit = GetIt.instance;
 
@@ -50,17 +54,17 @@ void setup() {
     AIModelRepoImpl(aiModelServices: getit.get<AIModelServices>()),
   );
 
-  getit.registerSingleton<HomeRepoImpl>(
-    HomeRepoImpl(
+  getit.registerSingleton<WeatherRepoImpl>(
+    WeatherRepoImpl(
       weatherApiServices: getit.get<WeatherApiServices>(),
       locationManagerRepo: getit.get<LocationManagerRepoImpl>(),
     ),
   );
-  
+
   getit.registerSingleton<GetPredictionUseCase>(
     GetPredictionUseCase(
       aiModelRepo: getit.get<AIModelRepoImpl>(),
-      homeRepo: getit.get<HomeRepoImpl>(),
+      weatherRepo: getit.get<WeatherRepoImpl>(),
     ),
   );
 
@@ -78,6 +82,30 @@ void setup() {
     ForgetPasswordUseCase(
       authRepo: getit.get<AuthRepoImpl>(),
       accountData: getit.get<AccountData>(),
+    ),
+  );
+
+  getit.registerSingleton<CurrentDayWeatherUseCase>(
+    CurrentDayWeatherUseCase(
+      weatherRepo: getit.get<WeatherRepoImpl>(),
+    ),
+  );
+
+  getit.registerSingleton<AnotherDayWeatherUseCase>(
+    AnotherDayWeatherUseCase(
+      weatherRepo: getit.get<WeatherRepoImpl>(),
+    ),
+  );
+
+  getit.registerSingleton<GetMyLocationUseCase>(
+    GetMyLocationUseCase(
+      locationRepo: getit.get<LocationRepoImpl>(),
+    ),
+  );
+
+  getit.registerSingleton<SearchForLocationsUseCase>(
+    SearchForLocationsUseCase(
+      locationRepo: getit.get<LocationRepoImpl>(),
     ),
   );
 }

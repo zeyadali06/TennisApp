@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Utils/AppRouter.dart';
+import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
+import 'package:tennis_app/Core/Widgets/InputDataSection.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
-import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/CommonWidgets/AuthViewHeader.dart';
-import 'package:tennis_app/Core/Widgets/InputDataSection.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/ForgetPasswordCubit/forget_password_cubit.dart';
 
 class ForgetPasswordViewBody extends StatefulWidget {

@@ -1,6 +1,6 @@
+import 'package:tennis_app/Features/HomeFeature/Domain/Entities/WeatherEntity.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/Models/CurrentWeatherModel.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/Models/ForecastWeatherModel.dart';
-import 'package:tennis_app/Features/HomeFeature/Domain/Entities/WeatherEntity.dart';
 
 class WeatherMapper {
   static WeatherEntity fromCurrentWeatherModel(CurrentWeatherModel currentWeatherModel) {

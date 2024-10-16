@@ -14,7 +14,7 @@ final class GetLocationSuccessed extends GetMyLocationState {
 }
 
 final class GetLocationFailed extends GetMyLocationState {
-  final GeolocatorFailureHandler error;
+  final GeoLocatorFailureHandler error;
 
   GetLocationFailed(this.error);
 }

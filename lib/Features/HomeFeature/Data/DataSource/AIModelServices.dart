@@ -12,13 +12,13 @@ class AIModelServices {
       var data = json.encode({"features": features});
 
       var response = await dio.request(
-        '10.0.2.2:5001/predict',
+        'http://10.0.2.2:5001/predict',
         options: Options(method: 'POST', headers: headers),
         data: data,
       );
 
       if (response.statusCode == 200) {
-        return response.data;
+        return response.data["prediction"][0] == 1;
       } else {
         return response.statusMessage;
       }

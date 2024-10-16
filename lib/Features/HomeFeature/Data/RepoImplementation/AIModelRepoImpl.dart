@@ -1,7 +1,8 @@
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Core/Functions/Check_Network.dart';
-import 'package:tennis_app/Core/Failure/NoInternetException.dart';
 import 'package:tennis_app/Core/Failure/AIModelFailureHandler.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/TryAgainException.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/NoInternetException.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/DataSource/AIModelServices.dart';
 import 'package:tennis_app/Features/HomeFeature/Domain/RepoInterface/AIModelRepo.dart';
 
@@ -22,7 +23,7 @@ class AIModelRepoImpl extends AIModelRepo {
 
       return RequestResault.success(prediction);
     } catch (e) {
-      return RequestResault.failure(AIModelFailureHandler(e));
+      return RequestResault.failure(AIModelFailureHandler(TryAgainException()));
     }
   }
 }
