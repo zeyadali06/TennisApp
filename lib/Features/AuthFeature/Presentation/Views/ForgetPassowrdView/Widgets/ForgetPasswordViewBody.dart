@@ -101,7 +101,7 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                           ),
                           const Expanded(flex: 1, child: SizedBox(height: 20)),
                           const Text(
-                            'After Submit, We will sent you an email to enter your new password.',
+                            'After Submit, We will send you an email to enter your new password.',
                             style: TextStyle(color: Colors.white),
                           ),
                           const Expanded(flex: 3, child: SizedBox()),
