@@ -2,11 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Core/Functions/Check_Network.dart';
-import 'package:tennis_app/Core/Failure/NoInternetException.dart';
 import 'package:tennis_app/Core/Failure/FirebaseFailureHandler.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/TryAgainException.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/Models/UserModel.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/NoInternetException.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/Entities/LoginEntity.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/RepoInterface/AuthRepo.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/FirebaseAuthExceptionCodes.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/Entities/RegisterEntity.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/DataSource/Authentication.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
@@ -15,9 +17,9 @@ import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/Locatio
 class AuthRepoImpl implements AuthRepo {
   AuthRepoImpl({required this.firestore, required this.signIn, required this.register, required this.accountData, required this.locationManagerRepo});
 
-  final Firestore firestore;
   final SignIn signIn;
   final Register register;
+  final Firestore firestore;
   final AccountData accountData;
   final LocationManagerRepo locationManagerRepo;
 
@@ -31,17 +33,22 @@ class AuthRepoImpl implements AuthRepo {
 
       UserCredential user = await signIn.signIn(loginData.email!, password);
       String fullName = await firestore.getField(collectionPath: ConstantNames.usersDataCollection, docName: user.user!.uid, key: ConstantNames.fullNameField);
+
       UserModel userModel = UserModel(email: loginData.email, uid: user.user!.uid, fullName: fullName);
       ConstantNames.userModel = userModel;
+
       await locationManagerRepo.getLocations();
+
       return RequestResault.success(userModel);
+    } on FirebaseAuthException catch (e) {
+      return RequestResault.failure(FirebaseFailureHandler(FirebaseAuthExceptionCodes(e)));
     } catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(e));
+      return RequestResault.failure(FirebaseFailureHandler(TryAgainException()));
     }
   }
 
   @override
-  Future<RequestResault<UserModel, FirebaseFailureHandler?>> signUp(RegisterEntity registerData, String password) async {
+  Future<RequestResault<UserModel, FirebaseFailureHandler>> signUp(RegisterEntity registerData, String password) async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
@@ -50,11 +57,15 @@ class AuthRepoImpl implements AuthRepo {
 
       UserCredential user = await register.register(registerData.toMap(), password);
       UserModel userModel = UserModel(email: registerData.email, uid: user.user!.uid, fullName: registerData.fullName);
+
       ConstantNames.userModel = userModel;
       await firestore.setField(collectionPath: ConstantNames.locationsCollection, docName: user.user!.uid, data: {ConstantNames.locationsField: []});
+
       return RequestResault.success(userModel);
+    } on FirebaseAuthException catch (e) {
+      return RequestResault.failure(FirebaseFailureHandler(FirebaseAuthExceptionCodes(e)));
     } catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(e));
+      return RequestResault.failure(FirebaseFailureHandler(TryAgainException()));
     }
   }
 
@@ -67,9 +78,12 @@ class AuthRepoImpl implements AuthRepo {
       }
 
       await accountData.resetPassword(email);
+
       return RequestResault.success(UserModel());
+    } on FirebaseAuthException catch (e) {
+      return RequestResault.failure(FirebaseFailureHandler(FirebaseAuthExceptionCodes(e)));
     } catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(e));
+      return RequestResault.failure(FirebaseFailureHandler(TryAgainException()));
     }
   }
 }

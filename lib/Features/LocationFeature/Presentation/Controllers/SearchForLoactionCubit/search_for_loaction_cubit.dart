@@ -3,20 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Core/Failure/WeatherAPIFailureHandler.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
-import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationRepo.dart';
+import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/SearchForLocationsUseCase.dart';
 
 part 'search_for_loaction_state.dart';
 
 class SearchForLoactionCubit extends Cubit<SearchForLoactionState> {
-  SearchForLoactionCubit(this.locationRepo) : super(SearchForLoactionInitial());
+  SearchForLoactionCubit(this.searchForLocationsUseCase) : super(SearchForLoactionInitial());
 
-  final LocationRepo locationRepo;
+  final SearchForLocationsUseCase searchForLocationsUseCase;
   String place = "";
 
   Future<void> searchForLoaction(String place) async {
     emit(SearchForLoactionLoading());
 
-    RequestResault res = await locationRepo.searchForPlaces(place);
+    RequestResault res = await searchForLocationsUseCase.searchForPlaces(place);
 
     if (res is RequestSuccess) {
       emit(SearchForLoactionSuccessed(res.data));

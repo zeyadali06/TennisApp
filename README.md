@@ -23,4 +23,5 @@ This app follows **Clean Architecture** and the **MVVM** (Model-View-ViewModel) 
 - **MVVM Pattern**: Organizes the code into Models, Views, and ViewModels for each feature.
 
 
-Link for Demo: https://drive.google.com/file/d/1IdLtwRRnvMQwyBbJvVk35fKbq4B2Hwty/view?usp=sharing
+Video Link: https://drive.google.com/file/d/1x6cjlIgZXG7CABhK7s3l8UVLTrnbKH-g/view?usp=sharing
+App Link: https://drive.google.com/file/d/15FCHU3Yde7MDqUIL2rgiKEf6e7xnpSOS/view?usp=sharing
