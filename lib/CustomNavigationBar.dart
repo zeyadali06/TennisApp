@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Utils/AppRouter.dart';
 import 'package:tennis_app/Core/Widgets/ScaleDownWidget.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Controllers/HomeViewCubit/home_view_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/AddLocationsCubit/add_locations_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/GetMyLocationCubit/get_my_location_cubit.dart';
@@ -18,7 +17,7 @@ class CustomNavigationBar extends StatefulWidget {
 }
 
 class CustomNavigationBarState extends State<CustomNavigationBar> {
-  int selectedIndex = 2;
+  int selectedIndex = 1;
   List<Widget> pages = <Widget>[];
   bool isLoading = false;
 
@@ -27,10 +26,8 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
     super.initState();
 
     pages = <Widget>[
-      CustomGradiantContainer(child: Container()),
-      CustomGradiantContainer(child: Container()),
-      AppRouter.homeView,
       AppRouter.locationsManagerView,
+      AppRouter.homeView,
       AppRouter.locationsView,
     ];
   }
@@ -146,11 +143,9 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
                   ),
                   child: Row(
                     children: [
-                      Expanded(child: _buildWidget(Icons.star_border, 0, 'Fav')),
-                      Expanded(child: _buildWidget(Icons.admin_panel_settings_outlined, 1, 'Profile')),
-                      Expanded(child: _buildWidget(Icons.home_filled, 2, 'Home')),
-                      Expanded(child: _buildWidget(Icons.check_box_outlined, 3, 'Check')),
-                      Expanded(child: _buildWidget(Icons.location_on, 4, 'Loc')),
+                      Expanded(child: _buildWidget(Icons.check_box_outlined, 0, 'Check')),
+                      Expanded(child: _buildWidget(Icons.home_filled, 1, 'Home')),
+                      Expanded(child: _buildWidget(Icons.location_on, 2, 'Loc')),
                     ],
                   ),
                 ),
