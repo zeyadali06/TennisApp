@@ -74,6 +74,12 @@ Features
 
 ## Screen Shots 📸
 
+|<img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732995507.png" width="300"> | <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732995507.png" width="300">|<img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732995507.png" width="300">|
+---|---|---
+
+
+
+
 ![](/ScreenShots/Screenshot_1732995507.png)
 ![](/ScreenShots/Screenshot_1732995522.png)
 ![](/ScreenShots/Screenshot_1732995538.png)
