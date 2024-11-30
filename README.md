@@ -66,7 +66,7 @@ This folder containes everything related to the screen of the application and th
 
 ```
 Features
-├── AuthFeature**: Secure user registration and login using Firebase.
+├── AuthFeature: Secure user registration and login using Firebase.
 ├── HomeFeature: Displays current weather conditions for the selected location, including temperature, wind speed, and weather description.
 ├── LocationFeature: Enables users to add new locations to monitor weather conditions.
 └── SplashFeature: Simple splash screen
