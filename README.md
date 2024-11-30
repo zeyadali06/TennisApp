@@ -74,23 +74,14 @@ Features
 
 ## Screen Shots 📸
 
-|<img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732995507.png" width="300"> | <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732995507.png" width="300">|<img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732995507.png" width="300">|
----|---|---
-
-
-
-
-![](/ScreenShots/Screenshot_1732995507.png)
-![](/ScreenShots/Screenshot_1732995522.png)
-![](/ScreenShots/Screenshot_1732995538.png)
-![](/ScreenShots/Screenshot_1732995556.png)
-![](/ScreenShots/Screenshot_1732995561.png)
-![](/ScreenShots/Screenshot_1732996123.png)
-![](/ScreenShots/Screenshot_1732996163.png)
-![](/ScreenShots/Screenshot_1732996172.png)
-![](/ScreenShots/Screenshot_1732996176.png)
-![](/ScreenShots/Screenshot_1732996183.png)
-![](/ScreenShots/Screenshot_1732996254.png)
+| <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732995507.png" width="300"> | <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732995522.png" width="300"> | <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732995538.png" width="300"> |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732995556.png" width="300"> | <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732995561.png" width="300"> | <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732996123.png" width="300"> |
+| ---                                                                                                             | ---                                                                                                             | ---                                                                                                             |
+| <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732996163.png" width="300"> | <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732996172.png" width="300"> | <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732996176.png" width="300"> |
+| ---                                                                                                             | ---                                                                                                             | ---                                                                                                             |
+| <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732996183.png" width="300"> | <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/Screenshot_1732996254.png" width="300"> |
+| ---                                                                                                             | ---                                                                                                             | ---                                                                                                             |
 
 # [Video Link](https://drive.google.com/file/d/1x6cjlIgZXG7CABhK7s3l8UVLTrnbKH-g/view?usp=sharing)
 
