@@ -14,7 +14,9 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   void initState() {
     Future.delayed(const Duration(seconds: 2)).then(
       (value) {
-        Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.authOptions));
+        if (mounted) {
+          Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.authOptions));
+        }
       },
     );
     super.initState();

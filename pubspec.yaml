@@ -50,7 +50,7 @@ dependencies:
   fl_chart: ^0.69.0
   cached_network_image: ^3.4.1
   connectivity_plus: ^6.0.5
-  http: ^1.2.2
+
 
 dev_dependencies:
   flutter_test:
