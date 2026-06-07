@@ -5,7 +5,7 @@ import 'package:tennis_app/Core/Failure/Exceptions/TryAgainException.dart';
 import 'package:tennis_app/Features/AuthFeature/Data/Models/UserModel.dart';
 import 'package:tennis_app/Core/Failure/Exceptions/FirebaseAuthExceptionCodes.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/RepoInterface/AuthRepo.dart';
-import 'package:tennis_app/Features/AuthFeature/Data/DataSource/Authentication.dart';
+import 'package:tennis_app/Core/Utils/Authentication.dart';
 
 class ForgetPasswordUseCase {
   ForgetPasswordUseCase({required this.authRepo, required this.accountData});
@@ -13,22 +13,22 @@ class ForgetPasswordUseCase {
   final AuthRepo authRepo;
   final AccountData accountData;
 
-  Future<RequestResault<UserModel, FirebaseFailureHandler>> forgetPassword(
+  Future<RequestResult<UserModel, FirebaseFailureHandler>> forgetPassword(
       String email) async {
     try {
       await accountData.getUIDFromFirestore(email);
-      RequestResault res = await authRepo.forgetPassword(email);
+      RequestResult res = await authRepo.forgetPassword(email);
 
       if (res is RequestSuccess) {
-        return RequestResault.success(res.data);
+        return RequestResult.success(res.data);
       } else if (res is RequestFailed) {
-        return RequestResault.failure(res.data);
+        return RequestResult.failure(res.data);
       } else {
-        return RequestResault.failure(
+        return RequestResult.failure(
             FirebaseFailureHandler(TryAgainException()));
       }
     } on RangeError catch (_) {
-      return RequestResault.failure(
+      return RequestResult.failure(
         FirebaseFailureHandler(
           FirebaseAuthExceptionCodes(
             FirebaseAuthException(code: "user-not-found"),
@@ -36,9 +36,9 @@ class ForgetPasswordUseCase {
         ),
       );
     } on FirebaseFailureHandler catch (e) {
-      return RequestResault.failure(e);
+      return RequestResult.failure(e);
     } catch (e) {
-      return RequestResault.failure(
+      return RequestResult.failure(
           FirebaseFailureHandler(TryAgainException()));
     }
   }

@@ -23,7 +23,7 @@ class HomeViewCubit extends Cubit<HomeViewState> {
 
   Future<void> getCurrentWeather() async {
     emit(HomeViewLoading());
-    RequestResault res = await currentDayWeatherUseCase.getCurrrentDayWeather();
+    RequestResult res = await currentDayWeatherUseCase.getCurrrentDayWeather();
     if (res is RequestSuccess) {
       return emit(HomeViewSuccess(res.data));
     } else if (res is RequestFailed) {
@@ -33,7 +33,7 @@ class HomeViewCubit extends Cubit<HomeViewState> {
 
   Future<void> getForecastWeather(DateTime dateTime) async {
     emit(HomeViewLoading());
-    RequestResault res =
+    RequestResult res =
         await anotherDayWeatherUseCase.getAnotherDayWeather(dateTime);
     if (res is RequestSuccess) {
       return emit(HomeViewSuccess(res.data));
@@ -44,7 +44,7 @@ class HomeViewCubit extends Cubit<HomeViewState> {
 
   Future<void> getPrediction() async {
     emit(HomeViewLoading());
-    RequestResault res = await getPredictionUseCase.getPrediction();
+    RequestResult res = await getPredictionUseCase.getPrediction();
     if (res is RequestSuccess) {
       return emit(GetPredictionSuccess(res.data));
     } else if (res is RequestFailed) {

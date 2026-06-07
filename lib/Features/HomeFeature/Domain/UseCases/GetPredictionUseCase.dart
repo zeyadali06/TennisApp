@@ -12,25 +12,25 @@ class GetPredictionUseCase {
   final AIModelRepo aiModelRepo;
   final WeatherRepo weatherRepo;
 
-  Future<RequestResault<bool, AIModelFailureHandler>> getPrediction() async {
+  Future<RequestResult<bool, AIModelFailureHandler>> getPrediction() async {
     try {
       late AIModelEntity aiModelEntity;
 
-      RequestResault res = await weatherRepo.getCurrentWeather();
+      RequestResult res = await weatherRepo.getCurrentWeather();
 
       if (res is RequestSuccess) {
         aiModelEntity = AIModelMapper.fromCurrentWeatherModel(res.data);
       } else if (res is RequestFailed) {
-        return RequestResault.failure(AIModelFailureHandler(res.data));
+        return RequestResult.failure(AIModelFailureHandler(res.data));
       }
 
       List<int> features = aiModelEntity.getFeatures();
 
       return await aiModelRepo.getPrediction(features);
     } on AIModelFailureHandler catch (e) {
-      return RequestResault.failure(e);
+      return RequestResult.failure(e);
     } catch (e) {
-      return RequestResault.failure(AIModelFailureHandler(TryAgainException()));
+      return RequestResult.failure(AIModelFailureHandler(TryAgainException()));
     }
   }
 }

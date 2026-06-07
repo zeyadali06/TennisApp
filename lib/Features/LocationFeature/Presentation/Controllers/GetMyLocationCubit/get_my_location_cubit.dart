@@ -15,7 +15,7 @@ class GetMyLocationCubit extends Cubit<GetMyLocationState> {
   Future<void> getMyLocation() async {
     emit(CheckLocationLoading());
 
-    RequestResault res = await getMyLocationUseCase.getMyLocation();
+    RequestResult res = await getMyLocationUseCase.getMyLocation();
 
     if (res is RequestSuccess) {
       emit(GetLocationSuccessed(res.data));

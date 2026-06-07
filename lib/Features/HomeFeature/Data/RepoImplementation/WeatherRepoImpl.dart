@@ -21,18 +21,18 @@ class WeatherRepoImpl extends WeatherRepo {
   final LocationManagerRepo locationManagerRepo;
 
   @override
-  Future<RequestResault<CurrentWeatherModel, WeatherAPIFailureHandler>>
+  Future<RequestResult<CurrentWeatherModel, WeatherAPIFailureHandler>>
       getCurrentWeather() async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(
+        return RequestResult.failure(
             WeatherAPIFailureHandler(NoInternetException()));
       }
 
-      RequestResault res = await _validateLocations();
+      RequestResult res = await _validateLocations();
       if (res is RequestFailed) {
-        return RequestResault.failure(res.data);
+        return RequestResult.failure(res.data);
       }
 
       String location = getLatLon(locationManagerRepo.locations[0]);
@@ -41,29 +41,29 @@ class WeatherRepoImpl extends WeatherRepo {
       CurrentWeatherModel currentWeatherModel =
           CurrentWeatherModel.fromJson(response['current']);
 
-      return RequestResault.success(currentWeatherModel);
+      return RequestResult.success(currentWeatherModel);
     } on DioException catch (e) {
-      return RequestResault.failure(WeatherAPIFailureHandler(
+      return RequestResult.failure(WeatherAPIFailureHandler(
           WeatherAPIFailureHandlerCodes(e.response!.data["error"]["code"])));
     } catch (e) {
-      return RequestResault.failure(
+      return RequestResult.failure(
           WeatherAPIFailureHandler(TryAgainException()));
     }
   }
 
   @override
-  Future<RequestResault<ForecastWeatherModel, WeatherAPIFailureHandler>>
+  Future<RequestResult<ForecastWeatherModel, WeatherAPIFailureHandler>>
       getForecastWeather(DateTime dateTime) async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(
+        return RequestResult.failure(
             WeatherAPIFailureHandler(NoInternetException()));
       }
 
-      RequestResault res = await _validateLocations();
+      RequestResult res = await _validateLocations();
       if (res is RequestFailed) {
-        return RequestResault.failure(res.data);
+        return RequestResult.failure(res.data);
       }
 
       String location = getLatLon(locationManagerRepo.locations[0]);
@@ -72,30 +72,30 @@ class WeatherRepoImpl extends WeatherRepo {
       ForecastWeatherModel forecastWeatherModel =
           ForecastWeatherModel.fromJson(response['forecast']['forecastday'][0]);
 
-      return RequestResault.success(forecastWeatherModel);
+      return RequestResult.success(forecastWeatherModel);
     } on DioException catch (e) {
-      return RequestResault.failure(WeatherAPIFailureHandler(
+      return RequestResult.failure(WeatherAPIFailureHandler(
           WeatherAPIFailureHandlerCodes(e.response!.data["error"]["code"])));
     } catch (e) {
-      return RequestResault.failure(
+      return RequestResult.failure(
           WeatherAPIFailureHandler(TryAgainException()));
     }
   }
 
-  Future<RequestResault<void, WeatherAPIFailureHandler>>
+  Future<RequestResult<void, WeatherAPIFailureHandler>>
       _validateLocations() async {
     if (locationManagerRepo.locations.isEmpty) {
-      RequestResault res = await locationManagerRepo.getLocations();
+      RequestResult res = await locationManagerRepo.getLocations();
       if (res is RequestSuccess) {
         if (res.data.isEmpty) {
-          return RequestResault.failure(
+          return RequestResult.failure(
               WeatherAPIFailureHandler(EmptyLocationsListException()));
         }
       } else if (res is RequestFailed) {
-        return RequestResault.failure(
+        return RequestResult.failure(
             WeatherAPIFailureHandler(TryAgainException()));
       }
     }
-    return RequestResault.success(null);
+    return RequestResult.success(null);
   }
 }

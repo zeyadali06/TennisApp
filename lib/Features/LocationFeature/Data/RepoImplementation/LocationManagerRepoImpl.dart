@@ -1,4 +1,4 @@
-import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
+import 'package:tennis_app/Core/Utils/Constants.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Core/Functions/Check_Network.dart';
 import 'package:tennis_app/Core/Failure/FirebaseFailureHandler.dart';
@@ -6,7 +6,7 @@ import 'package:tennis_app/Core/Failure/Exceptions/TryAgainException.dart';
 import 'package:tennis_app/Core/Failure/Exceptions/NoInternetException.dart';
 import 'package:tennis_app/Core/Failure/Exceptions/LocationAlreadyExistException.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
-import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
+import 'package:tennis_app/Core/Utils/FirebaseFirestoreServices.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
 
 class LocationManagerRepoImpl implements LocationManagerRepo {
@@ -17,26 +17,26 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
   final Firestore firestore;
 
   @override
-  Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>>
+  Future<RequestResult<List<PositionEntity>, FirebaseFailureHandler>>
       getLocations() async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(
+        return RequestResult.failure(
             FirebaseFailureHandler(NoInternetException()));
       }
 
       List<PositionEntity> poistionEntities = await _getAllLocations();
 
-      return RequestResault.success(poistionEntities);
+      return RequestResult.success(poistionEntities);
     } catch (e) {
-      return RequestResault.failure(
+      return RequestResult.failure(
           FirebaseFailureHandler(TryAgainException()));
     }
   }
 
   @override
-  Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>>
+  Future<RequestResult<List<PositionEntity>, FirebaseFailureHandler>>
       addLoaction(PositionEntity positionEntity) async {
     try {
       bool alreadyExist = false;
@@ -55,7 +55,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
 
         bool connStatus = await checkConn();
         if (!connStatus) {
-          return RequestResault.failure(
+          return RequestResult.failure(
               FirebaseFailureHandler(NoInternetException()));
         }
 
@@ -65,24 +65,24 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
           data: {ConstantNames.locationsField: convertedData},
         );
       } else {
-        return RequestResault.failure(
+        return RequestResult.failure(
             FirebaseFailureHandler(LocationAlreadyExistException()));
       }
 
-      return RequestResault.success(locations);
+      return RequestResult.success(locations);
     } catch (e) {
-      return RequestResault.failure(
+      return RequestResult.failure(
           FirebaseFailureHandler(TryAgainException()));
     }
   }
 
   @override
-  Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>>
+  Future<RequestResult<List<PositionEntity>, FirebaseFailureHandler>>
       deleteLoaction(PositionEntity positionEntity) async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(
+        return RequestResult.failure(
             FirebaseFailureHandler(NoInternetException()));
       }
 
@@ -101,20 +101,20 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
         data: {ConstantNames.locationsField: convertedData},
       );
 
-      return RequestResault.success(locations);
+      return RequestResult.success(locations);
     } catch (e) {
-      return RequestResault.failure(
+      return RequestResult.failure(
           FirebaseFailureHandler(TryAgainException()));
     }
   }
 
   @override
-  Future<RequestResault<List<PositionEntity>, FirebaseFailureHandler>>
+  Future<RequestResult<List<PositionEntity>, FirebaseFailureHandler>>
       setLocationAsDefault(PositionEntity positionEntity) async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(
+        return RequestResult.failure(
             FirebaseFailureHandler(NoInternetException()));
       }
 
@@ -134,9 +134,9 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
         data: {ConstantNames.locationsField: convertedData},
       );
 
-      return RequestResault.success(locations);
+      return RequestResult.success(locations);
     } catch (e) {
-      return RequestResault.failure(
+      return RequestResult.failure(
           FirebaseFailureHandler(TryAgainException()));
     }
   }

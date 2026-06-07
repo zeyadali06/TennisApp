@@ -11,6 +11,7 @@ import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/AnotherDayWeathe
 import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/CurrentDayWeatherUseCase.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/GetMyLocationUseCase.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/SearchForLocationsUseCase.dart';
+import 'package:tennis_app/Features/SplashFeature/Presentation/Controllers/cubit/splash_view_cubit.dart';
 import 'package:tennis_app/Features/SplashFeature/Presentation/Views/SplashView/SplashView.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/RegisterView/RegisterView.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/LoginCubit/login_cubit.dart';
@@ -74,10 +75,15 @@ abstract class AppRouter {
     child: const CustomNavigationBar(),
   );
 
+  static final Widget splashView = BlocProvider(
+    create: (context) =>
+        SplashViewCubit(authRepoImpl: getit.get<AuthRepoImpl>())..autoLogin(),
+    child: const SplashView(),
+  );
+
   static const Widget locationsManagerView = LocationsManagerView();
   static const Widget locationsView = LocationsView();
   static const Widget authOptions = AuthOptionsView();
-  static const Widget splashView = SplashView();
   static const Widget homeView = HomeView();
 
   static MaterialPageRoute goTo(BuildContext context, Widget toView) {

@@ -15,7 +15,7 @@ class LocationManagerCubit extends Cubit<LocationManagerState> {
 
   Future<void> getLocations() async {
     emit(LocationManagerLoading());
-    RequestResault res = await locationManagerRepo.getLocations();
+    RequestResult res = await locationManagerRepo.getLocations();
     if (res is RequestSuccess) {
       emit(LocationManagerSuccessed());
     } else if (res is RequestFailed) {
@@ -25,7 +25,7 @@ class LocationManagerCubit extends Cubit<LocationManagerState> {
 
   Future<void> deleteLocation(PositionEntity positionEntity) async {
     emit(LocationManagerLoading());
-    RequestResault res =
+    RequestResult res =
         await locationManagerRepo.deleteLoaction(positionEntity);
     if (res is RequestSuccess) {
       emit(LocationManagerSuccessed());
@@ -36,7 +36,7 @@ class LocationManagerCubit extends Cubit<LocationManagerState> {
 
   Future<void> setLocationAsDefault(PositionEntity positionEntity) async {
     emit(LocationManagerLoading());
-    RequestResault res =
+    RequestResult res =
         await locationManagerRepo.setLocationAsDefault(positionEntity);
     if (res is RequestSuccess) {
       emit(LocationManagerSuccessed());

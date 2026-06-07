@@ -41,7 +41,7 @@ class AddLocationsCubit extends Cubit<AddLocationsState> {
 
     emit(AddLocationsLoading());
 
-    RequestResault res = await locationManagerRepo.addLoaction(positionEntity);
+    RequestResult res = await locationManagerRepo.addLoaction(positionEntity);
 
     if (res is RequestSuccess) {
       return emit(AddLocationsSuccessed());

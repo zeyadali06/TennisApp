@@ -20,9 +20,9 @@ final class HomeViewFailed extends HomeViewState {
 }
 
 final class GetPredictionSuccess extends HomeViewState {
-  final bool resault;
+  final bool result;
 
-  GetPredictionSuccess(this.resault);
+  GetPredictionSuccess(this.result);
 }
 
 final class GetPredictionFailed extends HomeViewState {

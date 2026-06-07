@@ -4,8 +4,8 @@ import 'package:tennis_app/Features/HomeFeature/Data/Models/CurrentWeatherModel.
 import 'package:tennis_app/Features/HomeFeature/Data/Models/ForecastWeatherModel.dart';
 
 abstract class WeatherRepo {
-  Future<RequestResault<CurrentWeatherModel, WeatherAPIFailureHandler>>
+  Future<RequestResult<CurrentWeatherModel, WeatherAPIFailureHandler>>
       getCurrentWeather();
-  Future<RequestResault<ForecastWeatherModel, WeatherAPIFailureHandler>>
+  Future<RequestResult<ForecastWeatherModel, WeatherAPIFailureHandler>>
       getForecastWeather(DateTime dateTime);
 }

@@ -13,5 +13,8 @@ class ConstantNames {
   static const String placeField = 'placemarkField';
   static const String apiKey = "API_KEY";
   static const String baseURL = "https://api.weatherapi.com/v1/";
+  static const String localEmail = "email";
+  static const String localPassword = "password";
+  static const String localFullName = "fullName";
   static UserModel userModel = UserModel();
 }

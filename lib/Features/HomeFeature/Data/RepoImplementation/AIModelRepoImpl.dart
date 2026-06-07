@@ -12,20 +12,20 @@ class AIModelRepoImpl extends AIModelRepo {
   final AIModelServices aiModelServices;
 
   @override
-  Future<RequestResault<bool, AIModelFailureHandler>> getPrediction(
+  Future<RequestResult<bool, AIModelFailureHandler>> getPrediction(
       List<int> features) async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(
+        return RequestResult.failure(
             AIModelFailureHandler(NoInternetException()));
       }
 
       bool prediction = await aiModelServices.getPrediction(features);
 
-      return RequestResault.success(prediction);
+      return RequestResult.success(prediction);
     } catch (e) {
-      return RequestResault.failure(AIModelFailureHandler(TryAgainException()));
+      return RequestResult.failure(AIModelFailureHandler(TryAgainException()));
     }
   }
 }

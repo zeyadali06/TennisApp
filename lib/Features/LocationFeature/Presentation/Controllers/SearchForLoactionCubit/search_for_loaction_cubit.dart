@@ -17,7 +17,7 @@ class SearchForLoactionCubit extends Cubit<SearchForLoactionState> {
   Future<void> searchForLoaction(String place) async {
     emit(SearchForLoactionLoading());
 
-    RequestResault res = await searchForLocationsUseCase.searchForPlaces(place);
+    RequestResult res = await searchForLocationsUseCase.searchForPlaces(place);
 
     if (res is RequestSuccess) {
       emit(SearchForLoactionSuccessed(res.data));

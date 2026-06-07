@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
+import 'package:tennis_app/Core/Utils/Constants.dart';
 
 class LocationServices {
   LocationServices({required this.dio});

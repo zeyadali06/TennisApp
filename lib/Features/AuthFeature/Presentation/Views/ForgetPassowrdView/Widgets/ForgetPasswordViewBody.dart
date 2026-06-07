@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tennis_app/Core/Utils/AppRouter.dart';
 import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
 import 'package:tennis_app/Core/Widgets/InputDataSection.dart';
@@ -41,8 +40,7 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
           showSnackBar(context, state.error.message);
         } else if (state is EmailSentSuccessfully) {
           showSnackBar(context, "Email sent successfully");
-          Navigator.pushReplacement(
-              context, AppRouter.goTo(context, AppRouter.loginView));
+          Navigator.pop(context);
         }
         isLoading = false;
       },

@@ -16,7 +16,7 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> login(LoginEntity loginEntity, String password) async {
     emit(LoginLoading());
 
-    RequestResault<dynamic, dynamic> res =
+    RequestResult<dynamic, dynamic> res =
         await authRepo.login(loginEntity, password);
 
     if (res is RequestSuccess) {

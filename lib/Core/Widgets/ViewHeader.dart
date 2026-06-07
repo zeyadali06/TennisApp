@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
+import 'package:tennis_app/Core/Utils/Constants.dart';
 import 'package:tennis_app/Core/Widgets/ScaleDownWidget.dart';
 
 class ViewHeader extends StatelessWidget {

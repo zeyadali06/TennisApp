@@ -35,7 +35,7 @@ class HomeViewBody extends StatelessWidget {
                 title: const Text('Result'),
                 content: () {
                   String text;
-                  if (state.resault) {
+                  if (state.result) {
                     text = "You can go to do excercises";
                   } else {
                     text = "It's not good to go for training";

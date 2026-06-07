@@ -11,24 +11,24 @@ class SearchForLocationsUseCase {
 
   final LocationRepo locationRepo;
 
-  Future<RequestResault<List<PositionEntity>, WeatherAPIFailureHandler>>
+  Future<RequestResult<List<PositionEntity>, WeatherAPIFailureHandler>>
       searchForPlaces(String place) async {
     try {
       List<PositionEntity> positions = [];
 
-      RequestResault res1 = await locationRepo.searchForPlaces(place);
+      RequestResult res1 = await locationRepo.searchForPlaces(place);
 
       if (res1 is RequestSuccess) {
         for (var position in res1.data as List<PlaceModel>) {
           positions.add(LocationMapper.fromPlaceModel(position));
         }
       } else if (res1 is RequestFailed) {
-        return RequestResault.failure(res1.data);
+        return RequestResult.failure(res1.data);
       }
 
-      return RequestResault.success(positions);
+      return RequestResult.success(positions);
     } catch (e) {
-      return RequestResault.failure(
+      return RequestResult.failure(
           WeatherAPIFailureHandler(TryAgainException()));
     }
   }

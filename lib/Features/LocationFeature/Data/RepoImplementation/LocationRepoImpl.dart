@@ -20,58 +20,58 @@ class LocationRepoImpl implements LocationRepo {
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
 
   @override
-  Future<RequestResault<Position, GeoLocatorFailureHandler>>
+  Future<RequestResult<Position, GeoLocatorFailureHandler>>
       getMyPosition() async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(
+        return RequestResult.failure(
             GeoLocatorFailureHandler(NoInternetException()));
       }
 
       final bool hasPermission = await _handlePermission();
       if (!hasPermission) {
-        return RequestResault.failure(
+        return RequestResult.failure(
             GeoLocatorFailureHandler(LocationPermissionDeniedException()));
       }
 
       final Position position = await _geolocatorPlatform.getCurrentPosition();
-      return RequestResault.success(position);
+      return RequestResult.success(position);
     } on LocationServiceDisabledException {
-      return RequestResault.failure(
+      return RequestResult.failure(
           GeoLocatorFailureHandler(LocationPermissionDeniedException()));
     } catch (e) {
-      return RequestResault.failure(
+      return RequestResult.failure(
           GeoLocatorFailureHandler(TryAgainException()));
     }
   }
 
   @override
-  Future<RequestResault<Placemark, GeoLocatorFailureHandler>> getMyPlaceMark(
+  Future<RequestResult<Placemark, GeoLocatorFailureHandler>> getMyPlaceMark(
       double latitude, double longitude) async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(
+        return RequestResult.failure(
             GeoLocatorFailureHandler(NoInternetException()));
       }
 
       List<Placemark> placemarks =
           await placemarkFromCoordinates(latitude, longitude);
-      return RequestResault.success(placemarks[0]);
+      return RequestResult.success(placemarks[0]);
     } catch (e) {
-      return RequestResault.failure(
+      return RequestResult.failure(
           GeoLocatorFailureHandler(TryAgainException()));
     }
   }
 
   @override
-  Future<RequestResault<List<PlaceModel>, WeatherAPIFailureHandler>>
+  Future<RequestResult<List<PlaceModel>, WeatherAPIFailureHandler>>
       searchForPlaces(String place) async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(
+        return RequestResult.failure(
             WeatherAPIFailureHandler(NoInternetException()));
       }
 
@@ -85,12 +85,12 @@ class LocationRepoImpl implements LocationRepo {
         }
       }
 
-      return RequestResault.success(places);
+      return RequestResult.success(places);
     } on DioException catch (e) {
-      return RequestResault.failure(WeatherAPIFailureHandler(
+      return RequestResult.failure(WeatherAPIFailureHandler(
           WeatherAPIFailureHandlerCodes(e.response!.data["error"]["code"])));
     } catch (e) {
-      return RequestResault.failure(
+      return RequestResult.failure(
           WeatherAPIFailureHandler(TryAgainException()));
     }
   }

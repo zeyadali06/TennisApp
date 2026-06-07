@@ -1,4 +1,4 @@
-import 'package:tennis_app/Core/Utils/ConstantsNames.dart';
+import 'package:tennis_app/Core/Utils/Constants.dart';
 
 class LoginEntity {
   String? email;

@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:tennis_app/Features/AuthFeature/Data/DataSource/Authentication.dart';
+import 'package:tennis_app/Core/Utils/Authentication.dart';
+import 'package:tennis_app/Core/Utils/LocalDatabaseService.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/DataSource/AIModelServices.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/DataSource/WeatherApiServices.dart';
 import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/GetPredictionUseCase.dart';
@@ -11,7 +13,7 @@ import 'package:tennis_app/Features/HomeFeature/Data/RepoImplementation/AIModelR
 import 'package:tennis_app/Features/HomeFeature/Data/RepoImplementation/WeatherRepoImpl.dart';
 import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/AnotherDayWeatherUseCase.dart';
 import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/CurrentDayWeatherUseCase.dart';
-import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestoreServices.dart';
+import 'package:tennis_app/Core/Utils/FirebaseFirestoreServices.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/RepoImplementation/LocationRepoImpl.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/RepoImplementation/LocationManagerRepoImpl.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/GetMyLocationUseCase.dart';
@@ -29,6 +31,8 @@ void setup() {
   getit.registerSingleton<AccountData>(AccountData());
 
   getit.registerSingleton<Firestore>(Firestore());
+
+  getit.registerSingleton<FlutterSecureStorage>(const FlutterSecureStorage());
 
   getit.registerSingleton<WeatherApiServices>(
     WeatherApiServices(dio: getit.get<Dio>()),
@@ -54,6 +58,12 @@ void setup() {
     AIModelRepoImpl(aiModelServices: getit.get<AIModelServices>()),
   );
 
+  getit.registerSingleton<LocalDatabaseService>(
+    LocalDatabaseService(
+      flutterSecureStorage: getit.get<FlutterSecureStorage>(),
+    ),
+  );
+
   getit.registerSingleton<WeatherRepoImpl>(
     WeatherRepoImpl(
       weatherApiServices: getit.get<WeatherApiServices>(),
@@ -71,6 +81,7 @@ void setup() {
   getit.registerSingleton<AuthRepoImpl>(
     AuthRepoImpl(
       locationManagerRepo: getit.get<LocationManagerRepoImpl>(),
+      localDatabaseService: getit.get<LocalDatabaseService>(),
       accountData: getit.get<AccountData>(),
       firestore: getit.get<Firestore>(),
       register: getit.get<Register>(),

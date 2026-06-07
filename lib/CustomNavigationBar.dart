@@ -43,8 +43,8 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
         },
         padding: const EdgeInsets.all(10),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        hoverColor: Colors.grey.withOpacity(.2),
-        highlightColor: Colors.grey.withOpacity(.2),
+        hoverColor: Colors.grey.withValues(alpha: .2),
+        highlightColor: Colors.grey.withValues(alpha: .2),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

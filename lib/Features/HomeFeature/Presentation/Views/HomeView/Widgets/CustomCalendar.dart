@@ -36,7 +36,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
     return Container(
       height: 70,
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(.15),
+        color: Colors.grey.withValues(alpha: .15),
         borderRadius: BorderRadius.circular(15),
       ),
       child: TableCalendar(
@@ -74,7 +74,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
       BuildContext context, DateTime day, DateTime focusedDay) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(.15),
+        color: Colors.grey.withValues(alpha: .15),
         borderRadius: BorderRadius.circular(15),
       ),
       child: Center(
