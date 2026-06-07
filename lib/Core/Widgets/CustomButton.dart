@@ -32,12 +32,14 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed ?? () {},
       height: height,
       color: backgroundColor,
-      padding: EdgeInsets.symmetric(vertical: verticatPadding, horizontal: horizontalPadding),
+      padding: EdgeInsets.symmetric(
+          vertical: verticatPadding, horizontal: horizontalPadding),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
       child: FittedWidget(
         child: Text(
           title,
-          style: TextStyle(color: textColor, fontSize: fontSize, fontWeight: fontWeight),
+          style: TextStyle(
+              color: textColor, fontSize: fontSize, fontWeight: fontWeight),
         ),
       ),
     );

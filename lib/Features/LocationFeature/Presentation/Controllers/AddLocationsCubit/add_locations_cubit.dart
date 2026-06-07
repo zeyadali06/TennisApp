@@ -14,20 +14,27 @@ class AddLocationsCubit extends Cubit<AddLocationsState> {
 
   final LocationManagerRepo locationManagerRepo;
 
-  Future<void> addLocation(PositionEntity positionEntity, bool startExecution, bool validate, BuildContext context) async {
+  Future<void> addLocation(PositionEntity positionEntity, bool startExecution,
+      bool validate, BuildContext context) async {
     if (!startExecution) {
-      emit(AddLocationsFailed(FirebaseFailureHandler(CustomException("Search then choose place or use Get My Location"))));
+      emit(AddLocationsFailed(FirebaseFailureHandler(
+          CustomException("Search then choose place or use Get My Location"))));
       return;
     }
 
     if (positionEntity.place.isEmpty) {
-      emit(AddLocationsFailed(FirebaseFailureHandler(CustomException("Error when getting your location"))));
+      emit(AddLocationsFailed(FirebaseFailureHandler(
+          CustomException("Error when getting your location"))));
       return;
     }
 
     if (validate) {
-      if (BlocProvider.of<SearchForLoactionCubit>(context).place.toLowerCase() != positionEntity.place.toLowerCase()) {
-        emit(AddLocationsFailed(FirebaseFailureHandler(CustomException("Choose place from search results"))));
+      if (BlocProvider.of<SearchForLoactionCubit>(context)
+              .place
+              .toLowerCase() !=
+          positionEntity.place.toLowerCase()) {
+        emit(AddLocationsFailed(FirebaseFailureHandler(
+            CustomException("Choose place from search results"))));
         return;
       }
     }

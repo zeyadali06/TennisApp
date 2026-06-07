@@ -51,7 +51,9 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
             FittedWidget(
               child: Icon(
                 iconData,
-                shadows: isSelected ? const [Shadow(color: Colors.white, blurRadius: 4)] : null,
+                shadows: isSelected
+                    ? const [Shadow(color: Colors.white, blurRadius: 4)]
+                    : null,
                 size: isSelected ? 42 : null,
                 color: Colors.white,
               ),
@@ -60,7 +62,10 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
               FittedWidget(
                 child: Text(
                   label,
-                  style: const TextStyle(fontSize: 8, color: Colors.white, fontWeight: FontWeight.w300),
+                  style: const TextStyle(
+                      fontSize: 8,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300),
                 ),
               )
           ],
@@ -143,9 +148,13 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
                   ),
                   child: Row(
                     children: [
-                      Expanded(child: _buildWidget(Icons.check_box_outlined, 0, 'Check')),
-                      Expanded(child: _buildWidget(Icons.home_filled, 1, 'Home')),
-                      Expanded(child: _buildWidget(Icons.location_on, 2, 'Loc')),
+                      Expanded(
+                          child: _buildWidget(
+                              Icons.check_box_outlined, 0, 'Check')),
+                      Expanded(
+                          child: _buildWidget(Icons.home_filled, 1, 'Home')),
+                      Expanded(
+                          child: _buildWidget(Icons.location_on, 2, 'Loc')),
                     ],
                   ),
                 ),

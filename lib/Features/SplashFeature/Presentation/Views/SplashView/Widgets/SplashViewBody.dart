@@ -15,7 +15,8 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     Future.delayed(const Duration(seconds: 2)).then(
       (value) {
         if (mounted) {
-          Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.authOptions));
+          Navigator.pushReplacement(
+              context, AppRouter.goTo(context, AppRouter.authOptions));
         }
       },
     );

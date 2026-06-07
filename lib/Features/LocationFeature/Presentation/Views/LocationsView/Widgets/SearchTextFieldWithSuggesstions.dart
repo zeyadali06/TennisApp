@@ -22,15 +22,22 @@ class SearchTextFieldWithSuggesstions extends StatelessWidget {
           return const Iterable<PositionEntity>.empty();
         }
         return suggestions.where((PositionEntity option) {
-          return option.place.toLowerCase().contains(textEditingValue.text.toLowerCase());
+          return option.place
+              .toLowerCase()
+              .contains(textEditingValue.text.toLowerCase());
         });
       },
       onSelected: (PositionEntity option) {
         BlocProvider.of<SearchForLoactionCubit>(context).place = option.place;
-        BlocProvider.of<SearchForLoactionCubit>(context).choosePositionEntity(option);
+        BlocProvider.of<SearchForLoactionCubit>(context)
+            .choosePositionEntity(option);
       },
-      fieldViewBuilder: (BuildContext context, TextEditingController textEditingController, FocusNode focusNode, VoidCallback onFieldSubmitted) {
-        textEditingController.text = BlocProvider.of<SearchForLoactionCubit>(context).place;
+      fieldViewBuilder: (BuildContext context,
+          TextEditingController textEditingController,
+          FocusNode focusNode,
+          VoidCallback onFieldSubmitted) {
+        textEditingController.text =
+            BlocProvider.of<SearchForLoactionCubit>(context).place;
         return InputDataSection(
           controller: textEditingController,
           focusNode: focusNode,
@@ -38,12 +45,15 @@ class SearchTextFieldWithSuggesstions extends StatelessWidget {
             searchContent = value;
           },
           onChanged: (value) {
-            BlocProvider.of<SearchForLoactionCubit>(context).place = value ?? "";
+            BlocProvider.of<SearchForLoactionCubit>(context).place =
+                value ?? "";
           },
           title: 'Destination',
         );
       },
-      optionsViewBuilder: (BuildContext context, AutocompleteOnSelected<PositionEntity> onSelected, Iterable<PositionEntity> options) {
+      optionsViewBuilder: (BuildContext context,
+          AutocompleteOnSelected<PositionEntity> onSelected,
+          Iterable<PositionEntity> options) {
         return Align(
           alignment: Alignment.topLeft,
           child: Material(

@@ -12,7 +12,9 @@ import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/Locatio
 part 'home_view_state.dart';
 
 class HomeViewCubit extends Cubit<HomeViewState> {
-  HomeViewCubit(this.currentDayWeatherUseCase, this.anotherDayWeatherUseCase, this.locationManagerRepo, this.getPredictionUseCase) : super(HomeViewInitial());
+  HomeViewCubit(this.currentDayWeatherUseCase, this.anotherDayWeatherUseCase,
+      this.locationManagerRepo, this.getPredictionUseCase)
+      : super(HomeViewInitial());
 
   final CurrentDayWeatherUseCase currentDayWeatherUseCase;
   final AnotherDayWeatherUseCase anotherDayWeatherUseCase;
@@ -31,7 +33,8 @@ class HomeViewCubit extends Cubit<HomeViewState> {
 
   Future<void> getForecastWeather(DateTime dateTime) async {
     emit(HomeViewLoading());
-    RequestResault res = await anotherDayWeatherUseCase.getAnotherDayWeather(dateTime);
+    RequestResault res =
+        await anotherDayWeatherUseCase.getAnotherDayWeather(dateTime);
     if (res is RequestSuccess) {
       return emit(HomeViewSuccess(res.data));
     } else if (res is RequestFailed) {

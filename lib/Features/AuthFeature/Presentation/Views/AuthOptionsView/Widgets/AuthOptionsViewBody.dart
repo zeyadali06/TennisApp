@@ -33,7 +33,10 @@ class AuthOptionsViewBody extends StatelessWidget {
                           Expanded(
                             child: CustomButton(
                               onPressed: () {
-                                Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.registerView));
+                                Navigator.pushReplacement(
+                                    context,
+                                    AppRouter.goTo(
+                                        context, AppRouter.registerView));
                               },
                               title: 'Sign In',
                             ),
@@ -46,7 +49,10 @@ class AuthOptionsViewBody extends StatelessWidget {
                           Expanded(
                             child: CustomButton(
                               onPressed: () {
-                                Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.loginView));
+                                Navigator.pushReplacement(
+                                    context,
+                                    AppRouter.goTo(
+                                        context, AppRouter.loginView));
                               },
                               title: 'Log In',
                               backgroundColor: Colors.white,

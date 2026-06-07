@@ -13,13 +13,17 @@ class ViewHeader extends StatelessWidget {
         const FittedWidget(
           child: Text(
             'Hello',
-            style: TextStyle(color: Color(0xff0053bd), fontSize: 22, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: Color(0xff0053bd),
+                fontSize: 22,
+                fontWeight: FontWeight.bold),
           ),
         ),
         FittedWidget(
           child: Text(
             ConstantNames.userModel.fullName.toString(),
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
           ),
         ),
       ],

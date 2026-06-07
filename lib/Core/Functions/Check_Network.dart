@@ -6,7 +6,9 @@ Future<bool> checkConn() async {
   try {
     final Connectivity conn = Connectivity();
     await conn.checkConnectivity();
-    final StreamSubscription<List<ConnectivityResult>> connectivitySubscription = conn.onConnectivityChanged.listen((List<ConnectivityResult> result) {
+    final StreamSubscription<List<ConnectivityResult>>
+        connectivitySubscription =
+        conn.onConnectivityChanged.listen((List<ConnectivityResult> result) {
       if (result.last == ConnectivityResult.none) {
         status = false;
       }

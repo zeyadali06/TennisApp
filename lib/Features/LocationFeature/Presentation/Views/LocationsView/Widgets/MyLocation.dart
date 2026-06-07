@@ -15,26 +15,30 @@ class MyLocation extends StatelessWidget {
         const FittedWidget(
           child: Text(
             'Your Location:',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
           ),
         ),
         const SizedBox(height: 10),
         Text(
           'Place: ${positionEntity.place}',
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
+          style: const TextStyle(
+              color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
         ),
         const SizedBox(height: 10),
         FittedWidget(
           child: Text(
             'Latitude: ${positionEntity.latitude}',
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
           ),
         ),
         const SizedBox(height: 10),
         FittedWidget(
           child: Text(
             'Longitude: ${positionEntity.longitude}',
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
           ),
         ),
       ],

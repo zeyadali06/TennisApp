@@ -21,7 +21,10 @@ class LocationsManagerViewBody extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        List<PositionEntity> locations = BlocProvider.of<LocationManagerCubit>(context).locationManagerRepo.locations;
+        List<PositionEntity> locations =
+            BlocProvider.of<LocationManagerCubit>(context)
+                .locationManagerRepo
+                .locations;
         return CustomGradiantContainer(
           child: SafeArea(
             child: Padding(
@@ -35,7 +38,10 @@ class LocationsManagerViewBody extends StatelessWidget {
                       const FittedWidget(
                         child: Text(
                           'Default Location',
-                          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -52,7 +58,10 @@ class LocationsManagerViewBody extends StatelessWidget {
                             ScaleDown(
                               child: Text(
                                 'No Locations Found',
-                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
                           ],
@@ -61,7 +70,10 @@ class LocationsManagerViewBody extends StatelessWidget {
                       const FittedWidget(
                         child: Text(
                           'Another Locations',
-                          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -73,7 +85,10 @@ class LocationsManagerViewBody extends StatelessWidget {
                             ScaleDown(
                               child: Text(
                                 'No Locations Found',
-                                style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
                           ],
@@ -85,7 +100,9 @@ class LocationsManagerViewBody extends StatelessWidget {
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: locations.length - 1,
                           itemBuilder: (context, index) {
-                            return CustomTaskContainer(positionEntity: locations[index + 1], isNotDeafult: true);
+                            return CustomTaskContainer(
+                                positionEntity: locations[index + 1],
+                                isNotDeafult: true);
                           },
                         ),
                       const SizedBox(height: 50),

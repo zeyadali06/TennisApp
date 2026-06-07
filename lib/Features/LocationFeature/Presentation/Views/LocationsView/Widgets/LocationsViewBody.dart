@@ -50,7 +50,8 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
           listener: (context, state) {
             if (state is SearchForLoactionSuccessed) {
               suggestions = state.suggestions;
-              showSnackBar(context, "Click on the search field to open suggesstions");
+              showSnackBar(
+                  context, "Click on the search field to open suggesstions");
             } else if (state is SearchForLoactionFailed) {
               showSnackBar(context, state.error.message);
             } else if (state is ChooseLocation) {
@@ -88,7 +89,8 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                             onPressed: () async {
                               showMyLocationSection = true;
                               showSerchFieldSection = false;
-                              await BlocProvider.of<GetMyLocationCubit>(context).getMyLocation();
+                              await BlocProvider.of<GetMyLocationCubit>(context)
+                                  .getMyLocation();
                               setState(() {});
                             },
                             title: "Get My Location",
@@ -108,8 +110,10 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                       ],
                     ),
                     const SizedBox(height: 50),
-                    if (showMyLocationSection) MyLocation(positionEntity: positionEntity),
-                    if (showSerchFieldSection) SearchField(suggestions: suggestions),
+                    if (showMyLocationSection)
+                      MyLocation(positionEntity: positionEntity),
+                    if (showSerchFieldSection)
+                      SearchField(suggestions: suggestions),
                     const SizedBox(height: 30),
                   ],
                 ),
@@ -129,7 +133,9 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                           validate = false;
                         }
 
-                        await BlocProvider.of<AddLocationsCubit>(context).addLocation(positionEntity, startExecution, validate, context);
+                        await BlocProvider.of<AddLocationsCubit>(context)
+                            .addLocation(positionEntity, startExecution,
+                                validate, context);
                       },
                       title: 'Add Location',
                     ),

@@ -8,7 +8,8 @@ import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/Locatio
 part 'location_manager_state.dart';
 
 class LocationManagerCubit extends Cubit<LocationManagerState> {
-  LocationManagerCubit(this.locationManagerRepo) : super(LocationManagerInitial());
+  LocationManagerCubit(this.locationManagerRepo)
+      : super(LocationManagerInitial());
 
   final LocationManagerRepo locationManagerRepo;
 
@@ -24,7 +25,8 @@ class LocationManagerCubit extends Cubit<LocationManagerState> {
 
   Future<void> deleteLocation(PositionEntity positionEntity) async {
     emit(LocationManagerLoading());
-    RequestResault res = await locationManagerRepo.deleteLoaction(positionEntity);
+    RequestResault res =
+        await locationManagerRepo.deleteLoaction(positionEntity);
     if (res is RequestSuccess) {
       emit(LocationManagerSuccessed());
     } else if (res is RequestFailed) {
@@ -34,7 +36,8 @@ class LocationManagerCubit extends Cubit<LocationManagerState> {
 
   Future<void> setLocationAsDefault(PositionEntity positionEntity) async {
     emit(LocationManagerLoading());
-    RequestResault res = await locationManagerRepo.setLocationAsDefault(positionEntity);
+    RequestResault res =
+        await locationManagerRepo.setLocationAsDefault(positionEntity);
     if (res is RequestSuccess) {
       emit(LocationManagerSuccessed());
     } else if (res is RequestFailed) {

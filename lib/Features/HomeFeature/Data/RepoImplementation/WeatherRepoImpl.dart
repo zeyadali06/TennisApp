@@ -14,17 +14,20 @@ import 'package:tennis_app/Features/HomeFeature/Data/DataSource/WeatherApiServic
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
 
 class WeatherRepoImpl extends WeatherRepo {
-  WeatherRepoImpl({required this.locationManagerRepo, required this.weatherApiServices});
+  WeatherRepoImpl(
+      {required this.locationManagerRepo, required this.weatherApiServices});
 
   final WeatherApiServices weatherApiServices;
   final LocationManagerRepo locationManagerRepo;
 
   @override
-  Future<RequestResault<CurrentWeatherModel, WeatherAPIFailureHandler>> getCurrentWeather() async {
+  Future<RequestResault<CurrentWeatherModel, WeatherAPIFailureHandler>>
+      getCurrentWeather() async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(WeatherAPIFailureHandler(NoInternetException()));
+        return RequestResault.failure(
+            WeatherAPIFailureHandler(NoInternetException()));
       }
 
       RequestResault res = await _validateLocations();
@@ -33,23 +36,29 @@ class WeatherRepoImpl extends WeatherRepo {
       }
 
       String location = getLatLon(locationManagerRepo.locations[0]);
-      var response = await weatherApiServices.getCurrentWeather(location, DateTime.now().hour);
-      CurrentWeatherModel currentWeatherModel = CurrentWeatherModel.fromJson(response['current']);
+      var response = await weatherApiServices.getCurrentWeather(
+          location, DateTime.now().hour);
+      CurrentWeatherModel currentWeatherModel =
+          CurrentWeatherModel.fromJson(response['current']);
 
       return RequestResault.success(currentWeatherModel);
     } on DioException catch (e) {
-      return RequestResault.failure(WeatherAPIFailureHandler(WeatherAPIFailureHandlerCodes(e.response!.data["error"]["code"])));
+      return RequestResault.failure(WeatherAPIFailureHandler(
+          WeatherAPIFailureHandlerCodes(e.response!.data["error"]["code"])));
     } catch (e) {
-      return RequestResault.failure(WeatherAPIFailureHandler(TryAgainException()));
+      return RequestResault.failure(
+          WeatherAPIFailureHandler(TryAgainException()));
     }
   }
 
   @override
-  Future<RequestResault<ForecastWeatherModel, WeatherAPIFailureHandler>> getForecastWeather(DateTime dateTime) async {
+  Future<RequestResault<ForecastWeatherModel, WeatherAPIFailureHandler>>
+      getForecastWeather(DateTime dateTime) async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(WeatherAPIFailureHandler(NoInternetException()));
+        return RequestResault.failure(
+            WeatherAPIFailureHandler(NoInternetException()));
       }
 
       RequestResault res = await _validateLocations();
@@ -58,26 +67,33 @@ class WeatherRepoImpl extends WeatherRepo {
       }
 
       String location = getLatLon(locationManagerRepo.locations[0]);
-      var response = await weatherApiServices.getForecastWeather(dateTime, location, 1);
-      ForecastWeatherModel forecastWeatherModel = ForecastWeatherModel.fromJson(response['forecast']['forecastday'][0]);
+      var response =
+          await weatherApiServices.getForecastWeather(dateTime, location, 1);
+      ForecastWeatherModel forecastWeatherModel =
+          ForecastWeatherModel.fromJson(response['forecast']['forecastday'][0]);
 
       return RequestResault.success(forecastWeatherModel);
     } on DioException catch (e) {
-      return RequestResault.failure(WeatherAPIFailureHandler(WeatherAPIFailureHandlerCodes(e.response!.data["error"]["code"])));
+      return RequestResault.failure(WeatherAPIFailureHandler(
+          WeatherAPIFailureHandlerCodes(e.response!.data["error"]["code"])));
     } catch (e) {
-      return RequestResault.failure(WeatherAPIFailureHandler(TryAgainException()));
+      return RequestResault.failure(
+          WeatherAPIFailureHandler(TryAgainException()));
     }
   }
 
-  Future<RequestResault<void, WeatherAPIFailureHandler>> _validateLocations() async {
+  Future<RequestResault<void, WeatherAPIFailureHandler>>
+      _validateLocations() async {
     if (locationManagerRepo.locations.isEmpty) {
       RequestResault res = await locationManagerRepo.getLocations();
       if (res is RequestSuccess) {
         if (res.data.isEmpty) {
-          return RequestResault.failure(WeatherAPIFailureHandler(EmptyLocationsListException()));
+          return RequestResault.failure(
+              WeatherAPIFailureHandler(EmptyLocationsListException()));
         }
       } else if (res is RequestFailed) {
-        return RequestResault.failure(WeatherAPIFailureHandler(TryAgainException()));
+        return RequestResault.failure(
+            WeatherAPIFailureHandler(TryAgainException()));
       }
     }
     return RequestResault.success(null);

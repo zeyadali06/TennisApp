@@ -3,7 +3,8 @@ import 'package:tennis_app/Features/HomeFeature/Data/Models/CurrentWeatherModel.
 import 'package:tennis_app/Features/HomeFeature/Data/Models/ForecastWeatherModel.dart';
 
 class WeatherMapper {
-  static WeatherEntity fromCurrentWeatherModel(CurrentWeatherModel currentWeatherModel) {
+  static WeatherEntity fromCurrentWeatherModel(
+      CurrentWeatherModel currentWeatherModel) {
     return WeatherEntity(
       tempC: currentWeatherModel.tempC,
       windKph: currentWeatherModel.windKph,
@@ -17,7 +18,8 @@ class WeatherMapper {
     );
   }
 
-  static WeatherEntity fromForecastWeatherModel(ForecastWeatherModel forecastWeatherModel) {
+  static WeatherEntity fromForecastWeatherModel(
+      ForecastWeatherModel forecastWeatherModel) {
     return WeatherEntity(
       tempC: forecastWeatherModel.hour[0].tempC,
       windKph: forecastWeatherModel.hour[0].windKph,

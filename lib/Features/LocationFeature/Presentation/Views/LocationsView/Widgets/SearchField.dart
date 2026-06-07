@@ -28,7 +28,9 @@ class SearchField extends StatelessWidget {
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
-                      await BlocProvider.of<SearchForLoactionCubit>(context).searchForLoaction(SearchTextFieldWithSuggesstions.searchContent!);
+                      await BlocProvider.of<SearchForLoactionCubit>(context)
+                          .searchForLoaction(
+                              SearchTextFieldWithSuggesstions.searchContent!);
                     }
                   },
                   title: 'Search',

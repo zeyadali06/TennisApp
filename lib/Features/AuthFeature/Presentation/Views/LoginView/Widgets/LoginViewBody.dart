@@ -32,7 +32,8 @@ class LoginViewBody extends StatelessWidget {
         } else if (state is LoginFailed) {
           showSnackBar(context, state.error.message);
         } else if (state is LoginSuccess) {
-          Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.navigationBar));
+          Navigator.pushReplacement(
+              context, AppRouter.goTo(context, AppRouter.navigationBar));
         }
         isLoading = false;
       },
@@ -52,11 +53,16 @@ class LoginViewBody extends StatelessWidget {
                       child: Column(
                         children: [
                           const Expanded(flex: 3, child: SizedBox(height: 50)),
-                          const AuthViewHeader(title: 'LOGIN', subTitle: 'CREATE AN ACCOUNT TO MAKE SDFSDF'),
+                          const AuthViewHeader(
+                              title: 'LOGIN',
+                              subTitle: 'CREATE AN ACCOUNT TO MAKE SDFSDF'),
                           const Expanded(flex: 3, child: SizedBox(height: 50)),
                           InputDataSection(
                             title: 'Email',
-                            inputFormatters: [Formatters.preventSpaces, Formatters.emailRegExp],
+                            inputFormatters: [
+                              Formatters.preventSpaces,
+                              Formatters.emailRegExp
+                            ],
                             onSaved: (value) => loginEntity.email = value,
                           ),
                           const SizedBox(height: 10),
@@ -70,11 +76,17 @@ class LoginViewBody extends StatelessWidget {
                               ScaleDown(
                                 child: GestureDetector(
                                   onTap: () {
-                                    Navigator.push(context, AppRouter.goTo(context, AppRouter.forgetPasswordView));
+                                    Navigator.push(
+                                        context,
+                                        AppRouter.goTo(context,
+                                            AppRouter.forgetPasswordView));
                                   },
                                   child: const Text(
                                     'Forget your password?',
-                                    style: TextStyle(color: Color(0xff1b3b8e), fontSize: 10, fontWeight: FontWeight.w600),
+                                    style: TextStyle(
+                                        color: Color(0xff1b3b8e),
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
                               ),
@@ -86,12 +98,15 @@ class LoginViewBody extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: CustomButton(
                                     onPressed: () async {
                                       if (formKey.currentState!.validate()) {
                                         formKey.currentState!.save();
-                                        await BlocProvider.of<LoginCubit>(context).login(loginEntity, password);
+                                        await BlocProvider.of<LoginCubit>(
+                                                context)
+                                            .login(loginEntity, password);
                                       }
                                     },
                                     title: 'LOGIN',
@@ -107,11 +122,17 @@ class LoginViewBody extends StatelessWidget {
                               ScaleDown(
                                 child: GestureDetector(
                                   onTap: () {
-                                    Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.registerView));
+                                    Navigator.pushReplacement(
+                                        context,
+                                        AppRouter.goTo(
+                                            context, AppRouter.registerView));
                                   },
                                   child: const Text(
                                     "DON'T HAVE AN ACCOUNT ?",
-                                    style: TextStyle(color: Color(0xff1b3b8e), fontSize: 10, fontWeight: FontWeight.w600),
+                                    style: TextStyle(
+                                        color: Color(0xff1b3b8e),
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
                               ),

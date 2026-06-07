@@ -15,7 +15,15 @@ class _CustomCalendarState extends State<CustomCalendar> {
   late DateTime _focusedDay;
   DateTime? _selectedDay;
 
-  Map<int, String> weekdays = {1: 'Mon', 2: 'Tus', 3: 'Wed', 4: 'Thu', 5: 'Fri', 6: 'Sat', 7: 'Sun'};
+  Map<int, String> weekdays = {
+    1: 'Mon',
+    2: 'Tus',
+    3: 'Wed',
+    4: 'Thu',
+    5: 'Fri',
+    6: 'Sat',
+    7: 'Sun'
+  };
 
   @override
   void initState() {
@@ -62,7 +70,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
     );
   }
 
-  Widget? todayBuilder(BuildContext context, DateTime day, DateTime focusedDay) {
+  Widget? todayBuilder(
+      BuildContext context, DateTime day, DateTime focusedDay) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(.15),
@@ -75,14 +84,20 @@ class _CustomCalendarState extends State<CustomCalendar> {
             FittedWidget(
               child: Text(
                 weekdays[day.weekday].toString(),
-                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w200, fontSize: 8),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w200,
+                    fontSize: 8),
               ),
             ),
             const Expanded(flex: 2, child: SizedBox(height: 5)),
             FittedWidget(
               child: Text(
                 day.day.toString(),
-                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
               ),
             ),
             const Expanded(flex: 2, child: SizedBox(height: 5)),
@@ -92,7 +107,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
     );
   }
 
-  Widget? defaultBuilder(BuildContext context, DateTime day, DateTime focusedDay) {
+  Widget? defaultBuilder(
+      BuildContext context, DateTime day, DateTime focusedDay) {
     return Center(
       child: Column(
         children: [
@@ -100,14 +116,20 @@ class _CustomCalendarState extends State<CustomCalendar> {
           FittedWidget(
             child: Text(
               weekdays[day.weekday].toString(),
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w200, fontSize: 8),
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w200,
+                  fontSize: 8),
             ),
           ),
           const Expanded(child: SizedBox(height: 5)),
           FittedWidget(
             child: Text(
               day.day.toString(),
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
             ),
           ),
           const Expanded(flex: 2, child: SizedBox(height: 5)),
@@ -116,7 +138,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
     );
   }
 
-  Widget? selectedBuilder(BuildContext context, DateTime day, DateTime focusedDay) {
+  Widget? selectedBuilder(
+      BuildContext context, DateTime day, DateTime focusedDay) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -136,7 +159,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
             FittedWidget(
               child: Text(
                 day.day.toString(),
-                style: const TextStyle(color: Color(0xff014aa8), fontWeight: FontWeight.bold, fontSize: 20),
+                style: const TextStyle(
+                    color: Color(0xff014aa8),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
               ),
             ),
             const Expanded(flex: 2, child: SizedBox(height: 5)),

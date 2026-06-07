@@ -2,7 +2,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class TemperatureStatistic extends StatelessWidget {
-  const TemperatureStatistic({super.key, required this.temperature, required this.minTemperature, required this.maxTemperature});
+  const TemperatureStatistic(
+      {super.key,
+      required this.temperature,
+      required this.minTemperature,
+      required this.maxTemperature});
 
   final double temperature;
   final double minTemperature;
@@ -22,7 +26,10 @@ class TemperatureStatistic extends StatelessWidget {
 }
 
 class TemperatureStatisticPainter extends CustomPainter {
-  const TemperatureStatisticPainter({required this.temperature, required this.minTemperature, required this.maxTemperature});
+  const TemperatureStatisticPainter(
+      {required this.temperature,
+      required this.minTemperature,
+      required this.maxTemperature});
 
   final double temperature;
   final double minTemperature;
@@ -44,13 +51,17 @@ class TemperatureStatisticPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height);
     final radius = size.width / 2;
 
-    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), pi, pi, false, circlePaint);
+    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), pi, pi,
+        false, circlePaint);
 
     double validTemperature = temperature.clamp(minTemperature, maxTemperature);
-    double percentage = ((validTemperature - minTemperature) / (maxTemperature - minTemperature)) * 100;
+    double percentage = ((validTemperature - minTemperature) /
+            (maxTemperature - minTemperature)) *
+        100;
     double sweepAngle = (pi * percentage) / 100;
 
-    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), pi, sweepAngle, false, arcPaint);
+    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), pi,
+        sweepAngle, false, arcPaint);
 
     final textPainter = TextPainter(
       text: TextSpan(

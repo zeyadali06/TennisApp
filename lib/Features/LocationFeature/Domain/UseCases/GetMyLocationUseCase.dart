@@ -13,7 +13,8 @@ class GetMyLocationUseCase {
 
   final LocationRepo locationRepo;
 
-  Future<RequestResault<PositionEntity, GeoLocatorFailureHandler>> getMyLocation() async {
+  Future<RequestResault<PositionEntity, GeoLocatorFailureHandler>>
+      getMyLocation() async {
     try {
       late Position position;
       late Placemark placemark;
@@ -26,7 +27,8 @@ class GetMyLocationUseCase {
         return RequestResault.failure(res1.data);
       }
 
-      RequestResault res2 = await locationRepo.getMyPlaceMark(position.latitude, position.longitude);
+      RequestResault res2 = await locationRepo.getMyPlaceMark(
+          position.latitude, position.longitude);
 
       if (res2 is RequestSuccess) {
         placemark = res2.data;
@@ -34,10 +36,12 @@ class GetMyLocationUseCase {
         return RequestResault.failure(res2.data);
       }
 
-      PositionEntity positionEntity = LocationMapper.fromPosition(position, getPlaceMarkAsString(placemark));
+      PositionEntity positionEntity = LocationMapper.fromPosition(
+          position, getPlaceMarkAsString(placemark));
       return RequestResault.success(positionEntity);
     } catch (e) {
-      return RequestResault.failure(GeoLocatorFailureHandler(TryAgainException()));
+      return RequestResault.failure(
+          GeoLocatorFailureHandler(TryAgainException()));
     }
   }
 }

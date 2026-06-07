@@ -13,7 +13,8 @@ class ForgetPasswordUseCase {
   final AuthRepo authRepo;
   final AccountData accountData;
 
-  Future<RequestResault<UserModel, FirebaseFailureHandler>> forgetPassword(String email) async {
+  Future<RequestResault<UserModel, FirebaseFailureHandler>> forgetPassword(
+      String email) async {
     try {
       await accountData.getUIDFromFirestore(email);
       RequestResault res = await authRepo.forgetPassword(email);
@@ -23,7 +24,8 @@ class ForgetPasswordUseCase {
       } else if (res is RequestFailed) {
         return RequestResault.failure(res.data);
       } else {
-        return RequestResault.failure(FirebaseFailureHandler(TryAgainException()));
+        return RequestResault.failure(
+            FirebaseFailureHandler(TryAgainException()));
       }
     } on RangeError catch (_) {
       return RequestResault.failure(
@@ -36,7 +38,8 @@ class ForgetPasswordUseCase {
     } on FirebaseFailureHandler catch (e) {
       return RequestResault.failure(e);
     } catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(TryAgainException()));
+      return RequestResault.failure(
+          FirebaseFailureHandler(TryAgainException()));
     }
   }
 }

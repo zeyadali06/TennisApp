@@ -34,7 +34,8 @@ abstract class AppRouter {
   );
 
   static final Widget forgetPasswordView = BlocProvider(
-    create: (context) => ForgetPasswordCubit(getit.get<ForgetPasswordUseCase>()),
+    create: (context) =>
+        ForgetPasswordCubit(getit.get<ForgetPasswordUseCase>()),
     child: const ForgetPasswordView(),
   );
 
@@ -46,16 +47,20 @@ abstract class AppRouter {
   static final Widget navigationBar = MultiBlocProvider(
     providers: [
       BlocProvider(
-        create: (context) => GetMyLocationCubit(getit.get<GetMyLocationUseCase>()),
+        create: (context) =>
+            GetMyLocationCubit(getit.get<GetMyLocationUseCase>()),
       ),
       BlocProvider(
-        create: (context) => SearchForLoactionCubit(getit.get<SearchForLocationsUseCase>()),
+        create: (context) =>
+            SearchForLoactionCubit(getit.get<SearchForLocationsUseCase>()),
       ),
       BlocProvider(
-        create: (context) => AddLocationsCubit(getit.get<LocationManagerRepoImpl>()),
+        create: (context) =>
+            AddLocationsCubit(getit.get<LocationManagerRepoImpl>()),
       ),
       BlocProvider(
-        create: (context) => LocationManagerCubit(getit.get<LocationManagerRepoImpl>()),
+        create: (context) =>
+            LocationManagerCubit(getit.get<LocationManagerRepoImpl>()),
       ),
       BlocProvider(
         create: (context) => HomeViewCubit(

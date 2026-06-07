@@ -10,7 +10,8 @@ class CurrentDayWeatherUseCase {
 
   final WeatherRepo weatherRepo;
 
-  Future<RequestResault<WeatherEntity, WeatherAPIFailureHandler>> getCurrrentDayWeather() async {
+  Future<RequestResault<WeatherEntity, WeatherAPIFailureHandler>>
+      getCurrrentDayWeather() async {
     try {
       late WeatherEntity weatherEntity;
       RequestResault res = await weatherRepo.getCurrentWeather();
@@ -21,12 +22,14 @@ class CurrentDayWeatherUseCase {
       } else if (res is RequestFailed) {
         return RequestResault.failure(res.data);
       } else {
-        return RequestResault.failure(WeatherAPIFailureHandler(TryAgainException()));
+        return RequestResault.failure(
+            WeatherAPIFailureHandler(TryAgainException()));
       }
     } on WeatherAPIFailureHandler catch (e) {
       return RequestResault.failure(e);
     } catch (e) {
-      return RequestResault.failure(WeatherAPIFailureHandler(TryAgainException()));
+      return RequestResault.failure(
+          WeatherAPIFailureHandler(TryAgainException()));
     }
   }
 }

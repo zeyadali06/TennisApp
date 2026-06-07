@@ -3,7 +3,8 @@ import 'package:tennis_app/Features/HomeFeature/Data/Models/CurrentWeatherModel.
 import 'package:tennis_app/Features/HomeFeature/Data/Models/ForecastWeatherModel.dart';
 
 class AIModelMapper {
-  static AIModelEntity fromCurrentWeatherModel(CurrentWeatherModel currentWeatherModel) {
+  static AIModelEntity fromCurrentWeatherModel(
+      CurrentWeatherModel currentWeatherModel) {
     return AIModelEntity(
       humidity: currentWeatherModel.humidity,
       feelslikeC: currentWeatherModel.feelslikeC,
@@ -11,7 +12,8 @@ class AIModelMapper {
     );
   }
 
-  static AIModelEntity fromForecastWeatherModel(ForecastWeatherModel forecastWeatherModel) {
+  static AIModelEntity fromForecastWeatherModel(
+      ForecastWeatherModel forecastWeatherModel) {
     return AIModelEntity(
       humidity: forecastWeatherModel.hour[0].humidity,
       feelslikeC: forecastWeatherModel.hour[0].feelslikeC,

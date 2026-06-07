@@ -15,7 +15,12 @@ import 'package:tennis_app/Features/AuthFeature/Data/DataSource/FirebaseFirestor
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
 
 class AuthRepoImpl implements AuthRepo {
-  AuthRepoImpl({required this.firestore, required this.signIn, required this.register, required this.accountData, required this.locationManagerRepo});
+  AuthRepoImpl(
+      {required this.firestore,
+      required this.signIn,
+      required this.register,
+      required this.accountData,
+      required this.locationManagerRepo});
 
   final SignIn signIn;
   final Register register;
@@ -24,66 +29,89 @@ class AuthRepoImpl implements AuthRepo {
   final LocationManagerRepo locationManagerRepo;
 
   @override
-  Future<RequestResault<UserModel, FirebaseFailureHandler>> login(LoginEntity loginData, String password) async {
+  Future<RequestResault<UserModel, FirebaseFailureHandler>> login(
+      LoginEntity loginData, String password) async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(FirebaseFailureHandler(NoInternetException()));
+        return RequestResault.failure(
+            FirebaseFailureHandler(NoInternetException()));
       }
 
       UserCredential user = await signIn.signIn(loginData.email!, password);
-      String fullName = await firestore.getField(collectionPath: ConstantNames.usersDataCollection, docName: user.user!.uid, key: ConstantNames.fullNameField);
+      String fullName = await firestore.getField(
+          collectionPath: ConstantNames.usersDataCollection,
+          docName: user.user!.uid,
+          key: ConstantNames.fullNameField);
 
-      UserModel userModel = UserModel(email: loginData.email, uid: user.user!.uid, fullName: fullName);
+      UserModel userModel = UserModel(
+          email: loginData.email, uid: user.user!.uid, fullName: fullName);
       ConstantNames.userModel = userModel;
 
       await locationManagerRepo.getLocations();
 
       return RequestResault.success(userModel);
     } on FirebaseAuthException catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(FirebaseAuthExceptionCodes(e)));
+      return RequestResault.failure(
+          FirebaseFailureHandler(FirebaseAuthExceptionCodes(e)));
     } catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(TryAgainException()));
+      return RequestResault.failure(
+          FirebaseFailureHandler(TryAgainException()));
     }
   }
 
   @override
-  Future<RequestResault<UserModel, FirebaseFailureHandler>> signUp(RegisterEntity registerData, String password) async {
+  Future<RequestResault<UserModel, FirebaseFailureHandler>> signUp(
+      RegisterEntity registerData, String password) async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(FirebaseFailureHandler(NoInternetException()));
+        return RequestResault.failure(
+            FirebaseFailureHandler(NoInternetException()));
       }
 
-      UserCredential user = await register.register(registerData.toMap(), password);
-      UserModel userModel = UserModel(email: registerData.email, uid: user.user!.uid, fullName: registerData.fullName);
+      UserCredential user =
+          await register.register(registerData.toMap(), password);
+      UserModel userModel = UserModel(
+          email: registerData.email,
+          uid: user.user!.uid,
+          fullName: registerData.fullName);
 
       ConstantNames.userModel = userModel;
-      await firestore.setField(collectionPath: ConstantNames.locationsCollection, docName: user.user!.uid, data: {ConstantNames.locationsField: []});
+      await firestore.setField(
+          collectionPath: ConstantNames.locationsCollection,
+          docName: user.user!.uid,
+          data: {ConstantNames.locationsField: []});
 
       return RequestResault.success(userModel);
     } on FirebaseAuthException catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(FirebaseAuthExceptionCodes(e)));
+      return RequestResault.failure(
+          FirebaseFailureHandler(FirebaseAuthExceptionCodes(e)));
     } catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(TryAgainException()));
+      return RequestResault.failure(
+          FirebaseFailureHandler(TryAgainException()));
     }
   }
 
   @override
-  Future<RequestResault<UserModel, FirebaseFailureHandler>> forgetPassword(String email) async {
+  Future<RequestResault<UserModel, FirebaseFailureHandler>> forgetPassword(
+      String email) async {
     try {
       bool connStatus = await checkConn();
       if (!connStatus) {
-        return RequestResault.failure(FirebaseFailureHandler(NoInternetException()));
+        return RequestResault.failure(
+            FirebaseFailureHandler(NoInternetException()));
       }
 
       await accountData.resetPassword(email);
 
       return RequestResault.success(UserModel());
     } on FirebaseAuthException catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(FirebaseAuthExceptionCodes(e)));
+      return RequestResault.failure(
+          FirebaseFailureHandler(FirebaseAuthExceptionCodes(e)));
     } catch (e) {
-      return RequestResault.failure(FirebaseFailureHandler(TryAgainException()));
+      return RequestResault.failure(
+          FirebaseFailureHandler(TryAgainException()));
     }
   }
 }

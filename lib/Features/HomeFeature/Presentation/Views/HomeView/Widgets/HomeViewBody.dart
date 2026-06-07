@@ -74,7 +74,8 @@ class HomeViewBody extends StatelessWidget {
                       CustomCalendar(
                         onDaySelected: (dateTime) async {
                           if (isSameDay(dateTime, DateTime.now())) {
-                            await BlocProvider.of<HomeViewCubit>(context).getCurrentWeather();
+                            await BlocProvider.of<HomeViewCubit>(context)
+                                .getCurrentWeather();
                           } else {
                             DateTime date = DateTime(
                               dateTime.year,
@@ -82,18 +83,22 @@ class HomeViewBody extends StatelessWidget {
                               dateTime.day,
                               DateTime.now().hour,
                             );
-                            await BlocProvider.of<HomeViewCubit>(context).getForecastWeather(date);
+                            await BlocProvider.of<HomeViewCubit>(context)
+                                .getForecastWeather(date);
                           }
                         },
                       ),
                       const SizedBox(height: 30),
-                      WeartherStatistics(currentWeatherEntity: currentWeatherEntity),
+                      WeartherStatistics(
+                          currentWeatherEntity: currentWeatherEntity),
                       const SizedBox(height: 30),
                       Row(
                         children: [
                           Expanded(
                             child: CustomButton(
-                              onPressed: () async => await BlocProvider.of<HomeViewCubit>(context).getPrediction(),
+                              onPressed: () async =>
+                                  await BlocProvider.of<HomeViewCubit>(context)
+                                      .getPrediction(),
                               title: "Go To Excercise",
                             ),
                           ),

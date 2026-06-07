@@ -57,7 +57,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         style: const TextStyle(color: Colors.white),
         inputFormatters: widget.inputFormatters,
         decoration: InputDecoration(
-          errorStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          errorStyle:
+              const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
           filled: true,
           fillColor: Colors.grey.withOpacity(.2),
           border: outlineInputBorder(),

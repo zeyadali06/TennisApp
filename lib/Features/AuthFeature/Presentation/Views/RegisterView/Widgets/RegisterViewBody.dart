@@ -32,7 +32,8 @@ class RegisterViewBody extends StatelessWidget {
         } else if (state is RegisterFailed) {
           showSnackBar(context, state.error.message);
         } else if (state is RegisterSuccess) {
-          Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.navigationBar));
+          Navigator.pushReplacement(
+              context, AppRouter.goTo(context, AppRouter.navigationBar));
         }
         isLoading = false;
       },
@@ -52,7 +53,9 @@ class RegisterViewBody extends StatelessWidget {
                       child: Column(
                         children: [
                           const Expanded(flex: 3, child: SizedBox(height: 50)),
-                          const AuthViewHeader(title: 'SIGN UP', subTitle: 'CREATE AN ACCOUNT TO MAKE SDFSDF'),
+                          const AuthViewHeader(
+                              title: 'SIGN UP',
+                              subTitle: 'CREATE AN ACCOUNT TO MAKE SDFSDF'),
                           const Expanded(flex: 3, child: SizedBox(height: 50)),
                           InputDataSection(
                             title: 'FULL NAME',
@@ -63,7 +66,10 @@ class RegisterViewBody extends StatelessWidget {
                           InputDataSection(
                             title: 'Email',
                             onSaved: (value) => registerEntity.email = value,
-                            inputFormatters: [Formatters.preventSpaces, Formatters.emailRegExp],
+                            inputFormatters: [
+                              Formatters.preventSpaces,
+                              Formatters.emailRegExp
+                            ],
                           ),
                           const SizedBox(height: 10),
                           InputDataSection(
@@ -75,12 +81,15 @@ class RegisterViewBody extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: CustomButton(
                                     onPressed: () async {
                                       if (formKey.currentState!.validate()) {
                                         formKey.currentState!.save();
-                                        await BlocProvider.of<RegisterCubit>(context).register(registerEntity, password);
+                                        await BlocProvider.of<RegisterCubit>(
+                                                context)
+                                            .register(registerEntity, password);
                                       }
                                     },
                                     title: 'NEXT',
@@ -96,11 +105,17 @@ class RegisterViewBody extends StatelessWidget {
                               ScaleDown(
                                 child: GestureDetector(
                                   onTap: () {
-                                    Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.loginView));
+                                    Navigator.pushReplacement(
+                                        context,
+                                        AppRouter.goTo(
+                                            context, AppRouter.loginView));
                                   },
                                   child: const Text(
                                     "HAVE AN ACCOUNT ?",
-                                    style: TextStyle(color: Color(0xff1b3b8e), fontSize: 10, fontWeight: FontWeight.w600),
+                                    style: TextStyle(
+                                        color: Color(0xff1b3b8e),
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
                               ),

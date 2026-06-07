@@ -7,7 +7,8 @@ import 'package:tennis_app/Features/AuthFeature/Domain/UseCases/ForgetPasswordUs
 part 'forget_password_state.dart';
 
 class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
-  ForgetPasswordCubit(this.forgetPasswordUseCase) : super(ForgetPasswordInitial());
+  ForgetPasswordCubit(this.forgetPasswordUseCase)
+      : super(ForgetPasswordInitial());
 
   final ForgetPasswordUseCase forgetPasswordUseCase;
 

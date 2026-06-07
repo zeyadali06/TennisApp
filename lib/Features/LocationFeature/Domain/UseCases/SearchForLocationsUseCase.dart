@@ -11,7 +11,8 @@ class SearchForLocationsUseCase {
 
   final LocationRepo locationRepo;
 
-  Future<RequestResault<List<PositionEntity>, WeatherAPIFailureHandler>> searchForPlaces(String place) async {
+  Future<RequestResault<List<PositionEntity>, WeatherAPIFailureHandler>>
+      searchForPlaces(String place) async {
     try {
       List<PositionEntity> positions = [];
 
@@ -27,7 +28,8 @@ class SearchForLocationsUseCase {
 
       return RequestResault.success(positions);
     } catch (e) {
-      return RequestResault.failure(WeatherAPIFailureHandler(TryAgainException()));
+      return RequestResault.failure(
+          WeatherAPIFailureHandler(TryAgainException()));
     }
   }
 }

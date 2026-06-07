@@ -15,7 +15,10 @@ class WeartherStatistics extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          TemperatureStatistic(temperature: currentWeatherEntity.tempC, minTemperature: -50, maxTemperature: 56.7),
+          TemperatureStatistic(
+              temperature: currentWeatherEntity.tempC,
+              minTemperature: -50,
+              maxTemperature: 56.7),
           WeatherIcon(imageUrl: currentWeatherEntity.icon),
           const Expanded(child: SizedBox(height: 20)),
           Row(
@@ -24,7 +27,11 @@ class WeartherStatistics extends StatelessWidget {
                 flex: 5,
                 child: Center(
                   child: FittedWidget(
-                    child: StatisticsPieChart(value: currentWeatherEntity.uv, minValue: 0, maxValue: 11, title: 'UV index'),
+                    child: StatisticsPieChart(
+                        value: currentWeatherEntity.uv,
+                        minValue: 0,
+                        maxValue: 11,
+                        title: 'UV index'),
                   ),
                 ),
               ),
@@ -33,7 +40,11 @@ class WeartherStatistics extends StatelessWidget {
                 flex: 5,
                 child: Center(
                   child: FittedWidget(
-                    child: StatisticsPieChart(value: currentWeatherEntity.windKph, minValue: 0, maxValue: 200, title: 'Wind(Kph)'),
+                    child: StatisticsPieChart(
+                        value: currentWeatherEntity.windKph,
+                        minValue: 0,
+                        maxValue: 200,
+                        title: 'Wind(Kph)'),
                   ),
                 ),
               ),
@@ -42,7 +53,11 @@ class WeartherStatistics extends StatelessWidget {
                 flex: 5,
                 child: Center(
                   child: FittedWidget(
-                    child: StatisticsPieChart(value: currentWeatherEntity.humidity.toDouble(), minValue: 0, maxValue: 100, title: 'Humidity(%)'),
+                    child: StatisticsPieChart(
+                        value: currentWeatherEntity.humidity.toDouble(),
+                        minValue: 0,
+                        maxValue: 100,
+                        title: 'Humidity(%)'),
                   ),
                 ),
               ),
@@ -55,7 +70,11 @@ class WeartherStatistics extends StatelessWidget {
                 flex: 5,
                 child: Center(
                   child: FittedWidget(
-                    child: StatisticsPieChart(value: currentWeatherEntity.feelslikeC, minValue: -50, maxValue: 56.7, title: 'Feels Like'),
+                    child: StatisticsPieChart(
+                        value: currentWeatherEntity.feelslikeC,
+                        minValue: -50,
+                        maxValue: 56.7,
+                        title: 'Feels Like'),
                   ),
                 ),
               ),
@@ -64,7 +83,11 @@ class WeartherStatistics extends StatelessWidget {
                 flex: 5,
                 child: Center(
                   child: FittedWidget(
-                    child: StatisticsPieChart(value: currentWeatherEntity.pressureMb, minValue: 870, maxValue: 1085.7, title: 'Pressure'),
+                    child: StatisticsPieChart(
+                        value: currentWeatherEntity.pressureMb,
+                        minValue: 870,
+                        maxValue: 1085.7,
+                        title: 'Pressure'),
                   ),
                 ),
               ),
@@ -73,7 +96,11 @@ class WeartherStatistics extends StatelessWidget {
                 flex: 5,
                 child: Center(
                   child: FittedWidget(
-                    child: StatisticsPieChart(value: currentWeatherEntity.visKm, minValue: 0, maxValue: 30, title: 'Visibility'),
+                    child: StatisticsPieChart(
+                        value: currentWeatherEntity.visKm,
+                        minValue: 0,
+                        maxValue: 30,
+                        title: 'Visibility'),
                   ),
                 ),
               ),

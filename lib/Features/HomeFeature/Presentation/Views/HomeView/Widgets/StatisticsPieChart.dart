@@ -3,7 +3,12 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:tennis_app/Core/Widgets/ScaleDownWidget.dart';
 
 class StatisticsPieChart extends StatelessWidget {
-  const StatisticsPieChart({super.key, required this.value, required this.maxValue, required this.minValue, required this.title});
+  const StatisticsPieChart(
+      {super.key,
+      required this.value,
+      required this.maxValue,
+      required this.minValue,
+      required this.title});
 
   final double value;
   final double maxValue;
@@ -56,7 +61,10 @@ class StatisticsPieChart extends StatelessWidget {
                   child: FittedWidget(
                     child: Text(
                       value.toStringAsFixed(1),
-                      style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),

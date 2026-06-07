@@ -6,7 +6,11 @@ import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEnti
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/LocationManagerCubit/location_manager_cubit.dart';
 
 class CustomTaskContainer extends StatefulWidget {
-  const CustomTaskContainer({super.key, required this.positionEntity, this.onDismissed, required this.isNotDeafult});
+  const CustomTaskContainer(
+      {super.key,
+      required this.positionEntity,
+      this.onDismissed,
+      required this.isNotDeafult});
 
   final PositionEntity positionEntity;
   final Future<void> Function(DismissDirection direction)? onDismissed;
@@ -30,14 +34,18 @@ class _CustomTaskContainerState extends State<CustomTaskContainer> {
             height: height - 10,
             width: MediaQuery.sizeOf(context).width - 60 - 10,
             alignment: Alignment.center,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: Colors.red),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25), color: Colors.red),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ScaleDown(
                   child: Text(
                     "Delete Location ",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                        color: Colors.white),
                   ),
                 ),
                 Icon(Icons.delete, color: Colors.white),
@@ -48,16 +56,20 @@ class _CustomTaskContainerState extends State<CustomTaskContainer> {
             key: UniqueKey(),
             direction: DismissDirection.horizontal,
             onDismissed: (DismissDirection dismissDirection) async {
-              await BlocProvider.of<LocationManagerCubit>(context).deleteLocation(widget.positionEntity);
+              await BlocProvider.of<LocationManagerCubit>(context)
+                  .deleteLocation(widget.positionEntity);
               widget.onDismissed?.call(dismissDirection);
             },
             child: Container(
               height: height - 8,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: const Color(0xff222c48)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: const Color(0xff222c48)),
               child: Center(
                 child: Card(
                   color: Colors.transparent,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)),
                   clipBehavior: Clip.hardEdge,
                   elevation: 0,
                   child: ListTile(
@@ -71,7 +83,9 @@ class _CustomTaskContainerState extends State<CustomTaskContainer> {
                             horizontalPadding: 0,
                             title: 'Set As\nDefault',
                             onPressed: () async {
-                              await BlocProvider.of<LocationManagerCubit>(context).setLocationAsDefault(widget.positionEntity);
+                              await BlocProvider.of<LocationManagerCubit>(
+                                      context)
+                                  .setLocationAsDefault(widget.positionEntity);
                             },
                           )
                         : null,

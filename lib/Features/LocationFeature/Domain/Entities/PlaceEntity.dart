@@ -4,5 +4,9 @@ class PlaceEntity {
   final String name;
   final String country;
 
-  const PlaceEntity({required this.country, required this.name, required this.longitude, required this.latitude});
+  const PlaceEntity(
+      {required this.country,
+      required this.name,
+      required this.longitude,
+      required this.latitude});
 }

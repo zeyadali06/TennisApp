@@ -41,7 +41,8 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
           showSnackBar(context, state.error.message);
         } else if (state is EmailSentSuccessfully) {
           showSnackBar(context, "Email sent successfully");
-          Navigator.pushReplacement(context, AppRouter.goTo(context, AppRouter.loginView));
+          Navigator.pushReplacement(
+              context, AppRouter.goTo(context, AppRouter.loginView));
         }
         isLoading = false;
       },
@@ -67,12 +68,15 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                                icon: const Icon(Icons.arrow_back,
+                                    color: Colors.white),
                               )
                             ],
                           ),
                           const Expanded(flex: 2, child: SizedBox(height: 50)),
-                          const AuthViewHeader(title: "RESET PASSWORD", subTitle: 'CREATE AN ACCOUNT TO MAKE SDFSDF'),
+                          const AuthViewHeader(
+                              title: "RESET PASSWORD",
+                              subTitle: 'CREATE AN ACCOUNT TO MAKE SDFSDF'),
                           const Expanded(flex: 2, child: SizedBox(height: 50)),
                           InputDataSection(
                             title: "Email",
@@ -88,9 +92,12 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
                                   onPressed: () async {
                                     if (formKey.currentState!.validate()) {
                                       formKey.currentState!.save();
-                                      await BlocProvider.of<ForgetPasswordCubit>(context).forgetPassword(email);
+                                      await BlocProvider.of<
+                                              ForgetPasswordCubit>(context)
+                                          .forgetPassword(email);
                                     } else {
-                                      autovalidateMode = AutovalidateMode.always;
+                                      autovalidateMode =
+                                          AutovalidateMode.always;
                                       setState(() {});
                                     }
                                   },

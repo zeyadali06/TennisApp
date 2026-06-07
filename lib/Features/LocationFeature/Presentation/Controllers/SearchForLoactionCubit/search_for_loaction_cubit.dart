@@ -8,7 +8,8 @@ import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/SearchForLoc
 part 'search_for_loaction_state.dart';
 
 class SearchForLoactionCubit extends Cubit<SearchForLoactionState> {
-  SearchForLoactionCubit(this.searchForLocationsUseCase) : super(SearchForLoactionInitial());
+  SearchForLoactionCubit(this.searchForLocationsUseCase)
+      : super(SearchForLoactionInitial());
 
   final SearchForLocationsUseCase searchForLocationsUseCase;
   String place = "";
