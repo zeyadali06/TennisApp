@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/CustomNavigationBar.dart';
 import 'package:tennis_app/Core/Utils/DependencyInjection.dart';
+import 'package:tennis_app/Features/AuthFeature/Domain/RepoInterface/AuthRepo.dart';
 import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/GetPredictionUseCase.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView/HomeView.dart';
-import 'package:tennis_app/Features/AuthFeature/Data/RepoImplementation/AuthRepoImpl.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/UseCases/ForgetPasswordUseCase.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/LoginView/LoginView.dart';
 import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/AnotherDayWeatherUseCase.dart';
 import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/CurrentDayWeatherUseCase.dart';
+import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/GetMyLocationUseCase.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/SearchForLocationsUseCase.dart';
 import 'package:tennis_app/Features/SplashFeature/Presentation/Controllers/cubit/splash_view_cubit.dart';
@@ -17,7 +18,6 @@ import 'package:tennis_app/Features/AuthFeature/Presentation/Views/RegisterView/
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/LoginCubit/login_cubit.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/AuthOptionsView/AuthOptionsView.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsView/LocationsView.dart';
-import 'package:tennis_app/Features/LocationFeature/Data/RepoImplementation/LocationManagerRepoImpl.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Controllers/HomeViewCubit/home_view_cubit.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/RegisterCubit/register_cubit.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/ForgetPassowrdView/ForgetPasswordView.dart';
@@ -30,7 +30,7 @@ import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/Sea
 
 abstract class AppRouter {
   static final Widget loginView = BlocProvider(
-    create: (context) => LoginCubit(getit.get<AuthRepoImpl>()),
+    create: (context) => LoginCubit(getit.get<AuthRepo>()),
     child: const LoginView(),
   );
 
@@ -41,7 +41,7 @@ abstract class AppRouter {
   );
 
   static final Widget registerView = BlocProvider(
-    create: (context) => RegisterCubit(getit.get<AuthRepoImpl>()),
+    create: (context) => RegisterCubit(getit.get<AuthRepo>()),
     child: const RegisterView(),
   );
 
@@ -57,17 +57,17 @@ abstract class AppRouter {
       ),
       BlocProvider(
         create: (context) =>
-            AddLocationsCubit(getit.get<LocationManagerRepoImpl>()),
+            AddLocationsCubit(getit.get<LocationManagerRepo>()),
       ),
       BlocProvider(
         create: (context) =>
-            LocationManagerCubit(getit.get<LocationManagerRepoImpl>()),
+            LocationManagerCubit(getit.get<LocationManagerRepo>()),
       ),
       BlocProvider(
         create: (context) => HomeViewCubit(
           getit.get<CurrentDayWeatherUseCase>(),
           getit.get<AnotherDayWeatherUseCase>(),
-          getit.get<LocationManagerRepoImpl>(),
+          getit.get<LocationManagerRepo>(),
           getit.get<GetPredictionUseCase>(),
         ),
       ),
@@ -77,7 +77,7 @@ abstract class AppRouter {
 
   static final Widget splashView = BlocProvider(
     create: (context) =>
-        SplashViewCubit(authRepoImpl: getit.get<AuthRepoImpl>())..autoLogin(),
+        SplashViewCubit(authRepo: getit.get<AuthRepo>())..autoLogin(),
     child: const SplashView(),
   );
 
