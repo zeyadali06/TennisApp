@@ -11,15 +11,29 @@ import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView/Widg
 import 'package:tennis_app/Features/HomeFeature/Presentation/Controllers/HomeViewCubit/home_view_cubit.dart';
 
 // ignore: must_be_immutable
-class HomeViewBody extends StatelessWidget {
-  HomeViewBody({super.key});
-  WeatherEntity currentWeatherEntity = WeatherEntity.init();
+class HomeViewBody extends StatefulWidget {
+  const HomeViewBody({super.key});
+
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  late WeatherEntity currentWeatherEntity;
+
+  @override
+  void initState() {
+    currentWeatherEntity = WeatherEntity.init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await BlocProvider.of<HomeViewCubit>(context).getCurrentWeather();
-    });
+    super.build(context);
 
     return BlocConsumer<HomeViewCubit, HomeViewState>(
       listener: (context, state) {
@@ -90,7 +104,8 @@ class HomeViewBody extends StatelessWidget {
                       ),
                       const SizedBox(height: 30),
                       WeartherStatistics(
-                          currentWeatherEntity: currentWeatherEntity),
+                        currentWeatherEntity: currentWeatherEntity,
+                      ),
                       const SizedBox(height: 30),
                       Row(
                         children: [

@@ -47,29 +47,29 @@ abstract class AppRouter {
 
   static final Widget navigationBar = MultiBlocProvider(
     providers: [
-      BlocProvider(
+      BlocProvider<GetMyLocationCubit>(
         create: (context) =>
             GetMyLocationCubit(getit.get<GetMyLocationUseCase>()),
       ),
-      BlocProvider(
+      BlocProvider<SearchForLoactionCubit>(
         create: (context) =>
             SearchForLoactionCubit(getit.get<SearchForLocationsUseCase>()),
       ),
-      BlocProvider(
+      BlocProvider<AddLocationsCubit>(
         create: (context) =>
             AddLocationsCubit(getit.get<LocationManagerRepo>()),
       ),
-      BlocProvider(
+      BlocProvider<LocationManagerCubit>(
         create: (context) =>
             LocationManagerCubit(getit.get<LocationManagerRepo>()),
       ),
-      BlocProvider(
+      BlocProvider<HomeViewCubit>(
         create: (context) => HomeViewCubit(
           getit.get<CurrentDayWeatherUseCase>(),
           getit.get<AnotherDayWeatherUseCase>(),
           getit.get<LocationManagerRepo>(),
           getit.get<GetPredictionUseCase>(),
-        ),
+        )..getCurrentWeather(),
       ),
     ],
     child: const CustomNavigationBar(),

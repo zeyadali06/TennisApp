@@ -19,7 +19,7 @@ class CustomNavigationBar extends StatefulWidget {
 class CustomNavigationBarState extends State<CustomNavigationBar> {
   int selectedIndex = 1;
   List<Widget> pages = <Widget>[];
-  bool isLoading = false;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -63,9 +63,10 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
                 child: Text(
                   label,
                   style: const TextStyle(
-                      fontSize: 8,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300),
+                    fontSize: 8,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
               )
           ],
@@ -76,6 +77,7 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('HomeView hash: ${pages[1].hashCode}');
     return MultiBlocListener(
       listeners: [
         BlocListener<HomeViewCubit, HomeViewState>(
@@ -135,7 +137,10 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
           resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
-              pages.elementAt(selectedIndex),
+              IndexedStack(
+                index: selectedIndex,
+                children: pages,
+              ),
               Positioned(
                 bottom: 15,
                 right: 20,
@@ -151,8 +156,7 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
                       Expanded(
                           child: _buildWidget(
                               Icons.check_box_outlined, 0, 'Check')),
-                      Expanded(
-                          child: _buildWidget(Icons.home_filled, 1, 'Home')),
+                      Expanded(child: _buildWidget(Icons.cloud, 1, 'Weather')),
                       Expanded(
                           child: _buildWidget(Icons.location_on, 2, 'Loc')),
                     ],

@@ -28,10 +28,11 @@ class WeartherStatistics extends StatelessWidget {
                 child: Center(
                   child: FittedWidget(
                     child: StatisticsPieChart(
-                        value: currentWeatherEntity.uv,
-                        minValue: 0,
-                        maxValue: 11,
-                        title: 'UV index'),
+                      value: currentWeatherEntity.uv,
+                      minValue: 0,
+                      maxValue: 11,
+                      title: 'UV index',
+                    ),
                   ),
                 ),
               ),
@@ -41,10 +42,11 @@ class WeartherStatistics extends StatelessWidget {
                 child: Center(
                   child: FittedWidget(
                     child: StatisticsPieChart(
-                        value: currentWeatherEntity.windKph,
-                        minValue: 0,
-                        maxValue: 200,
-                        title: 'Wind(Kph)'),
+                      value: currentWeatherEntity.windKph,
+                      minValue: 0,
+                      maxValue: 200,
+                      title: 'Wind(Kph)',
+                    ),
                   ),
                 ),
               ),
@@ -54,10 +56,11 @@ class WeartherStatistics extends StatelessWidget {
                 child: Center(
                   child: FittedWidget(
                     child: StatisticsPieChart(
-                        value: currentWeatherEntity.humidity.toDouble(),
-                        minValue: 0,
-                        maxValue: 100,
-                        title: 'Humidity(%)'),
+                      value: currentWeatherEntity.humidity.toDouble(),
+                      minValue: 0,
+                      maxValue: 100,
+                      title: 'Humidity(%)',
+                    ),
                   ),
                 ),
               ),
@@ -71,10 +74,11 @@ class WeartherStatistics extends StatelessWidget {
                 child: Center(
                   child: FittedWidget(
                     child: StatisticsPieChart(
-                        value: currentWeatherEntity.feelslikeC,
-                        minValue: -50,
-                        maxValue: 56.7,
-                        title: 'Feels Like'),
+                      value: currentWeatherEntity.feelslikeC,
+                      minValue: -50,
+                      maxValue: 56.7,
+                      title: 'Feels Like( ْ C)',
+                    ),
                   ),
                 ),
               ),
@@ -84,10 +88,11 @@ class WeartherStatistics extends StatelessWidget {
                 child: Center(
                   child: FittedWidget(
                     child: StatisticsPieChart(
-                        value: currentWeatherEntity.pressureMb,
-                        minValue: 870,
-                        maxValue: 1085.7,
-                        title: 'Pressure'),
+                      value: currentWeatherEntity.pressureMb,
+                      minValue: 870,
+                      maxValue: 1085.7,
+                      title: 'Pressure',
+                    ),
                   ),
                 ),
               ),
@@ -97,10 +102,11 @@ class WeartherStatistics extends StatelessWidget {
                 child: Center(
                   child: FittedWidget(
                     child: StatisticsPieChart(
-                        value: currentWeatherEntity.visKm,
-                        minValue: 0,
-                        maxValue: 30,
-                        title: 'Visibility'),
+                      value: currentWeatherEntity.visKm,
+                      minValue: 0,
+                      maxValue: 30,
+                      title: 'Visibility',
+                    ),
                   ),
                 ),
               ),
