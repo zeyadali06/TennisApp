@@ -30,8 +30,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
 
       return RequestResult.success(poistionEntities);
     } catch (e) {
-      return RequestResult.failure(
-          FirebaseFailureHandler(TryAgainException()));
+      return RequestResult.failure(FirebaseFailureHandler(TryAgainException()));
     }
   }
 
@@ -71,8 +70,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
 
       return RequestResult.success(locations);
     } catch (e) {
-      return RequestResult.failure(
-          FirebaseFailureHandler(TryAgainException()));
+      return RequestResult.failure(FirebaseFailureHandler(TryAgainException()));
     }
   }
 
@@ -103,8 +101,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
 
       return RequestResult.success(locations);
     } catch (e) {
-      return RequestResult.failure(
-          FirebaseFailureHandler(TryAgainException()));
+      return RequestResult.failure(FirebaseFailureHandler(TryAgainException()));
     }
   }
 
@@ -119,10 +116,12 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
       }
 
       for (int i = 0; i < locations.length; i++) {
+        if (locations[i].isDefault == true) {
+          locations[i].isDefault = false;
+        }
+
         if (locations[i] == positionEntity) {
-          locations.removeAt(i);
-          locations.insert(0, positionEntity);
-          break;
+          locations[i].isDefault = true;
         }
       }
 
@@ -136,8 +135,7 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
 
       return RequestResult.success(locations);
     } catch (e) {
-      return RequestResult.failure(
-          FirebaseFailureHandler(TryAgainException()));
+      return RequestResult.failure(FirebaseFailureHandler(TryAgainException()));
     }
   }
 
@@ -163,5 +161,15 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
 
     locations = poistionEntities;
     return poistionEntities;
+  }
+
+  @override
+  PositionEntity? getDefaultPosition() {
+    for (PositionEntity pos in locations) {
+      if (pos.isDefault) {
+        return pos;
+      }
+    }
+    return null;
   }
 }

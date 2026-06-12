@@ -11,6 +11,7 @@ import 'package:tennis_app/Features/HomeFeature/Domain/RepoInterface/WeatherRepo
 import 'package:tennis_app/Features/HomeFeature/Data/Models/ForecastWeatherModel.dart';
 import 'package:tennis_app/Core/Failure/Exceptions/WeatherAPIFailureHandlerCodes.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/DataSource/WeatherApiServices.dart';
+import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
 
 class WeatherRepoImpl extends WeatherRepo {
@@ -35,7 +36,13 @@ class WeatherRepoImpl extends WeatherRepo {
         return RequestResult.failure(res.data);
       }
 
-      String location = getLatLon(locationManagerRepo.locations[0]);
+      PositionEntity? pos = locationManagerRepo.getDefaultPosition();
+      if (pos == null) {
+        return RequestResult.failure(
+            WeatherAPIFailureHandler(EmptyLocationsListException()));
+      }
+
+      String location = getLatLon(pos);
       var response = await weatherApiServices.getCurrentWeather(
           location, DateTime.now().hour);
       CurrentWeatherModel currentWeatherModel =

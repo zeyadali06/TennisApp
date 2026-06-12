@@ -38,6 +38,7 @@ class _HomeViewBodyState extends State<HomeViewBody>
     return BlocConsumer<HomeViewCubit, HomeViewState>(
       listener: (context, state) {
         if (state is HomeViewFailed) {
+          currentWeatherEntity = WeatherEntity.init();
           showSnackBar(context, state.error.message);
         } else if (state is HomeViewSuccess) {
           currentWeatherEntity = state.currentWeatherEntity;

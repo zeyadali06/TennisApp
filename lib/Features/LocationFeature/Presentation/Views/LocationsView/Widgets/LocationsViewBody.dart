@@ -5,6 +5,7 @@ import 'package:tennis_app/Core/Widgets/ViewHeader.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/LocationManagerCubit/location_manager_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsView/Widgets/MyLocation.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsView/Widgets/SearchField.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/AddLocationsCubit/add_locations_cubit.dart';
@@ -29,7 +30,8 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
     showMyLocationSection = false;
     showSerchFieldSection = false;
     suggestions = [];
-    positionEntity = const PositionEntity(longitude: 0, latitude: 0, place: "");
+    positionEntity =
+        PositionEntity(longitude: 0, latitude: 0, place: "", isDefault: false);
     super.initState();
   }
 
@@ -64,6 +66,7 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
           listener: (context, state) {
             if (state is AddLocationsSuccessed) {
               showSnackBar(context, "Location added successfully");
+              BlocProvider.of<LocationManagerCubit>(context).getLocations();
             } else if (state is AddLocationsFailed) {
               showSnackBar(context, state.error.message);
             }
@@ -133,9 +136,8 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                           validate = false;
                         }
 
-                        await BlocProvider.of<AddLocationsCubit>(context)
-                            .addLocation(positionEntity, startExecution,
-                                validate, context);
+                        BlocProvider.of<AddLocationsCubit>(context).addLocation(
+                            positionEntity, startExecution, validate, context);
                       },
                       title: 'Add Location',
                     ),

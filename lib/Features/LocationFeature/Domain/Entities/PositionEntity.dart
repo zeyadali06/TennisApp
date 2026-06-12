@@ -4,15 +4,21 @@ class PositionEntity {
   final double longitude;
   final double latitude;
   final String place;
+  bool isDefault;
 
-  const PositionEntity(
-      {required this.place, required this.longitude, required this.latitude});
+  PositionEntity({
+    required this.place,
+    required this.longitude,
+    required this.latitude,
+    required this.isDefault,
+  });
 
   factory PositionEntity.fromJson(dynamic data) {
     return PositionEntity(
       longitude: data[ConstantNames.longitudeField],
       latitude: data[ConstantNames.latitudeField],
       place: data[ConstantNames.placeField],
+      isDefault: data[ConstantNames.isDefaultField],
     );
   }
 
@@ -20,7 +26,8 @@ class PositionEntity {
     return {
       ConstantNames.longitudeField: longitude,
       ConstantNames.latitudeField: latitude,
-      ConstantNames.placeField: place
+      ConstantNames.placeField: place,
+      ConstantNames.isDefaultField: isDefault,
     };
   }
 

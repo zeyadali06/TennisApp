@@ -10,6 +10,7 @@ class ConstantNames {
   static const String defaultLocationField = 'defaultLocationField';
   static const String longitudeField = 'longitudeField';
   static const String latitudeField = 'latitudeField';
+  static const String isDefaultField = 'isDefaultField';
   static const String placeField = 'placemarkField';
   static const String apiKey = "API_KEY";
   static const String baseURL = "https://api.weatherapi.com/v1/";

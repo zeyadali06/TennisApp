@@ -14,4 +14,5 @@ abstract class LocationManagerRepo {
       deleteLoaction(PositionEntity positionEntity);
   Future<RequestResult<List<PositionEntity>, FirebaseFailureHandler>>
       setLocationAsDefault(PositionEntity positionEntity);
+  PositionEntity? getDefaultPosition();
 }
