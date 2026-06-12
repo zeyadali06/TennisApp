@@ -15,19 +15,19 @@ class PositionEntity {
 
   factory PositionEntity.fromJson(dynamic data) {
     return PositionEntity(
-      longitude: data[ConstantNames.longitudeField],
-      latitude: data[ConstantNames.latitudeField],
-      place: data[ConstantNames.placeField],
-      isDefault: data[ConstantNames.isDefaultField],
+      longitude: data[Constants.longitudeField],
+      latitude: data[Constants.latitudeField],
+      place: data[Constants.placeField],
+      isDefault: data[Constants.isDefaultField],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      ConstantNames.longitudeField: longitude,
-      ConstantNames.latitudeField: latitude,
-      ConstantNames.placeField: place,
-      ConstantNames.isDefaultField: isDefault,
+      Constants.longitudeField: longitude,
+      Constants.latitudeField: latitude,
+      Constants.placeField: place,
+      Constants.isDefaultField: isDefault,
     };
   }
 

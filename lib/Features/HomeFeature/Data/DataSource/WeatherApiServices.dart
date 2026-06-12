@@ -12,7 +12,7 @@ class WeatherApiServices {
     try {
       String date = "${dateTime.year}-${dateTime.month}-${dateTime.day}";
       var response = await dio.request(
-        '${ConstantNames.baseURL}forecast.json?q=$place&days=$numberOfDays&dt=$date&hour=${dateTime.hour}&key=${dotenv.env[ConstantNames.apiKey]}',
+        '${Constants.baseURL}forecast.json?q=$place&days=$numberOfDays&dt=$date&hour=${dateTime.hour}&key=${dotenv.env[Constants.apiKey]}',
         options: Options(
           method: 'GET',
         ),
@@ -32,7 +32,7 @@ class WeatherApiServices {
     try {
       var dio = Dio();
       var response = await dio.request(
-        '${ConstantNames.baseURL}current.json?q=$place&hour=$hour&key=${dotenv.env[ConstantNames.apiKey]}',
+        '${Constants.baseURL}current.json?q=$place&hour=$hour&key=${dotenv.env[Constants.apiKey]}',
         options: Options(
           method: 'GET',
         ),

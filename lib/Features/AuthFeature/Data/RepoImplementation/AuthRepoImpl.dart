@@ -44,13 +44,13 @@ class AuthRepoImpl implements AuthRepo {
 
       UserCredential user = await signIn.signIn(loginData.email!, password);
       String fullName = await firestore.getField(
-          collectionPath: ConstantNames.usersDataCollection,
+          collectionPath: Constants.usersDataCollection,
           docName: user.user!.uid,
-          key: ConstantNames.fullNameField);
+          key: Constants.fullNameField);
 
       UserModel userModel = UserModel(
           email: loginData.email, uid: user.user!.uid, fullName: fullName);
-      ConstantNames.userModel = userModel;
+      Constants.userModel = userModel;
 
       await locationManagerRepo.getLocations();
 
@@ -80,11 +80,11 @@ class AuthRepoImpl implements AuthRepo {
           uid: user.user!.uid,
           fullName: registerData.fullName);
 
-      ConstantNames.userModel = userModel;
+      Constants.userModel = userModel;
       await firestore.setField(
-          collectionPath: ConstantNames.locationsCollection,
+          collectionPath: Constants.locationsCollection,
           docName: user.user!.uid,
-          data: {ConstantNames.locationsField: []});
+          data: {Constants.locationsField: []});
 
       await localDatabaseService.writeLoginData(
           registerData.email!, password, registerData.fullName!);
@@ -134,7 +134,7 @@ class AuthRepoImpl implements AuthRepo {
 
       UserModel userModel = UserModel(
           email: model.email, uid: user.user!.uid, fullName: model.fullName);
-      ConstantNames.userModel = userModel;
+      Constants.userModel = userModel;
 
       await locationManagerRepo.getLocations();
 

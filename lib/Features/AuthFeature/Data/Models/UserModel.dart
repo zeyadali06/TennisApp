@@ -9,9 +9,9 @@ class UserModel {
 
   Map<String, dynamic> toMap() {
     return {
-      ConstantNames.fullNameField: fullName,
-      ConstantNames.emailField: email,
-      ConstantNames.uidField: uid,
+      Constants.fullNameField: fullName,
+      Constants.emailField: email,
+      Constants.uidField: uid,
     };
   }
 }

@@ -59,9 +59,9 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
         }
 
         await firestore.updateField(
-          collectionPath: ConstantNames.locationsCollection,
-          docName: ConstantNames.userModel.uid!,
-          data: {ConstantNames.locationsField: convertedData},
+          collectionPath: Constants.locationsCollection,
+          docName: Constants.userModel.uid!,
+          data: {Constants.locationsField: convertedData},
         );
       } else {
         return RequestResult.failure(
@@ -94,9 +94,9 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
       List<Map<String, dynamic>> convertedData = _converter(locations);
 
       await firestore.updateField(
-        collectionPath: ConstantNames.locationsCollection,
-        docName: ConstantNames.userModel.uid!,
-        data: {ConstantNames.locationsField: convertedData},
+        collectionPath: Constants.locationsCollection,
+        docName: Constants.userModel.uid!,
+        data: {Constants.locationsField: convertedData},
       );
 
       return RequestResult.success(locations);
@@ -128,9 +128,9 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
       List<Map<String, dynamic>> convertedData = _converter(locations);
 
       await firestore.updateField(
-        collectionPath: ConstantNames.locationsCollection,
-        docName: ConstantNames.userModel.uid!,
-        data: {ConstantNames.locationsField: convertedData},
+        collectionPath: Constants.locationsCollection,
+        docName: Constants.userModel.uid!,
+        data: {Constants.locationsField: convertedData},
       );
 
       return RequestResult.success(locations);
@@ -150,9 +150,9 @@ class LocationManagerRepoImpl implements LocationManagerRepo {
 
   Future<List<PositionEntity>> _getAllLocations() async {
     var res = await firestore.getField(
-        collectionPath: ConstantNames.locationsCollection,
-        docName: ConstantNames.userModel.uid!,
-        key: ConstantNames.locationsField);
+        collectionPath: Constants.locationsCollection,
+        docName: Constants.userModel.uid!,
+        key: Constants.locationsField);
     List<PositionEntity> poistionEntities = [];
 
     for (var ele in (res as List)) {

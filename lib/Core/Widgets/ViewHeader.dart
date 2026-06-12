@@ -21,7 +21,7 @@ class ViewHeader extends StatelessWidget {
         ),
         FittedWidget(
           child: Text(
-            ConstantNames.userModel.fullName.toString(),
+            Constants.userModel.fullName.toString(),
             style: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.w400, fontSize: 18),
           ),

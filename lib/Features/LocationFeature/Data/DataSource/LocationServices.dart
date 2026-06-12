@@ -9,7 +9,7 @@ class LocationServices {
   Future searchForPlaces(String place) async {
     try {
       var response = await dio.request(
-        '${ConstantNames.baseURL}search.json?q=$place&key=${dotenv.env[ConstantNames.apiKey]}',
+        '${Constants.baseURL}search.json?q=$place&key=${dotenv.env[Constants.apiKey]}',
         options: Options(
           method: 'GET',
         ),

@@ -8,8 +8,8 @@ class RegisterEntity {
 
   Map<String, dynamic> toMap() {
     return {
-      ConstantNames.fullNameField: fullName,
-      ConstantNames.emailField: email,
+      Constants.fullNameField: fullName,
+      Constants.emailField: email,
     };
   }
 }

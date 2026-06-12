@@ -1,6 +1,6 @@
 import 'package:tennis_app/Features/AuthFeature/Data/Models/UserModel.dart';
 
-class ConstantNames {
+class Constants {
   static const String usersDataCollection = 'usersDataCollection';
   static const String locationsCollection = 'locationsCollection';
   static const String fullNameField = 'Full Name';
