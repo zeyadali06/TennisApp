@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:tennis_app/CustomNavigationBar.dart';
 import 'package:tennis_app/Core/Utils/DependencyInjection.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/RepoInterface/AuthRepo.dart';
@@ -12,6 +13,7 @@ import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/CurrentDayWeathe
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/GetMyLocationUseCase.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/SearchForLocationsUseCase.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsManagerView/ShowLocationOnMapView.dart';
 import 'package:tennis_app/Features/SplashFeature/Presentation/Controllers/cubit/splash_view_cubit.dart';
 import 'package:tennis_app/Features/SplashFeature/Presentation/Views/SplashView/SplashView.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/RegisterView/RegisterView.dart';
@@ -86,7 +88,11 @@ abstract class AppRouter {
   static const Widget authOptions = AuthOptionsView();
   static const Widget homeView = HomeView();
 
-  static MaterialPageRoute goTo(BuildContext context, Widget toView) {
+  // ignore: prefer_function_declarations_over_variables
+  static final Widget Function(LatLng coordinates) showLocationOnMapView =
+      (coordinates) => ShowLocationOnMapView(coordinates: coordinates);
+
+  static MaterialPageRoute getRoute(BuildContext context, Widget toView) {
     return MaterialPageRoute(builder: (context) {
       return toView;
     });

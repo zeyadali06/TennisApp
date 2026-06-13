@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:tennis_app/Core/Utils/AppRouter.dart';
 import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
 import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
@@ -63,8 +65,24 @@ class LocationsManagerViewBody extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: CustomTaskContainer(
-                          positionEntity: locations[index],
+                        child: GestureDetector(
+                          onTap: () async {
+                            Navigator.push(
+                              context,
+                              AppRouter.getRoute(
+                                context,
+                                AppRouter.showLocationOnMapView(
+                                  LatLng(
+                                    locations[index].latitude,
+                                    locations[index].longitude,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          child: CustomTaskContainer(
+                            positionEntity: locations[index],
+                          ),
                         ),
                       );
                     },

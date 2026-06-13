@@ -33,7 +33,7 @@ class RegisterViewBody extends StatelessWidget {
           showSnackBar(context, state.error.message);
         } else if (state is RegisterSuccess) {
           Navigator.pushReplacement(
-              context, AppRouter.goTo(context, AppRouter.navigationBar));
+              context, AppRouter.getRoute(context, AppRouter.navigationBar));
         }
         isLoading = false;
       },
@@ -107,7 +107,7 @@ class RegisterViewBody extends StatelessWidget {
                                   onTap: () {
                                     Navigator.pushReplacement(
                                         context,
-                                        AppRouter.goTo(
+                                        AppRouter.getRoute(
                                             context, AppRouter.loginView));
                                   },
                                   child: const Text(

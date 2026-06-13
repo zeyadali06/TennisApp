@@ -77,7 +77,6 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('HomeView hash: ${pages[1].hashCode}');
     return MultiBlocListener(
       listeners: [
         BlocListener<HomeViewCubit, HomeViewState>(

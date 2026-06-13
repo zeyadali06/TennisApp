@@ -33,7 +33,7 @@ class LoginViewBody extends StatelessWidget {
           showSnackBar(context, state.error.message);
         } else if (state is LoginSuccess) {
           Navigator.pushReplacement(
-              context, AppRouter.goTo(context, AppRouter.navigationBar));
+              context, AppRouter.getRoute(context, AppRouter.navigationBar));
         }
         isLoading = false;
       },
@@ -78,7 +78,7 @@ class LoginViewBody extends StatelessWidget {
                                   onTap: () {
                                     Navigator.push(
                                         context,
-                                        AppRouter.goTo(context,
+                                        AppRouter.getRoute(context,
                                             AppRouter.forgetPasswordView));
                                   },
                                   child: const Text(
@@ -124,7 +124,7 @@ class LoginViewBody extends StatelessWidget {
                                   onTap: () {
                                     Navigator.pushReplacement(
                                         context,
-                                        AppRouter.goTo(
+                                        AppRouter.getRoute(
                                             context, AppRouter.registerView));
                                   },
                                   child: const Text(

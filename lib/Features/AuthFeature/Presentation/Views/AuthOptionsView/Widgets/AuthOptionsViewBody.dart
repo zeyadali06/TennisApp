@@ -35,7 +35,7 @@ class AuthOptionsViewBody extends StatelessWidget {
                               onPressed: () {
                                 Navigator.pushReplacement(
                                     context,
-                                    AppRouter.goTo(
+                                    AppRouter.getRoute(
                                         context, AppRouter.registerView));
                               },
                               title: 'Sign In',
@@ -51,7 +51,7 @@ class AuthOptionsViewBody extends StatelessWidget {
                               onPressed: () {
                                 Navigator.pushReplacement(
                                     context,
-                                    AppRouter.goTo(
+                                    AppRouter.getRoute(
                                         context, AppRouter.loginView));
                               },
                               title: 'Log In',

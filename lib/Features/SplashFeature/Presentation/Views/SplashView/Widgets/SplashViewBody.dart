@@ -26,10 +26,10 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       listener: (context, state) {
         if (state is SplashViewSuccess) {
           Navigator.pushReplacement(
-              context, AppRouter.goTo(context, AppRouter.navigationBar));
+              context, AppRouter.getRoute(context, AppRouter.navigationBar));
         } else if (state is SplashViewFailed) {
           Navigator.pushReplacement(
-              context, AppRouter.goTo(context, AppRouter.authOptions));
+              context, AppRouter.getRoute(context, AppRouter.authOptions));
         }
       },
       builder: (context, state) {
