@@ -4,7 +4,7 @@ import 'package:tennis_app/Features/HomeFeature/Data/Models/ForecastWeatherModel
 
 class AIModelMapper {
   static AIModelEntity fromCurrentWeatherModel(
-      CurrentWeatherModel currentWeatherModel) {
+      WeatherModel currentWeatherModel) {
     return AIModelEntity(
       humidity: currentWeatherModel.humidity,
       feelslikeC: currentWeatherModel.feelslikeC,

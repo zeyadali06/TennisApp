@@ -6,9 +6,9 @@ import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView/Widg
 import 'package:tennis_app/Features/HomeFeature/Presentation/Views/HomeView/Widgets/TemperatureStatistic.dart';
 
 class WeartherStatistics extends StatelessWidget {
-  const WeartherStatistics({super.key, required this.currentWeatherEntity});
+  const WeartherStatistics({super.key, required this.weatherEntity});
 
-  final WeatherEntity currentWeatherEntity;
+  final WeatherEntity weatherEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,21 @@ class WeartherStatistics extends StatelessWidget {
       child: Column(
         children: [
           TemperatureStatistic(
-              temperature: currentWeatherEntity.tempC,
-              minTemperature: -50,
-              maxTemperature: 56.7),
-          WeatherIcon(imageUrl: currentWeatherEntity.icon),
-          const Expanded(child: SizedBox(height: 20)),
+            temperature: weatherEntity.tempC,
+            minTemperature: -50,
+            maxTemperature: 56.7,
+          ),
+          WeatherIcon(imageUrl: weatherEntity.icon),
+          const SizedBox(height: 20),
+          Text(
+            "${weatherEntity.maxTempC.toInt()} ْ C  /  ${weatherEntity.minTempC.toInt()} ْ C",
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 20),
           Row(
             children: [
               Flexible(
@@ -28,7 +38,7 @@ class WeartherStatistics extends StatelessWidget {
                 child: Center(
                   child: FittedWidget(
                     child: StatisticsPieChart(
-                      value: currentWeatherEntity.uv,
+                      value: weatherEntity.uv,
                       minValue: 0,
                       maxValue: 11,
                       title: 'UV index',
@@ -42,7 +52,7 @@ class WeartherStatistics extends StatelessWidget {
                 child: Center(
                   child: FittedWidget(
                     child: StatisticsPieChart(
-                      value: currentWeatherEntity.windKph,
+                      value: weatherEntity.windKph,
                       minValue: 0,
                       maxValue: 200,
                       title: 'Wind(Kph)',
@@ -56,7 +66,7 @@ class WeartherStatistics extends StatelessWidget {
                 child: Center(
                   child: FittedWidget(
                     child: StatisticsPieChart(
-                      value: currentWeatherEntity.humidity.toDouble(),
+                      value: weatherEntity.humidity.toDouble(),
                       minValue: 0,
                       maxValue: 100,
                       title: 'Humidity(%)',
@@ -74,7 +84,7 @@ class WeartherStatistics extends StatelessWidget {
                 child: Center(
                   child: FittedWidget(
                     child: StatisticsPieChart(
-                      value: currentWeatherEntity.feelslikeC,
+                      value: weatherEntity.feelslikeC,
                       minValue: -50,
                       maxValue: 56.7,
                       title: 'Feels Like( ْ C)',
@@ -88,7 +98,7 @@ class WeartherStatistics extends StatelessWidget {
                 child: Center(
                   child: FittedWidget(
                     child: StatisticsPieChart(
-                      value: currentWeatherEntity.pressureMb,
+                      value: weatherEntity.pressureMb,
                       minValue: 870,
                       maxValue: 1085.7,
                       title: 'Pressure',
@@ -102,7 +112,7 @@ class WeartherStatistics extends StatelessWidget {
                 child: Center(
                   child: FittedWidget(
                     child: StatisticsPieChart(
-                      value: currentWeatherEntity.visKm,
+                      value: weatherEntity.visKm,
                       minValue: 0,
                       maxValue: 30,
                       title: 'Visibility',

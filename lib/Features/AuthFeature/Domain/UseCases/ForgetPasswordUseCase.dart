@@ -38,8 +38,7 @@ class ForgetPasswordUseCase {
     } on FirebaseFailureHandler catch (e) {
       return RequestResult.failure(e);
     } catch (e) {
-      return RequestResult.failure(
-          FirebaseFailureHandler(TryAgainException()));
+      return RequestResult.failure(FirebaseFailureHandler(TryAgainException()));
     }
   }
 }

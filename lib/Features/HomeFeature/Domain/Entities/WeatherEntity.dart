@@ -1,5 +1,7 @@
 class WeatherEntity {
   final double tempC;
+  final double minTempC;
+  final double maxTempC;
   final double windKph;
   final int humidity;
   final double uv;
@@ -11,6 +13,8 @@ class WeatherEntity {
 
   WeatherEntity({
     required this.tempC,
+    required this.minTempC,
+    required this.maxTempC,
     required this.windKph,
     required this.humidity,
     required this.uv,
@@ -24,6 +28,8 @@ class WeatherEntity {
   factory WeatherEntity.init() {
     return WeatherEntity(
       tempC: 0,
+      minTempC: 0,
+      maxTempC: 0,
       windKph: 0,
       humidity: 0,
       uv: 0,

@@ -17,19 +17,21 @@ class AnotherDayWeatherUseCase {
       RequestResult res = await weatherRepo.getForecastWeather(dateTime);
 
       if (res is RequestSuccess) {
-        weatherEntity = WeatherMapper.fromForecastWeatherModel(res.data);
+        weatherEntity = WeatherMapper.fromWeatherModel(res.data);
         return RequestResult.success(weatherEntity);
       } else if (res is RequestFailed) {
         return RequestResult.failure(res.data);
       } else {
         return RequestResult.failure(
-            WeatherAPIFailureHandler(TryAgainException()));
+          WeatherAPIFailureHandler(TryAgainException()),
+        );
       }
     } on WeatherAPIFailureHandler catch (e) {
       return RequestResult.failure(e);
     } catch (e) {
       return RequestResult.failure(
-          WeatherAPIFailureHandler(TryAgainException()));
+        WeatherAPIFailureHandler(TryAgainException()),
+      );
     }
   }
 }

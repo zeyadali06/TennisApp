@@ -23,11 +23,11 @@ class _HomeViewBodyState extends State<HomeViewBody>
   @override
   bool get wantKeepAlive => true;
 
-  late WeatherEntity currentWeatherEntity;
+  late WeatherEntity weatherEntity;
 
   @override
   void initState() {
-    currentWeatherEntity = WeatherEntity.init();
+    weatherEntity = WeatherEntity.init();
     super.initState();
   }
 
@@ -38,10 +38,10 @@ class _HomeViewBodyState extends State<HomeViewBody>
     return BlocConsumer<HomeViewCubit, HomeViewState>(
       listener: (context, state) {
         if (state is HomeViewFailed) {
-          currentWeatherEntity = WeatherEntity.init();
+          weatherEntity = WeatherEntity.init();
           showSnackBar(context, state.error.message);
         } else if (state is HomeViewSuccess) {
-          currentWeatherEntity = state.currentWeatherEntity;
+          weatherEntity = state.weatherEntity;
         } else if (state is GetPredictionSuccess) {
           showDialog(
             context: context,
@@ -105,7 +105,7 @@ class _HomeViewBodyState extends State<HomeViewBody>
                       ),
                       const SizedBox(height: 30),
                       WeartherStatistics(
-                        currentWeatherEntity: currentWeatherEntity,
+                        weatherEntity: weatherEntity,
                       ),
                       const SizedBox(height: 30),
                       Row(

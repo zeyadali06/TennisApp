@@ -16,7 +16,7 @@ class GetPredictionUseCase {
     try {
       late AIModelEntity aiModelEntity;
 
-      RequestResult res = await weatherRepo.getCurrentWeather();
+      RequestResult res = await weatherRepo.getForecastWeather(DateTime.now());
 
       if (res is RequestSuccess) {
         aiModelEntity = AIModelMapper.fromCurrentWeatherModel(res.data);

@@ -25,6 +25,8 @@ class _CustomCalendarState extends State<CustomCalendar> {
     7: 'Sun'
   };
 
+  late final DateTime date;
+
   @override
   void initState() {
     _focusedDay = DateTime.now();
@@ -44,11 +46,13 @@ class _CustomCalendarState extends State<CustomCalendar> {
         headerVisible: false,
         focusedDay: _focusedDay,
         daysOfWeekVisible: false,
-        firstDay: DateTime(2000, 1, 1),
-        lastDay: DateTime(9999, 12, 31),
+        firstDay: DateTime.now().subtract(const Duration(days: 3)),
+        lastDay: DateTime.now().add(const Duration(days: 3)),
         calendarFormat: CalendarFormat.week,
         availableGestures: AvailableGestures.none,
-        startingDayOfWeek: StartingDayOfWeek.sunday,
+        startingDayOfWeek: getDay(
+          DateTime.now().subtract(const Duration(days: 3)).weekday,
+        ),
         selectedDayPredicate: (day) {
           return isSameDay(_focusedDay, day);
         },
@@ -70,8 +74,15 @@ class _CustomCalendarState extends State<CustomCalendar> {
     );
   }
 
+  StartingDayOfWeek getDay(int day) {
+    return StartingDayOfWeek.values[day - 1];
+  }
+
   Widget? todayBuilder(
-      BuildContext context, DateTime day, DateTime focusedDay) {
+    BuildContext context,
+    DateTime day,
+    DateTime focusedDay,
+  ) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.grey.withValues(alpha: .15),
@@ -85,9 +96,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
               child: Text(
                 weekdays[day.weekday].toString(),
                 style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w200,
-                    fontSize: 8),
+                  color: Colors.white,
+                  fontWeight: FontWeight.w200,
+                  fontSize: 8,
+                ),
               ),
             ),
             const Expanded(flex: 2, child: SizedBox(height: 5)),
@@ -95,9 +107,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
               child: Text(
                 day.day.toString(),
                 style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
               ),
             ),
             const Expanded(flex: 2, child: SizedBox(height: 5)),
@@ -108,7 +121,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
   }
 
   Widget? defaultBuilder(
-      BuildContext context, DateTime day, DateTime focusedDay) {
+    BuildContext context,
+    DateTime day,
+    DateTime focusedDay,
+  ) {
     return Center(
       child: Column(
         children: [
@@ -117,9 +133,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
             child: Text(
               weekdays[day.weekday].toString(),
               style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w200,
-                  fontSize: 8),
+                color: Colors.white,
+                fontWeight: FontWeight.w200,
+                fontSize: 8,
+              ),
             ),
           ),
           const Expanded(child: SizedBox(height: 5)),
@@ -127,9 +144,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
             child: Text(
               day.day.toString(),
               style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
             ),
           ),
           const Expanded(flex: 2, child: SizedBox(height: 5)),
@@ -139,7 +157,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
   }
 
   Widget? selectedBuilder(
-      BuildContext context, DateTime day, DateTime focusedDay) {
+    BuildContext context,
+    DateTime day,
+    DateTime focusedDay,
+  ) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -160,9 +181,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
               child: Text(
                 day.day.toString(),
                 style: const TextStyle(
-                    color: Color(0xff014aa8),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
+                  color: Color(0xff014aa8),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
             ),
             const Expanded(flex: 2, child: SizedBox(height: 5)),

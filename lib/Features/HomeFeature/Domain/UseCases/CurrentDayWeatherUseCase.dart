@@ -14,10 +14,10 @@ class CurrentDayWeatherUseCase {
       getCurrrentDayWeather() async {
     try {
       late WeatherEntity weatherEntity;
-      RequestResult res = await weatherRepo.getCurrentWeather();
+      RequestResult res = await weatherRepo.getForecastWeather(DateTime.now());
 
       if (res is RequestSuccess) {
-        weatherEntity = WeatherMapper.fromCurrentWeatherModel(res.data);
+        weatherEntity = WeatherMapper.fromWeatherModel(res.data);
         return RequestResult.success(weatherEntity);
       } else if (res is RequestFailed) {
         return RequestResult.failure(res.data);

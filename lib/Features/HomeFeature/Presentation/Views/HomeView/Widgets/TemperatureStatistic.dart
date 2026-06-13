@@ -2,11 +2,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class TemperatureStatistic extends StatelessWidget {
-  const TemperatureStatistic(
-      {super.key,
-      required this.temperature,
-      required this.minTemperature,
-      required this.maxTemperature});
+  const TemperatureStatistic({
+    super.key,
+    required this.temperature,
+    required this.minTemperature,
+    required this.maxTemperature,
+  });
 
   final double temperature;
   final double minTemperature;
@@ -26,10 +27,11 @@ class TemperatureStatistic extends StatelessWidget {
 }
 
 class TemperatureStatisticPainter extends CustomPainter {
-  const TemperatureStatisticPainter(
-      {required this.temperature,
-      required this.minTemperature,
-      required this.maxTemperature});
+  const TemperatureStatisticPainter({
+    required this.temperature,
+    required this.minTemperature,
+    required this.maxTemperature,
+  });
 
   final double temperature;
   final double minTemperature;
