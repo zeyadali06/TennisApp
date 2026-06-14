@@ -5,7 +5,6 @@ import 'package:tennis_app/Core/Widgets/ScaleDownWidget.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Controllers/HomeViewCubit/home_view_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/AddLocationsCubit/add_locations_cubit.dart';
-import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/GetMyLocationCubit/get_my_location_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/LocationManagerCubit/location_manager_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/SearchForLoactionCubit/search_for_loaction_cubit.dart';
 
@@ -92,16 +91,6 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
         BlocListener<AddLocationsCubit, AddLocationsState>(
           listener: (context, state) {
             if (state is AddLocationsLoading) {
-              isLoading = true;
-            } else {
-              isLoading = false;
-            }
-            setState(() {});
-          },
-        ),
-        BlocListener<GetMyLocationCubit, GetMyLocationState>(
-          listener: (context, state) {
-            if (state is CheckLocationLoading) {
               isLoading = true;
             } else {
               isLoading = false;

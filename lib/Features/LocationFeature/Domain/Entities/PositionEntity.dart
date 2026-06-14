@@ -31,6 +31,15 @@ class PositionEntity {
     };
   }
 
+  factory PositionEntity.init() {
+    return PositionEntity(
+      longitude: 0,
+      latitude: 0,
+      place: "",
+      isDefault: false,
+    );
+  }
+
   @override
   // ignore: non_nullable_equals_parameter, hash_and_equals
   bool operator ==(dynamic other) {

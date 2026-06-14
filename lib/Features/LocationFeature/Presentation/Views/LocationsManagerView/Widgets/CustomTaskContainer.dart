@@ -79,8 +79,12 @@ class _CustomTaskContainerState extends State<CustomTaskContainer> {
                     trailing: CustomCheckbox(
                       initValue: widget.positionEntity.isDefault,
                       onChanged: (value) async {
-                        await BlocProvider.of<LocationManagerCubit>(context)
-                            .setLocationAsDefault(widget.positionEntity);
+                        if (!widget.positionEntity.isDefault) {
+                          await BlocProvider.of<LocationManagerCubit>(context)
+                              .setLocationAsDefault(widget.positionEntity);
+                          return true;
+                        }
+                        return false;
                       },
                     ),
                     title: Text(

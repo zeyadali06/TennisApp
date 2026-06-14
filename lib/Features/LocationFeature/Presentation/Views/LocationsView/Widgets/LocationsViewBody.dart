@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tennis_app/Core/Functions/SnackBar.dart';
+import 'package:tennis_app/Core/Utils/AppRouter.dart';
 import 'package:tennis_app/Core/Widgets/ViewHeader.dart';
 import 'package:tennis_app/Core/Widgets/CustomButton.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/LocationManagerCubit/location_manager_cubit.dart';
-import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsView/Widgets/MyLocation.dart';
-import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsView/Widgets/SearchField.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/AddLocationsCubit/add_locations_cubit.dart';
-import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/GetMyLocationCubit/get_my_location_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/SearchForLoactionCubit/search_for_loaction_cubit.dart';
 
 class LocationsViewBody extends StatefulWidget {
@@ -20,15 +18,11 @@ class LocationsViewBody extends StatefulWidget {
 }
 
 class _LocationsViewBodyState extends State<LocationsViewBody> {
-  late bool showMyLocationSection;
-  late bool showSerchFieldSection;
   late PositionEntity positionEntity;
   late List<PositionEntity> suggestions;
 
   @override
   void initState() {
-    showMyLocationSection = false;
-    showSerchFieldSection = false;
     suggestions = [];
     positionEntity =
         PositionEntity(longitude: 0, latitude: 0, place: "", isDefault: false);
@@ -39,15 +33,6 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
-        BlocListener<GetMyLocationCubit, GetMyLocationState>(
-          listener: (context, state) {
-            if (state is GetLocationSuccessed) {
-              positionEntity = state.positionEntity;
-            } else if (state is GetLocationFailed) {
-              showSnackBar(context, state.error.message);
-            }
-          },
-        ),
         BlocListener<SearchForLoactionCubit, SearchForLoactionState>(
           listener: (context, state) {
             if (state is SearchForLoactionSuccessed) {
@@ -76,75 +61,59 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
       child: CustomGradiantContainer(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 30),
-                    const ViewHeader(),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CustomButton(
-                            onPressed: () async {
-                              showMyLocationSection = true;
-                              showSerchFieldSection = false;
-                              await BlocProvider.of<GetMyLocationCubit>(context)
-                                  .getMyLocation();
-                              setState(() {});
-                            },
-                            title: "Get My Location",
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 30),
+              const ViewHeader(),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomButton(
+                      onPressed: () async {
+                        positionEntity = (await Navigator.push<PositionEntity>(
+                          context,
+                          AppRouter.getRoute<PositionEntity>(
+                            context,
+                            AppRouter.mapView,
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: CustomButton(
-                            onPressed: () {
-                              showMyLocationSection = false;
-                              showSerchFieldSection = true;
-                              setState(() {});
-                            },
-                            title: "Search Field",
-                          ),
-                        ),
-                      ],
+                        ))!;
+                        setState(() {});
+                      },
+                      title: "Get Location",
                     ),
-                    const SizedBox(height: 50),
-                    if (showMyLocationSection)
-                      MyLocation(positionEntity: positionEntity),
-                    if (showSerchFieldSection)
-                      SearchField(suggestions: suggestions),
-                    const SizedBox(height: 30),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              SliverFillRemaining(
-                hasScrollBody: false,
-                child: Column(
+              const Spacer(),
+              if (positionEntity.place.isNotEmpty)
+                Text(
+                  positionEntity.place,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                  ),
+                ),
+              const Spacer(),
+              if (positionEntity.place.isNotEmpty)
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Expanded(child: SizedBox()),
                     CustomButton(
                       onPressed: () async {
-                        bool validate = true;
-                        bool startExecution = true;
-                        if (!showMyLocationSection && !showSerchFieldSection) {
-                          startExecution = false;
-                        } else if (showMyLocationSection) {
-                          validate = false;
-                        }
-
-                        BlocProvider.of<AddLocationsCubit>(context).addLocation(
-                            positionEntity, startExecution, validate, context);
+                        await BlocProvider.of<AddLocationsCubit>(context)
+                            .addLocation(
+                          positionEntity,
+                          context,
+                        );
                       },
-                      title: 'Add Location',
+                      title: 'Add This Location',
                     ),
-                    const SizedBox(height: 90),
                   ],
                 ),
-              ),
+              const SizedBox(height: 100),
             ],
           ),
         ),

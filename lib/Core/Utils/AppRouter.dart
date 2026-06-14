@@ -11,9 +11,9 @@ import 'package:tennis_app/Features/AuthFeature/Presentation/Views/LoginView/Log
 import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/AnotherDayWeatherUseCase.dart';
 import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/CurrentDayWeatherUseCase.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
-import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/GetMyLocationUseCase.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/SearchForLocationsUseCase.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsManagerView/ShowLocationOnMapView.dart';
+import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsView/MapView.dart';
 import 'package:tennis_app/Features/SplashFeature/Presentation/Controllers/cubit/splash_view_cubit.dart';
 import 'package:tennis_app/Features/SplashFeature/Presentation/Views/SplashView/SplashView.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Views/RegisterView/RegisterView.dart';
@@ -26,7 +26,6 @@ import 'package:tennis_app/Features/AuthFeature/Presentation/Views/ForgetPassowr
 import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsManagerView/LocationsManagerView.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/AddLocationsCubit/add_locations_cubit.dart';
 import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/ForgetPasswordCubit/forget_password_cubit.dart';
-import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/GetMyLocationCubit/get_my_location_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/LocationManagerCubit/location_manager_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/SearchForLoactionCubit/search_for_loaction_cubit.dart';
 
@@ -49,10 +48,6 @@ abstract class AppRouter {
 
   static final Widget navigationBar = MultiBlocProvider(
     providers: [
-      BlocProvider<GetMyLocationCubit>(
-        create: (context) =>
-            GetMyLocationCubit(getit.get<GetMyLocationUseCase>()),
-      ),
       BlocProvider<SearchForLoactionCubit>(
         create: (context) =>
             SearchForLoactionCubit(getit.get<SearchForLocationsUseCase>()),
@@ -87,12 +82,13 @@ abstract class AppRouter {
   static const Widget locationsView = LocationsView();
   static const Widget authOptions = AuthOptionsView();
   static const Widget homeView = HomeView();
+  static const Widget mapView = MapView();
 
   // ignore: prefer_function_declarations_over_variables
   static final Widget Function(LatLng coordinates) showLocationOnMapView =
       (coordinates) => ShowLocationOnMapView(coordinates: coordinates);
 
-  static MaterialPageRoute getRoute(BuildContext context, Widget toView) {
+  static MaterialPageRoute<T> getRoute<T>(BuildContext context, Widget toView) {
     return MaterialPageRoute(builder: (context) {
       return toView;
     });

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:tennis_app/Core/Failure/Exceptions/CustomException.dart';
 import 'package:tennis_app/Core/Functions/GetLatLon.dart';
 import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Core/Functions/Check_Network.dart';
@@ -10,6 +11,7 @@ import 'package:tennis_app/Features/HomeFeature/Data/Models/CurrentWeatherModel.
 import 'package:tennis_app/Features/HomeFeature/Domain/RepoInterface/WeatherRepo.dart';
 import 'package:tennis_app/Core/Failure/Exceptions/WeatherAPIFailureHandlerCodes.dart';
 import 'package:tennis_app/Features/HomeFeature/Data/DataSource/WeatherApiServices.dart';
+import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
 
 class WeatherRepoImpl extends WeatherRepo {
@@ -37,7 +39,17 @@ class WeatherRepoImpl extends WeatherRepo {
         return RequestResult.failure(res.data);
       }
 
-      String location = getLatLon(locationManagerRepo.locations[0]);
+      String location =
+          getLatLon(locationManagerRepo.locations.firstWhere((pos) {
+        return pos.isDefault;
+      }, orElse: () => PositionEntity.init()));
+
+      if (location.isEmpty) {
+        return RequestResult.failure(
+          WeatherAPIFailureHandler(CustomException("Choose location first!")),
+        );
+      }
+
       var response =
           await weatherApiServices.getForecastWeather(dateTime, location, 1);
       WeatherModel forecastWeatherModel =

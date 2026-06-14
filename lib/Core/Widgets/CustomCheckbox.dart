@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomCheckbox extends StatefulWidget {
   const CustomCheckbox({super.key, this.onChanged, required this.initValue});
 
-  final void Function(bool value)? onChanged;
+  final Future<bool> Function(bool value)? onChanged;
   final bool initValue;
 
   @override
@@ -22,10 +22,13 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
   @override
   Widget build(BuildContext context) {
     return Checkbox(
-      onChanged: (value) {
-        enabled = value!;
-        setState(() {});
-        widget.onChanged?.call(value);
+      onChanged: (value) async {
+        if (await (widget.onChanged?.call(value!))!) {
+          enabled = value!;
+          try {
+            setState(() {});
+          } catch (_) {}
+        }
       },
       value: enabled,
       activeColor: const Color(0xff044abb),
