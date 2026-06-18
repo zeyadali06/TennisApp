@@ -8,12 +8,19 @@ class LocalDatabaseService {
   final FlutterSecureStorage flutterSecureStorage;
 
   Future<void> writeLoginData(
-      String email, String password, String fullName) async {
+    String? email,
+    String? password,
+    String? fullName,
+  ) async {
     await flutterSecureStorage.write(key: Constants.localEmail, value: email);
     await flutterSecureStorage.write(
-        key: Constants.localPassword, value: password);
+      key: Constants.localPassword,
+      value: password,
+    );
     await flutterSecureStorage.write(
-        key: Constants.localFullName, value: fullName);
+      key: Constants.localFullName,
+      value: fullName,
+    );
   }
 
   Future<AutoLoginModel> readLoginData() async {

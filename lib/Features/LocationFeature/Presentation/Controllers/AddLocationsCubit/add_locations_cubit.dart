@@ -12,7 +12,8 @@ class AddLocationsCubit extends Cubit<AddLocationsState> {
 
   final LocationManagerRepo locationManagerRepo;
 
-  Future<void> addLocation(PositionEntity positionEntity,  BuildContext context) async {
+  Future<void> addLocation(
+      PositionEntity positionEntity, BuildContext context) async {
     // if (!startExecution) {
     //   emit(AddLocationsFailed(FirebaseFailureHandler(
     //       CustomException("Search then choose place or use Get My Location"))));

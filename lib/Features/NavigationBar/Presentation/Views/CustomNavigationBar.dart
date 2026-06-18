@@ -7,6 +7,7 @@ import 'package:tennis_app/Features/HomeFeature/Presentation/Controllers/HomeVie
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/AddLocationsCubit/add_locations_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/LocationManagerCubit/location_manager_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Controllers/SearchForLoactionCubit/search_for_loaction_cubit.dart';
+import 'package:tennis_app/Features/NavigationBar/Presentation/Controllers/NavigationBarCubit/navigation_bar_cubit.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   const CustomNavigationBar({super.key});
@@ -116,6 +117,20 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
               isLoading = false;
             }
             setState(() {});
+          },
+        ),
+        BlocListener<NavigationBarCubit, NavigationBarState>(
+          listener: (context, state) {
+            if (state is NavigationBarLoading) {
+              isLoading = true;
+              setState(() {});
+            } else if (state is NavigationBarLogout) {
+              Navigator.pushAndRemoveUntil(
+                context,
+                AppRouter.getRoute(context, AppRouter.splashView),
+                (route) => false,
+              );
+            }
           },
         ),
       ],

@@ -12,9 +12,12 @@ import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/Locatio
 part 'home_view_state.dart';
 
 class HomeViewCubit extends Cubit<HomeViewState> {
-  HomeViewCubit(this.currentDayWeatherUseCase, this.anotherDayWeatherUseCase,
-      this.locationManagerRepo, this.getPredictionUseCase)
-      : super(HomeViewInitial());
+  HomeViewCubit(
+    this.currentDayWeatherUseCase,
+    this.anotherDayWeatherUseCase,
+    this.locationManagerRepo,
+    this.getPredictionUseCase,
+  ) : super(HomeViewInitial());
 
   final CurrentDayWeatherUseCase currentDayWeatherUseCase;
   final AnotherDayWeatherUseCase anotherDayWeatherUseCase;
@@ -23,7 +26,8 @@ class HomeViewCubit extends Cubit<HomeViewState> {
 
   Future<void> getCurrentWeather() async {
     emit(HomeViewLoading());
-    RequestResult res = await currentDayWeatherUseCase.getCurrrentDayWeather();
+    final RequestResult res =
+        await currentDayWeatherUseCase.getCurrrentDayWeather();
     if (res is RequestSuccess) {
       return emit(HomeViewSuccess(res.data));
     } else if (res is RequestFailed) {
@@ -33,7 +37,7 @@ class HomeViewCubit extends Cubit<HomeViewState> {
 
   Future<void> getForecastWeather(DateTime dateTime) async {
     emit(HomeViewLoading());
-    RequestResult res =
+    final RequestResult res =
         await anotherDayWeatherUseCase.getAnotherDayWeather(dateTime);
     if (res is RequestSuccess) {
       return emit(HomeViewSuccess(res.data));
@@ -44,7 +48,7 @@ class HomeViewCubit extends Cubit<HomeViewState> {
 
   Future<void> getPrediction() async {
     emit(HomeViewLoading());
-    RequestResult res = await getPredictionUseCase.getPrediction();
+    final RequestResult res = await getPredictionUseCase.getPrediction();
     if (res is RequestSuccess) {
       return emit(GetPredictionSuccess(res.data));
     } else if (res is RequestFailed) {

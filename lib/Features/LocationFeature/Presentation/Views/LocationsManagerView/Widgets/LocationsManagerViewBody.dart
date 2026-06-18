@@ -5,6 +5,7 @@ import 'package:tennis_app/Core/Utils/AppRouter.dart';
 import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
 import 'package:tennis_app/Core/Functions/SnackBar.dart';
 import 'package:tennis_app/Core/Widgets/CustomGradiantContainer.dart';
+import 'package:tennis_app/Core/Widgets/ViewHeader.dart';
 import 'package:tennis_app/Features/HomeFeature/Presentation/Controllers/HomeViewCubit/home_view_cubit.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Presentation/Views/LocationsManagerView/Widgets/CustomTaskContainer.dart';
@@ -31,62 +32,72 @@ class LocationsManagerViewBody extends StatelessWidget {
                 .locations;
 
         return CustomGradiantContainer(
-          child: SafeArea(
-            child: locations.isEmpty
-                ? const Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ScaleDown(
-                            child: Text(
-                              'No Locations Added',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.only(
-                      left: 30,
-                      right: 30,
-                      bottom: 100,
-                      top: 20,
-                    ),
-                    itemCount: locations.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: GestureDetector(
-                          onTap: () async {
-                            Navigator.push(
-                              context,
-                              AppRouter.getRoute(
-                                context,
-                                AppRouter.showLocationOnMapView(
-                                  LatLng(
-                                    locations[index].latitude,
-                                    locations[index].longitude,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(height: 30),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: ViewHeader(),
+              ),
+              const SizedBox(height: 15),
+              Expanded(
+                child: locations.isEmpty
+                    ? const Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ScaleDown(
+                                child: Text(
+                                  'No Locations Added',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),
-                            );
-                          },
-                          child: CustomTaskContainer(
-                            positionEntity: locations[index],
+                            ],
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      )
+                    : ListView.builder(
+                        padding: const EdgeInsets.only(
+                          left: 30,
+                          right: 30,
+                          bottom: 100,
+                        ),
+                        itemCount: locations.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: GestureDetector(
+                              onTap: () async {
+                                Navigator.push(
+                                  context,
+                                  AppRouter.getRoute(
+                                    context,
+                                    AppRouter.showLocationOnMapView(
+                                      LatLng(
+                                        locations[index].latitude,
+                                        locations[index].longitude,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: CustomTaskContainer(
+                                positionEntity: locations[index],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+              ),
+            ],
           ),
         );
       },

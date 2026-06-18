@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:tennis_app/CustomNavigationBar.dart';
+import 'package:tennis_app/Features/NavigationBar/Presentation/Controllers/NavigationBarCubit/navigation_bar_cubit.dart';
+import 'package:tennis_app/Features/NavigationBar/Presentation/Views/CustomNavigationBar.dart';
 import 'package:tennis_app/Core/Utils/DependencyInjection.dart';
 import 'package:tennis_app/Features/AuthFeature/Domain/RepoInterface/AuthRepo.dart';
 import 'package:tennis_app/Features/HomeFeature/Domain/UseCases/GetPredictionUseCase.dart';
@@ -59,6 +60,9 @@ abstract class AppRouter {
       BlocProvider<LocationManagerCubit>(
         create: (context) =>
             LocationManagerCubit(getit.get<LocationManagerRepo>()),
+      ),
+      BlocProvider<NavigationBarCubit>(
+        create: (context) => NavigationBarCubit(getit.get<AuthRepo>()),
       ),
       BlocProvider<HomeViewCubit>(
         create: (context) => HomeViewCubit(

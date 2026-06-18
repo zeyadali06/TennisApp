@@ -31,6 +31,8 @@ void setup() {
 
   getit.registerSingleton<SignIn>(SignIn());
 
+  getit.registerSingleton<SignOut>(SignOut());
+
   getit.registerSingleton<Register>(Register());
 
   getit.registerSingleton<AccountData>(AccountData());
@@ -90,6 +92,7 @@ void setup() {
       accountData: getit.get<AccountData>(),
       firestore: getit.get<Firestore>(),
       register: getit.get<Register>(),
+      signOut: getit.get<SignOut>(),
       signIn: getit.get<SignIn>(),
     ),
   );

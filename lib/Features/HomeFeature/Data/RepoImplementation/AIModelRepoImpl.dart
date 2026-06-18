@@ -18,7 +18,8 @@ class AIModelRepoImpl extends AIModelRepo {
       bool connStatus = await checkConn();
       if (!connStatus) {
         return RequestResult.failure(
-            AIModelFailureHandler(NoInternetException()));
+          AIModelFailureHandler(NoInternetException()),
+        );
       }
 
       bool prediction = await aiModelServices.getPrediction(features);

@@ -12,4 +12,5 @@ abstract class AuthRepo {
   Future<RequestResult<UserModel, FirebaseFailureHandler>> forgetPassword(
       String email);
   Future<RequestResult<UserModel, FirebaseFailureHandler>> autoLogin();
+  Future<RequestResult<void, FirebaseFailureHandler>> logout();
 }

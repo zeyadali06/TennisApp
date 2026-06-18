@@ -47,19 +47,27 @@ class _HomeViewBodyState extends State<HomeViewBody>
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text('Result'),
+                backgroundColor: const Color(0xff051642),
+                title: const Text(
+                  'Result',
+                  style: TextStyle(color: Colors.white),
+                ),
                 content: () {
                   String text;
                   if (state.result) {
-                    text = "You can go to do excercises";
+                    text = "You can go to do excercises.";
                   } else {
-                    text = "It's not good to go for training";
+                    text = "It's not good to go for training!";
                   }
-                  return Text(text);
+                  return Text(
+                    text,
+                    style: const TextStyle(color: Colors.white),
+                  );
                 }.call(),
                 actions: <Widget>[
-                  TextButton(
-                    child: const Text('OK'),
+                  CustomButton(
+                    title: 'OK',
+                    fontSize: 14,
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
