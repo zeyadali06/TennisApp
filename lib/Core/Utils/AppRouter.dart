@@ -49,9 +49,9 @@ abstract class AppRouter {
 
   static final Widget navigationBar = MultiBlocProvider(
     providers: [
-      BlocProvider<SearchForLoactionCubit>(
+      BlocProvider<SearchForLocationCubit>(
         create: (context) =>
-            SearchForLoactionCubit(getit.get<SearchForLocationsUseCase>()),
+            SearchForLocationCubit(getit.get<SearchForLocationsUseCase>()),
       ),
       BlocProvider<AddLocationsCubit>(
         create: (context) =>
@@ -82,11 +82,16 @@ abstract class AppRouter {
     child: const SplashView(),
   );
 
+  static final Widget mapView = BlocProvider(
+    create: (context) =>
+        SearchForLocationCubit(getit.get<SearchForLocationsUseCase>()),
+    child: const MapView(),
+  );
+
   static const Widget locationsManagerView = LocationsManagerView();
   static const Widget locationsView = LocationsView();
   static const Widget authOptions = AuthOptionsView();
   static const Widget homeView = HomeView();
-  static const Widget mapView = MapView();
 
   // ignore: prefer_function_declarations_over_variables
   static final Widget Function(LatLng coordinates) showLocationOnMapView =

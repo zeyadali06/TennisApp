@@ -99,9 +99,9 @@ class CustomNavigationBarState extends State<CustomNavigationBar> {
             setState(() {});
           },
         ),
-        BlocListener<SearchForLoactionCubit, SearchForLoactionState>(
+        BlocListener<SearchForLocationCubit, SearchForLocationState>(
           listener: (context, state) {
-            if (state is SearchForLoactionLoading) {
+            if (state is SearchForLocationLoading) {
               isLoading = true;
             } else {
               isLoading = false;

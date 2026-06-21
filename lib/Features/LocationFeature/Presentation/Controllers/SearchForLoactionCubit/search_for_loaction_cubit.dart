@@ -7,22 +7,22 @@ import 'package:tennis_app/Features/LocationFeature/Domain/UseCases/SearchForLoc
 
 part 'search_for_loaction_state.dart';
 
-class SearchForLoactionCubit extends Cubit<SearchForLoactionState> {
-  SearchForLoactionCubit(this.searchForLocationsUseCase)
-      : super(SearchForLoactionInitial());
+class SearchForLocationCubit extends Cubit<SearchForLocationState> {
+  SearchForLocationCubit(this.searchForLocationsUseCase)
+      : super(SearchForLocationInitial());
 
   final SearchForLocationsUseCase searchForLocationsUseCase;
   String place = "";
 
-  Future<void> searchForLoaction(String place) async {
-    emit(SearchForLoactionLoading());
+  Future<void> searchForLocation(String place) async {
+    emit(SearchForLocationLoading());
 
     RequestResult res = await searchForLocationsUseCase.searchForPlaces(place);
 
     if (res is RequestSuccess) {
-      emit(SearchForLoactionSuccessed(res.data));
+      emit(SearchForLocationSuccessed(res.data));
     } else if (res is RequestFailed) {
-      emit(SearchForLoactionFailed(res.data));
+      emit(SearchForLocationFailed(res.data));
     }
   }
 

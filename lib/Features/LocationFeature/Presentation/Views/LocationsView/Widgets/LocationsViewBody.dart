@@ -33,13 +33,13 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
-        BlocListener<SearchForLoactionCubit, SearchForLoactionState>(
+        BlocListener<SearchForLocationCubit, SearchForLocationState>(
           listener: (context, state) {
-            if (state is SearchForLoactionSuccessed) {
+            if (state is SearchForLocationSuccessed) {
               suggestions = state.suggestions;
               showSnackBar(
                   context, "Click on the search field to open suggesstions");
-            } else if (state is SearchForLoactionFailed) {
+            } else if (state is SearchForLocationFailed) {
               showSnackBar(context, state.error.message);
             } else if (state is ChooseLocation) {
               positionEntity = state.positionEntity;
@@ -73,12 +73,13 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                     child: CustomButton(
                       onPressed: () async {
                         positionEntity = (await Navigator.push<PositionEntity>(
-                          context,
-                          AppRouter.getRoute<PositionEntity>(
-                            context,
-                            AppRouter.mapView,
-                          ),
-                        ))!;
+                              context,
+                              AppRouter.getRoute<PositionEntity>(
+                                context,
+                                AppRouter.mapView,
+                              ),
+                            )) ??
+                            PositionEntity.init();
                         setState(() {});
                       },
                       title: "Get Location",

@@ -28,8 +28,8 @@ class SearchTextFieldWithSuggesstions extends StatelessWidget {
         });
       },
       onSelected: (PositionEntity option) {
-        BlocProvider.of<SearchForLoactionCubit>(context).place = option.place;
-        BlocProvider.of<SearchForLoactionCubit>(context)
+        BlocProvider.of<SearchForLocationCubit>(context).place = option.place;
+        BlocProvider.of<SearchForLocationCubit>(context)
             .choosePositionEntity(option);
       },
       fieldViewBuilder: (BuildContext context,
@@ -37,7 +37,7 @@ class SearchTextFieldWithSuggesstions extends StatelessWidget {
           FocusNode focusNode,
           VoidCallback onFieldSubmitted) {
         textEditingController.text =
-            BlocProvider.of<SearchForLoactionCubit>(context).place;
+            BlocProvider.of<SearchForLocationCubit>(context).place;
         return InputDataSection(
           controller: textEditingController,
           focusNode: focusNode,
@@ -45,7 +45,7 @@ class SearchTextFieldWithSuggesstions extends StatelessWidget {
             searchContent = value;
           },
           onChanged: (value) {
-            BlocProvider.of<SearchForLoactionCubit>(context).place =
+            BlocProvider.of<SearchForLocationCubit>(context).place =
                 value ?? "";
           },
           title: 'Destination',

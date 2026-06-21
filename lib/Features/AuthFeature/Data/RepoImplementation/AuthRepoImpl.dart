@@ -62,6 +62,12 @@ class AuthRepoImpl implements AuthRepo {
       );
       Constants.userModel = userModel;
 
+      await localDatabaseService.writeLoginData(
+        loginData.email,
+        password,
+        fullName,
+      );
+
       await locationManagerRepo.getLocations();
 
       return RequestResult.success(userModel);

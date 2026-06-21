@@ -1,28 +1,28 @@
 part of 'search_for_loaction_cubit.dart';
 
 @immutable
-sealed class SearchForLoactionState {}
+sealed class SearchForLocationState {}
 
-final class SearchForLoactionInitial extends SearchForLoactionState {}
+final class SearchForLocationInitial extends SearchForLocationState {}
 
-final class SearchForLoactionLoading extends SearchForLoactionState {}
+final class SearchForLocationLoading extends SearchForLocationState {}
 
-final class ChooseLocation extends SearchForLoactionState {
+final class ChooseLocation extends SearchForLocationState {
   final PositionEntity positionEntity;
 
   ChooseLocation(this.positionEntity);
 }
 
-final class ChooseLocationFinished extends SearchForLoactionState {}
+final class ChooseLocationFinished extends SearchForLocationState {}
 
-final class SearchForLoactionSuccessed extends SearchForLoactionState {
+final class SearchForLocationSuccessed extends SearchForLocationState {
   final List<PositionEntity> suggestions;
 
-  SearchForLoactionSuccessed(this.suggestions);
+  SearchForLocationSuccessed(this.suggestions);
 }
 
-final class SearchForLoactionFailed extends SearchForLoactionState {
+final class SearchForLocationFailed extends SearchForLocationState {
   final WeatherAPIFailureHandler error;
 
-  SearchForLoactionFailed(this.error);
+  SearchForLocationFailed(this.error);
 }
