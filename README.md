@@ -4,13 +4,13 @@ A Flutter-based tennis app that displays weather conditions, allowing users to a
 
 ## Table of contents 📑
 
-- ### [Main Packages Used =>](#main-packages-used)
-- ### [How to Run =>](#how-to-run)
-- ### [Architecture =>](#architecture)
-- ### [Folder Structure =>](#folder-structure)
-- ### [Screen Shots =>](#screen-shots)
-- ### [Video Link =>](#video-link)
-- ### [Apk Link =>](#apk-link)
+- ### [Main Packages Used](#main-packages-used)
+- ### [How to Run](#how-to-run)
+- ### [Architecture](#architecture)
+- ### [Folder Structure](#folder-structure)
+- ### [Screen Shots](#screen-shots)
+- ### [Video Link](#video-link)
+- ### [Apk Link](#apk-link)
 
 ## Main Packages Used 🛠
 
@@ -33,9 +33,9 @@ A Flutter-based tennis app that displays weather conditions, allowing users to a
 - [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) -> to securely store sensitive data such as authentication tokens and user credentials using the device's secure storage.
 - [google_maps_flutter](https://pub.dev/packages/google_maps_flutter) -> to display interactive Google Maps, show locations, and allow users to select places on a map.
 
-# How to Run
+## How to Run ▶️
 
-## Flutter Application
+### Flutter Application
 
 ### 1. Clone the Repository
 
@@ -120,9 +120,7 @@ Welcome to the ML Prediction API!
 
 # Architecture ⚙
 
-This app follows
-
-**Clean Architecture**, ensuring a separation of concerns and making the codebase more modular and testable.
+This app follows **Clean Architecture**, ensuring a separation of concerns and making the codebase more modular and testable.
 
 ## Folder Structure 📂
 
