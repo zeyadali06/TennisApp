@@ -4,7 +4,7 @@ A Flutter-based tennis app that displays weather conditions, allowing users to a
 
 ## Table of contents 📑
 
-- ### [Main Packages Used](#main-packages-used)
+- ### [Main Packages Used](##main-packages-used)
 - ### [How to Run](#how-to-run)
 - ### [Architecture](#architecture)
 - ### [Folder Structure](#folder-structure)
