@@ -5,6 +5,7 @@ A Flutter-based tennis app that displays weather conditions, allowing users to a
 ## Table of contents 📑
 
 - ### [Main Packages Used =>](#main-packages-used)
+- ### [How to Run =>](#how-to-run)
 - ### [Architecture =>](#architecture)
 - ### [Folder Structure =>](#folder-structure)
 - ### [Screen Shots =>](#screen-shots)
@@ -28,10 +29,100 @@ A Flutter-based tennis app that displays weather conditions, allowing users to a
 - [fl_chart](https://pub.dev/packages/fl_chart) -> to create charts
 - [cached_network_image](https://pub.dev/packages/cached_network_image) -> to show the image and store it
 - [connectivity_plus](https://pub.dev/packages/connectivity_plus) -> to check the internet connection
+- [flutter_dotenv](https://pub.dev/packages/flutter_dotenv) -> to load environment variables from a .env file and keep sensitive configuration separate from the source code.
+- [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) -> to securely store sensitive data such as authentication tokens and user credentials using the device's secure storage.
+- [google_maps_flutter](https://pub.dev/packages/google_maps_flutter) -> to display interactive Google Maps, show locations, and allow users to select places on a map.
+
+# How to Run
+
+## Flutter Application
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/zeyadali06/TennisApp.git
+cd TennisApp
+```
+
+### 2. Install Dependencies
+
+```bash
+flutter pub get
+```
+
+### 3. Configure Environment Variables
+
+Create a `.env` file in the project root and add the required environment variables:
+
+```env
+API_KEY=put_your_weather_api_key
+```
+
+### 4. Run the Application
+
+```bash
+flutter run
+```
+
+---
+
+## AI Prediction API (Python)
+
+### 1. Navigate to the Project Directory
+
+```bash
+cd TennisApp
+```
+
+### 2. Create a Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### 3. Activate the Environment
+
+```bash
+venv\Scripts\activate
+```
+
+### 4. Install Required Packages
+
+```bash
+venv\Scripts\pip.exe install flask numpy scikit-learn
+```
+
+### 5. Run the API
+
+```bash
+venv\Scripts\python.exe app.py
+```
+
+You should see output similar to:
+
+- Running on http://127.0.0.1:5001
+
+### 5. Verify the API
+
+Open:
+
+http://127.0.0.1:5001
+
+Expected response:
+
+Welcome to the ML Prediction API!
+
+### Notes
+
+1. Ensure random_forest_model.pkl is located in the same directory as app.py.
+2. The Flutter application expects the API to be running on port 5001.
+3. Always use the Python executable inside the venv folder to avoid dependency version conflicts.
 
 ## Architecture ⚙
 
-This app follows **Clean Architecture**, ensuring a separation of concerns and making the codebase more modular and testable.
+This app follows
+
+**Clean Architecture**, ensuring a separation of concerns and making the codebase more modular and testable.
 
 ## Folder Structure 📂
 
@@ -41,7 +132,6 @@ Here is the folder structure we have been using in this project:
 lib
 ├── Core
 ├── Features
-├── CustomNavigationBar.dart
 ├── firebase_options.dart
 └── main.dart
 ```
@@ -55,6 +145,7 @@ Core
 ├── Failures
 ├── Formatters
 ├── Functions
+├── Models
 ├── Utils
 ├── Widgets
 └── .env
@@ -69,7 +160,8 @@ Features
 ├── AuthFeature: Secure user registration and login using Firebase.
 ├── HomeFeature: Displays current weather conditions for the selected location, including temperature, wind speed, and weather description.
 ├── LocationFeature: Enables users to add new locations to monitor weather conditions.
-└── SplashFeature: Simple splash screen
+├── NavigationBar: Handles screen switching and maintains navigation state across the application's main views.
+└── SplashFeature: Simple splash screen.
 ```
 
 ## Screen Shots 📸
