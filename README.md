@@ -33,24 +33,24 @@ A Flutter-based tennis app that displays weather conditions, allowing users to a
 - [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) -> to securely store sensitive data such as authentication tokens and user credentials using the device's secure storage.
 - [google_maps_flutter](https://pub.dev/packages/google_maps_flutter) -> to display interactive Google Maps, show locations, and allow users to select places on a map.
 
-# How to Run
+## How to Run
 
-## Flutter Application
+### Flutter Application
 
-### 1. Clone the Repository
+#### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/zeyadali06/TennisApp.git
 cd TennisApp
 ```
 
-### 2. Install Dependencies
+#### 2. Install Dependencies
 
 ```bash
 flutter pub get
 ```
 
-### 3. Configure Environment Variables
+#### 3. Configure Environment Variables
 
 Create a `.env` file in the project root and add the required environment variables:
 
@@ -58,7 +58,7 @@ Create a `.env` file in the project root and add the required environment variab
 API_KEY=put_your_weather_api_key
 ```
 
-### 4. Run the Application
+#### 4. Run the Application
 
 ```bash
 flutter run
@@ -66,33 +66,33 @@ flutter run
 
 ---
 
-## AI Prediction API (Python)
+### AI Prediction API (Python)
 
-### 1. Navigate to the Project Directory
+#### 1. Navigate to the Project Directory
 
 ```bash
 cd TennisApp
 ```
 
-### 2. Create a Virtual Environment
+#### 2. Create a Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-### 3. Activate the Environment
+#### 3. Activate the Environment
 
 ```bash
 venv\Scripts\activate
 ```
 
-### 4. Install Required Packages
+#### 4. Install Required Packages
 
 ```bash
 venv\Scripts\pip.exe install flask numpy scikit-learn
 ```
 
-### 5. Run the API
+#### 5. Run the API
 
 ```bash
 venv\Scripts\python.exe app.py
@@ -102,7 +102,7 @@ You should see output similar to:
 
 - Running on http://127.0.0.1:5001
 
-### 5. Verify the API
+#### 6. Verify the API
 
 Open:
 
@@ -112,7 +112,7 @@ Expected response:
 
 Welcome to the ML Prediction API!
 
-### Notes
+#### Notes
 
 1. Ensure random_forest_model.pkl is located in the same directory as app.py.
 2. The Flutter application expects the API to be running on port 5001.
