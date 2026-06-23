@@ -69,8 +69,6 @@ class _MapViewBodyState extends State<MapViewBody> {
                   zoomControlsEnabled: true,
                   onMapCreated: (controller) async {
                     _mapController = controller;
-
-
                   },
                   onCameraMove: (position) {
                     _selectedLocation = position.target;

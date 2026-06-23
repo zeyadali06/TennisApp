@@ -6,7 +6,8 @@ import 'package:tennis_app/Core/Failure/WeatherAPIFailureHandler.dart';
 import 'package:tennis_app/Features/LocationFeature/Data/Models/PlaceModel.dart';
 
 abstract class LocationRepo {
-  Future<RequestResult<void, GeoLocatorFailureHandler>> handleLocationPermission();
+  Future<RequestResult<void, GeoLocatorFailureHandler>>
+      handleLocationPermission();
   Future<RequestResult<Position, GeoLocatorFailureHandler>> getMyPosition();
   Future<RequestResult<Placemark, GeoLocatorFailureHandler>> getMyPlaceMark(
       double latitude, double longitude);

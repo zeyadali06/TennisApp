@@ -176,6 +176,6 @@ Features
 
 <img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/11.png" width="300"><img src="https://github.com/zeyadali06/TennisApp/blob/main/ScreenShots/12.png" width="300">
 
-# [Video Link](https://drive.google.com/file/d/1x6cjlIgZXG7CABhK7s3l8UVLTrnbKH-g/view?usp=sharing)
+# [Video Link](https://drive.google.com/file/d/16kNQaox4fZMEhyRUUhxNk94cNgnqVVQm/view?usp=drive_link)
 
-# [Apk Link](https://drive.google.com/file/d/1GeJ5a5gBpp7LH898V8ic1l6gtZsj-o7q/view?usp=sharing)
+# [Apk Link](https://drive.google.com/file/d/19IENQl3Jf5tG7fNSRqY3NIKae2bWgU5I/view?usp=drive_link)
