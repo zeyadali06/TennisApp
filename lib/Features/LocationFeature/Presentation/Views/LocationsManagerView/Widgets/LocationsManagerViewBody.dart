@@ -20,7 +20,8 @@ class LocationsManagerViewBody extends StatelessWidget {
     return BlocConsumer<LocationManagerCubit, LocationManagerState>(
       listener: (context, state) {
         if (state is LocationManagerSuccessed) {
-          BlocProvider.of<HomeViewCubit>(context).getCurrentWeather();
+          BlocProvider.of<HomeViewCubit>(context)
+              .getForecastWeather(BlocProvider.of<HomeViewCubit>(context).date);
         } else if (state is LocationManagerFailed) {
           showSnackBar(context, state.error.message);
         }

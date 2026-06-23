@@ -97,6 +97,8 @@ class _HomeViewBodyState extends State<HomeViewBody>
                       CustomCalendar(
                         onDaySelected: (dateTime) async {
                           if (isSameDay(dateTime, DateTime.now())) {
+                            BlocProvider.of<HomeViewCubit>(context).date =
+                                DateTime.now();
                             await BlocProvider.of<HomeViewCubit>(context)
                                 .getCurrentWeather();
                           } else {
@@ -106,6 +108,7 @@ class _HomeViewBodyState extends State<HomeViewBody>
                               dateTime.day,
                               DateTime.now().hour,
                             );
+                            BlocProvider.of<HomeViewCubit>(context).date = date;
                             await BlocProvider.of<HomeViewCubit>(context)
                                 .getForecastWeather(date);
                           }

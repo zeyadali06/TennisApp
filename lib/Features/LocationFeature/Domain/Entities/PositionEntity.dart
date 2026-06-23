@@ -33,8 +33,8 @@ class PositionEntity {
 
   factory PositionEntity.init() {
     return PositionEntity(
-      longitude: 0,
-      latitude: 0,
+      longitude: 1000,
+      latitude: 1000,
       place: "",
       isDefault: false,
     );

@@ -16,7 +16,7 @@ import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/Registe
 class RegisterViewBody extends StatelessWidget {
   RegisterViewBody({super.key});
 
-  final AutovalidateMode autovalidateMode = AutovalidateMode.always;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   final GlobalKey<FormState> formKey = GlobalKey();
   final RegisterEntity registerEntity = RegisterEntity();
   late String password;
@@ -34,6 +34,8 @@ class RegisterViewBody extends StatelessWidget {
         } else if (state is RegisterSuccess) {
           Navigator.pushReplacement(
               context, AppRouter.getRoute(context, AppRouter.navigationBar));
+        } else if (state is EnableAutoValidateMode) {
+          autovalidateMode = AutovalidateMode.always;
         }
         isLoading = false;
       },
@@ -75,6 +77,7 @@ class RegisterViewBody extends StatelessWidget {
                           InputDataSection(
                             title: 'Password',
                             onSaved: (value) => password = value!,
+                            obscureText: true,
                           ),
                           const Expanded(flex: 1, child: SizedBox(height: 10)),
                           Row(
@@ -90,6 +93,9 @@ class RegisterViewBody extends StatelessWidget {
                                         await BlocProvider.of<RegisterCubit>(
                                                 context)
                                             .register(registerEntity, password);
+                                      } else {
+                                        BlocProvider.of<RegisterCubit>(context)
+                                            .enableAutoValidateMode();
                                       }
                                     },
                                     title: 'NEXT',

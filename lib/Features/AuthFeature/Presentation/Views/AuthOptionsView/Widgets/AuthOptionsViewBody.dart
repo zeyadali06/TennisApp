@@ -38,7 +38,7 @@ class AuthOptionsViewBody extends StatelessWidget {
                                     AppRouter.getRoute(
                                         context, AppRouter.registerView));
                               },
-                              title: 'Sign In',
+                              title: 'Sign Up',
                             ),
                           ),
                         ],

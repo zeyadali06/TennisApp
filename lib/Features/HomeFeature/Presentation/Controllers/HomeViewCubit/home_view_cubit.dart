@@ -23,6 +23,7 @@ class HomeViewCubit extends Cubit<HomeViewState> {
   final AnotherDayWeatherUseCase anotherDayWeatherUseCase;
   final LocationManagerRepo locationManagerRepo;
   final GetPredictionUseCase getPredictionUseCase;
+  DateTime date = DateTime.now();
 
   Future<void> getCurrentWeather() async {
     emit(HomeViewLoading());

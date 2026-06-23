@@ -18,3 +18,5 @@ final class RegisterFailed extends RegisterState {
 
   RegisterFailed(this.error);
 }
+
+final class EnableAutoValidateMode extends RegisterState {}

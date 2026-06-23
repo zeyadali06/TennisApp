@@ -72,14 +72,19 @@ class _LocationsViewBodyState extends State<LocationsViewBody> {
                   Expanded(
                     child: CustomButton(
                       onPressed: () async {
-                        positionEntity = (await Navigator.push<PositionEntity>(
-                              context,
-                              AppRouter.getRoute<PositionEntity>(
-                                context,
-                                AppRouter.mapView,
-                              ),
-                            )) ??
-                            PositionEntity.init();
+                        await BlocProvider.of<LocationManagerCubit>(context)
+                            .handleLocationPermission();
+                        if (context.mounted) {
+                          positionEntity =
+                              (await Navigator.push<PositionEntity>(
+                                    context,
+                                    AppRouter.getRoute<PositionEntity>(
+                                      context,
+                                      AppRouter.mapView,
+                                    ),
+                                  )) ??
+                                  PositionEntity.init();
+                        }
                         setState(() {});
                       },
                       title: "Get Location",

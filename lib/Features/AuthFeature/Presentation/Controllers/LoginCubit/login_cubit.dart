@@ -25,4 +25,8 @@ class LoginCubit extends Cubit<LoginState> {
       return emit(LoginFailed(res.data));
     }
   }
+
+  void enableAutoValidateMode() {
+    emit(EnableAutoValidateMode());
+  }
 }

@@ -29,17 +29,19 @@ class LocationRepoImpl implements LocationRepo {
             GeoLocatorFailureHandler(NoInternetException()));
       }
 
-      final bool hasPermission = await _handlePermission();
-      if (!hasPermission) {
+      final RequestResult res = await handleLocationPermission();
+      if (res is RequestFailed) {
         return RequestResult.failure(
-            GeoLocatorFailureHandler(LocationPermissionDeniedException()));
+          GeoLocatorFailureHandler(LocationPermissionDeniedException()),
+        );
       }
 
       final Position position = await _geolocatorPlatform.getCurrentPosition();
       return RequestResult.success(position);
     } on LocationServiceDisabledException {
       return RequestResult.failure(
-          GeoLocatorFailureHandler(LocationPermissionDeniedException()));
+        GeoLocatorFailureHandler(LocationPermissionDeniedException()),
+      );
     } catch (e) {
       return RequestResult.failure(
           GeoLocatorFailureHandler(TryAgainException()));
@@ -95,21 +97,33 @@ class LocationRepoImpl implements LocationRepo {
     }
   }
 
-  Future<bool> _handlePermission() async {
-    LocationPermission permission;
+  @override
+  Future<RequestResult<void, GeoLocatorFailureHandler>>
+      handleLocationPermission() async {
+    try {
+      LocationPermission permission;
 
-    permission = await _geolocatorPlatform.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await _geolocatorPlatform.requestPermission();
+      permission = await _geolocatorPlatform.checkPermission();
       if (permission == LocationPermission.denied) {
-        return false;
+        permission = await _geolocatorPlatform.requestPermission();
+        if (permission == LocationPermission.denied) {
+          return RequestResult.failure(
+            GeoLocatorFailureHandler(LocationPermissionDeniedException()),
+          );
+        }
       }
-    }
 
-    if (permission == LocationPermission.deniedForever) {
-      return false;
-    }
+      if (permission == LocationPermission.deniedForever) {
+        return RequestResult.failure(
+          GeoLocatorFailureHandler(LocationPermissionDeniedException()),
+        );
+      }
 
-    return true;
+      return RequestResult.success(null);
+    } catch (e) {
+      return RequestResult.failure(
+        GeoLocatorFailureHandler(LocationPermissionDeniedException()),
+      );
+    }
   }
 }

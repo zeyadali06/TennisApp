@@ -25,4 +25,8 @@ class RegisterCubit extends Cubit<RegisterState> {
       return emit(RegisterFailed(res.data));
     }
   }
+
+  void enableAutoValidateMode() {
+    emit(EnableAutoValidateMode());
+  }
 }

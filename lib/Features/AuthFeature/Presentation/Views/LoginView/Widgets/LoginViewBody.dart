@@ -16,7 +16,7 @@ import 'package:tennis_app/Features/AuthFeature/Presentation/Controllers/LoginCu
 class LoginViewBody extends StatelessWidget {
   LoginViewBody({super.key});
 
-  final AutovalidateMode autovalidateMode = AutovalidateMode.always;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   final GlobalKey<FormState> formKey = GlobalKey();
   final LoginEntity loginEntity = LoginEntity();
   late String password;
@@ -34,6 +34,8 @@ class LoginViewBody extends StatelessWidget {
         } else if (state is LoginSuccess) {
           Navigator.pushReplacement(
               context, AppRouter.getRoute(context, AppRouter.navigationBar));
+        } else if (state is EnableAutoValidateMode) {
+          autovalidateMode = AutovalidateMode.always;
         }
         isLoading = false;
       },
@@ -69,6 +71,7 @@ class LoginViewBody extends StatelessWidget {
                           InputDataSection(
                             title: 'Password',
                             onSaved: (value) => password = value!,
+                            obscureText: true,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -107,6 +110,9 @@ class LoginViewBody extends StatelessWidget {
                                         await BlocProvider.of<LoginCubit>(
                                                 context)
                                             .login(loginEntity, password);
+                                      } else {
+                                        BlocProvider.of<LoginCubit>(context)
+                                            .enableAutoValidateMode();
                                       }
                                     },
                                     title: 'LOGIN',

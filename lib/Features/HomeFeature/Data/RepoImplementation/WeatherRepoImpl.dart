@@ -39,12 +39,12 @@ class WeatherRepoImpl extends WeatherRepo {
         return RequestResult.failure(res.data);
       }
 
-      String location =
+      String? location =
           getLatLon(locationManagerRepo.locations.firstWhere((pos) {
         return pos.isDefault;
       }, orElse: () => PositionEntity.init()));
 
-      if (location.isEmpty) {
+      if (location == null || location.isEmpty) {
         return RequestResult.failure(
           WeatherAPIFailureHandler(CustomException("Choose location first!")),
         );

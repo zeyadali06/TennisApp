@@ -4,14 +4,16 @@ import 'package:tennis_app/Core/Failure/RequestFailure.dart';
 import 'package:tennis_app/Core/Failure/FirebaseFailureHandler.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/Entities/PositionEntity.dart';
 import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationManagerRepo.dart';
+import 'package:tennis_app/Features/LocationFeature/Domain/RepoInterface/LocationRepo.dart';
 
 part 'location_manager_state.dart';
 
 class LocationManagerCubit extends Cubit<LocationManagerState> {
-  LocationManagerCubit(this.locationManagerRepo)
+  LocationManagerCubit(this.locationManagerRepo, this.locationRepo)
       : super(LocationManagerInitial());
 
   final LocationManagerRepo locationManagerRepo;
+  final LocationRepo locationRepo;
 
   Future<void> getLocations() async {
     emit(LocationManagerLoading());
@@ -43,5 +45,11 @@ class LocationManagerCubit extends Cubit<LocationManagerState> {
     } else if (res is RequestFailed) {
       emit(LocationManagerFailed(res.data));
     }
+  }
+
+  Future<void> handleLocationPermission() async {
+    try {
+      await locationRepo.handleLocationPermission();
+    } catch (_) {}
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tennis_app/Core/Widgets/CustomObsecureTextFormField.dart';
 import 'package:tennis_app/Core/Widgets/ScaleDown.dart';
 import 'package:tennis_app/Core/Widgets/CustomTextFormField.dart';
 
@@ -12,6 +13,7 @@ class InputDataSection extends StatelessWidget {
     this.onSaved,
     this.onChanged,
     this.focusNode,
+    this.obscureText = false,
   });
 
   final String title;
@@ -20,6 +22,7 @@ class InputDataSection extends StatelessWidget {
   final void Function(String?)? onSaved;
   final void Function(String?)? onChanged;
   final FocusNode? focusNode;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +35,30 @@ class InputDataSection extends StatelessWidget {
               child: Text(
                 title,
                 style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],
         ),
-        CustomTextFormField(
-          controller: controller,
-          inputFormatters: inputFormatters,
-          onSaved: onSaved,
-          onChanged: onChanged,
-          focusNode: focusNode,
-        ),
+        if (obscureText)
+          CustomObsecureTextFormField(
+            controller: controller,
+            inputFormatters: inputFormatters,
+            onSaved: onSaved,
+            onChanged: onChanged,
+            focusNode: focusNode,
+          )
+        else
+          CustomTextFormField(
+            controller: controller,
+            inputFormatters: inputFormatters,
+            onSaved: onSaved,
+            onChanged: onChanged,
+            focusNode: focusNode,
+          )
       ],
     );
   }
